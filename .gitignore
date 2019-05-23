@@ -4,7 +4,10 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-
+Assets/Buildings
+Assets/Construction Worker
+Assets/HexagonPackagePart.1
+Assets/Low_Poly_Factory
 # Visual Studio cache directory
 .vs/
 
