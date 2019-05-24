@@ -20,9 +20,9 @@ public class show_resources : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        waterText.text = "Water: " + currentPlayer.get_water();
-        foodText.text = "Food: " + currentPlayer.get_food();
-        metalText.text = "Metal: " + currentPlayer.get_metal();
-        wasteText.text = "Waste: " + currentPlayer.get_waste();
+        waterText.text = "Water: " + currentPlayer.Get_water();
+        foodText.text = "Food: " + currentPlayer.Get_food();
+        metalText.text = "Metal: " + currentPlayer.Get_metal();
+        wasteText.text = "Waste: " + currentPlayer.Get_waste();
     }
 }
