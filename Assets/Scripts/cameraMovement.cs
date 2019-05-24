@@ -19,17 +19,14 @@ public class cameraMovement : MonoBehaviour
             {
                 iniMousePos = Input.mousePosition;
                 iniCamPos = this.transform.position;
-                print("ADSAD");
             }
             else
             {
-                print("asd");
                 this.transform.position = (iniCamPos + (iniMousePos - Input.mousePosition)*camSpeed);
             }
         }
         else
         {
-            print("asd123");
             iniMousePos = Vector3.zero;
         }
     }
