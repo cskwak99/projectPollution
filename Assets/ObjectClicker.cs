@@ -14,26 +14,24 @@ public class ObjectClicker : MonoBehaviour {
     public Ray ray;
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + ray.direction * 100.0f);
+        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + ray.direction * 1000.0f);
     }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            print("1");
+            
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 1000.0f))
             {
                 if (hit.transform != null)
                 {
-
                     Rigidbody rb;
 
                     if (rb = hit.transform.GetComponent<Rigidbody>())
                     {                        
                         PrintName(hit.transform.gameObject);
-                        LaunchIntoAir(rb);
                     }
                 }
             }
