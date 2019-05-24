@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 3406572338638638441}
   - component: {fileID: 3406572338638638440}
   - component: {fileID: 3406572338638638455}
+  - component: {fileID: 1226420251279654367}
   m_Layer: 0
-  m_Name: Hexagon_Land_02_010 (1)
+  m_Name: Mine_tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +93,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300150, guid: 4a53e387fd903a043aa08cf9438f89c1, type: 3}
+--- !u!114 &1226420251279654367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406572338638638453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67156fa6493501a40b3f6b6d0de1518a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 0}
