@@ -1128,6 +1128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 762221853}
+  - component: {fileID: 762221854}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -1153,9 +1154,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 304.9, y: 12.799988}
+  m_AnchoredPosition: {x: 305, y: 12.75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &762221854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762221852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c381d356410e84f9fc75ad98e2979e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &811758784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,12 +1860,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: 0
-  food: 0
-  metal: 0
-  waste: 0
-  antivaxHP: 0
-  workerHP: 0
+  resources: {x: 0, y: 0, z: 0, w: 0}
+  antivaxHP_max: 0
+  antivaxHP_present: 0
+  worker_max: 0
+  worker_present: 0
+  support_rate: 0
+  unlocked_buildings: 
+  player_number: 1
 --- !u!4 &1720685198
 Transform:
   m_ObjectHideFlags: 0
@@ -2203,7 +2218,6 @@ MonoBehaviour:
   foodText: {fileID: 2034602760}
   metalText: {fileID: 1898021355}
   wasteText: {fileID: 435785162}
-  currentPlayer: {fileID: 1720685197}
 --- !u!1 &2007426317
 GameObject:
   m_ObjectHideFlags: 0
