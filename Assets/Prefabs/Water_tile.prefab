@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2208542709983570002}
   - component: {fileID: 2208542709983570013}
   - component: {fileID: 2208542709983570012}
+  - component: {fileID: 7495223038992754318}
   m_Layer: 0
-  m_Name: Hexagon_Water_02_003
+  m_Name: Water_tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +93,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300202, guid: 4a53e387fd903a043aa08cf9438f89c1, type: 3}
+--- !u!114 &7495223038992754318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208542709983570014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67156fa6493501a40b3f6b6d0de1518a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 0}
