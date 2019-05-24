@@ -19,9 +19,17 @@ public class ObjectClicker : MonoBehaviour {
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 1000.0f);
-            TileClass tile = null;
-            if( hit.transform != null)
-                tile = hit.transform.GetComponent<TileClass>();
+
+            TileClass tile;
+            if (hit.transform == null)
+                tile = null;
+            else
+            {
+                string tile_type = hit.transform.gameObject.name.Substring(4);
+                print(tile_type);
+                tile = (TileClass) hit.transform.GetComponent(tile_type);
+            }
+
             UIManager uiManager = mainUI.GetComponent<UIManager>();
             uiManager.manageUI(tile);
         }
