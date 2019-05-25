@@ -32,6 +32,8 @@ public class clickHandler : MonoBehaviour {
             UIManager uiManager = this.GetComponent<UIManager>();
             uiManager.manageUI(tile);
         }
+
+        //ON CLICK MOUSE2 (MIDDLEMOUSE) CAMERA CAN MOVE (VIEW SCRIPT IN THE CAMERA)
     }
 
     private void Start()

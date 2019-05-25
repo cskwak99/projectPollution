@@ -22,16 +22,19 @@ public class UIManager : MonoBehaviour
             string[] optionList = { "A", "B" };
             GameObject panel = new GameObject("Panel");
             panel.AddComponent<CanvasRenderer>();
-            Image i = panel.AddComponent<Image>();
-            i.color = Color.red;
+            int n = 0;
             foreach (string option in optionList)
             {
                 GameObject opt = Instantiate(buttonPrefab);
+                addMouseHoverListener(opt);
                 opt.GetComponentInChildren<Text>().text = option;
                 opt.transform.SetParent(panel.transform);
-                opt.transform.Translate(new Vector3(0, -0.1f, 0));
+                float height = opt.GetComponent<RectTransform>().rect.height;
+                opt.GetComponent<RectTransform>().anchoredPosition -= new Vector2(0, n*height);
+                n++;
             }
             panel.transform.SetParent(this.transform, false);
+            panel.transform.position = Input.mousePosition + new Vector3(-10,0,0);
             currentOptionList = panel;
         }
         else
