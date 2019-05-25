@@ -4,24 +4,13 @@ using UnityEngine;
 
 public class Building
 {
-    public int pollution_rate;
-    public Vector4 required_resource;
-    public Vector4 product_resource;
-    public int player_number;
+    public string buildingType; //To specify building type
+    public double efficiency; //To get efficiecny of worker so that evaluate the building work //Maybe change to float
+    public GameObject assignedWorker; //To check whether building can do something
+    public int wasteMk;
+    public int airPoMk;
 
-    public void Update_pollution_rate(int value)
-    {
-        pollution_rate = pollution_rate + value;
-        if (pollution_rate > 100)
-        {
-            pollution_rate = 100;
-        }
-    }
-
-    public void Update_produce(Vector4 vec4)
-    {
-        product_resource = product_resource + vec4;
-    }
-
+    public Vec4 getResources(Vec4 remainResources); //For every building, return Vec4 info about resources that player get
+    public int makeAirPo(); //For factory building, make fixed amout of air pollution
     
 }
