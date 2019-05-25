@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 
-public class TileClass : MonoBehaviour
+public class TurnMananger : MonoBehaviour
 {
     // Start is called before the first frame update
-    public string tileDescription;
-    public float polluAmount = 30;
-    public float maxPolluAmount = 100;
+    public PlayerStats player1 = new PlayerStats(1);
+    public PlayerStats player2 = new PlayerStats(2);
+
     void Start()
     {
-        tileDescription = "A Description";
+        
     }
 
     // Update is called once per frame
