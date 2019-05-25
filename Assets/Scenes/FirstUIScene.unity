@@ -2039,6 +2039,7 @@ GameObject:
   - component: {fileID: 255680747}
   - component: {fileID: 255680746}
   - component: {fileID: 255680750}
+  - component: {fileID: 255680749}
   m_Layer: 5
   m_Name: EndTurn
   m_TagString: Untagged
@@ -2108,7 +2109,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 255680747}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1759905546}
+        m_MethodName: Swap_player
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &255680747
@@ -2148,6 +2160,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255680744}
   m_CullTransparentMesh: 0
+--- !u!114 &255680749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255680744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f72bfd07234dbe409be42bb7ee0f4a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &255680750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9534,6 +9558,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resources: {x: 0, y: 0, z: 0, w: 0}
+  antivaxHP_max: 0
+  antivaxHP_present: 0
+  worker_max: 0
+  worker_present: 0
+  support_rate: 0
+  player_number: 1
 --- !u!4 &1720685198
 Transform:
   m_ObjectHideFlags: 0
@@ -9648,6 +9679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759905545}
+  - component: {fileID: 1759905546}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -9669,6 +9701,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1759905546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759905544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428b2fb0fe427d44c83e47f5244a28fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  current_player: {fileID: 0}
 --- !u!1001 &1768631967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11249,6 +11296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016349955}
+  - component: {fileID: 2016349956}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -11270,6 +11318,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016349956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016349954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources: {x: 100, y: 100, z: 100, w: 100}
+  antivaxHP_max: 0
+  antivaxHP_present: 0
+  worker_max: 0
+  worker_present: 0
+  support_rate: 0
+  player_number: 1
 --- !u!1001 &2018438574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11348,6 +11415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2019553205}
+  - component: {fileID: 2019553206}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -11369,6 +11437,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2019553206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019553204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources: {x: 200, y: 200, z: 200, w: 200}
+  antivaxHP_max: 0
+  antivaxHP_present: 0
+  worker_max: 0
+  worker_present: 0
+  support_rate: 0
+  player_number: 2
 --- !u!1001 &2026643808
 PrefabInstance:
   m_ObjectHideFlags: 0
