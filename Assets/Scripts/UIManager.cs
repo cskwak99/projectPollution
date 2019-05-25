@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private GUI tileInfo;
     private GameObject currentOptionList;
-    public GameObject buttonPrefab;
     public bool isMouseOnUI;
     public void manageUI(TileClass tile)
     {
@@ -19,30 +18,35 @@ public class UIManager : MonoBehaviour
             print(tile.gameObject.name);
             BroadcastMessage("onTileSelected", tile);
             //string[] optionList = tile.getOptions();
-            string[] optionList = { "A", "B" };
-            GameObject panel = new GameObject("Panel");
-            panel.AddComponent<CanvasRenderer>();
-            int n = 0;
-            foreach (string option in optionList)
+            string[] optionList = { "Worker", "B" };
+            currentOptionList = this.GetComponent<OptionManager>().createOptionPanel("TileOption", gameObject, optionList, Input.mousePosition);
+            Transform tmp;
+            GameObject buildOptionParent;
+            GameObject workerOptionParent;
+            GameObject buildingOptionParent;
+            if(tmp = currentOptionList.transform.Find("Build"))
             {
-                GameObject opt = Instantiate(buttonPrefab);
-                addMouseHoverListener(opt);
-                opt.GetComponentInChildren<Text>().text = option;
-                opt.transform.SetParent(panel.transform);
-                float height = opt.GetComponent<RectTransform>().rect.height;
-                opt.GetComponent<RectTransform>().anchoredPosition -= new Vector2(0, n*height);
-                n++;
+                buildOptionParent = tmp.gameObject;
+                this.GetComponent<OptionManager>().createOptionPanel("BuildOption", buildOptionParent, optionList, currentOptionList.transform.position);
             }
-            panel.transform.SetParent(this.transform, false);
-            panel.transform.position = Input.mousePosition + new Vector3(-10,0,0);
-            currentOptionList = panel;
+
+            if (tmp = currentOptionList.transform.Find("Worker"))
+            {
+                print("YAY");
+                workerOptionParent = tmp.gameObject;
+                this.GetComponent<OptionManager>().createOptionPanel("WorkerOption", workerOptionParent, optionList, currentOptionList.transform.position);
+            }
+            if (tmp = currentOptionList.transform.Find("Building"))
+            {
+                buildingOptionParent = tmp.gameObject;
+                this.GetComponent<OptionManager>().createOptionPanel("BuildingOption", buildingOptionParent, optionList, currentOptionList.transform.position);
+            }
         }
         else
         {
             print("SPACE");
             BroadcastMessage("onTileUnSelected");
         }
-        
     }
 
     public void addMouseHoverListener(GameObject obj)
