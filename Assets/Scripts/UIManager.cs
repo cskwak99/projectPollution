@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     private GUI tileInfo;
     private GameObject currentOptionList;
+    private OptionManager OPM;
     public bool isMouseOnUI;
     public void manageUI(TileClass tile)
     {
@@ -18,28 +19,38 @@ public class UIManager : MonoBehaviour
             print(tile.gameObject.name);
             BroadcastMessage("onTileSelected", tile);
             //string[] optionList = tile.getOptions();
-            string[] optionList = { "Worker", "B" };
-            currentOptionList = this.GetComponent<OptionManager>().createOptionPanel("TileOption", gameObject, optionList, Input.mousePosition);
+            string[] dummyoptionList = { "Worker", "Build", "Building" };
+            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Input.mousePosition);
             Transform tmp;
-            GameObject buildOptionParent;
-            GameObject workerOptionParent;
-            GameObject buildingOptionParent;
+            GameObject buildOption;
+            string[] buildOptionList = {};
+            GameObject workerOption;
+            string[] workerOptionList = {};
+            GameObject buildingOption;
+            string[] buildingOptionList = {};
             if(tmp = currentOptionList.transform.Find("Build"))
             {
-                buildOptionParent = tmp.gameObject;
-                this.GetComponent<OptionManager>().createOptionPanel("BuildOption", buildOptionParent, optionList, currentOptionList.transform.position);
+                buildOption = tmp.gameObject;
+                buildOption.GetComponent<Button>().onClick.AddListener(/*() => buildingOptionList = tile.getBuildingList()*/() => { this.setActiveOption(buildOption); });
+                //Change from parent option to child options
+                buildOption = OPM.createOptionPanel("BuildOption", buildOption, dummyoptionList, buildOption.transform.position);
+                buildOption.SetActive(false);
             }
-
             if (tmp = currentOptionList.transform.Find("Worker"))
             {
-                print("YAY");
-                workerOptionParent = tmp.gameObject;
-                this.GetComponent<OptionManager>().createOptionPanel("WorkerOption", workerOptionParent, optionList, currentOptionList.transform.position);
+                workerOption = tmp.gameObject;
+                workerOption.GetComponent<Button>().onClick.AddListener( /*() =>workerOptionList = tile.getBuildingList()*/() => { this.setActiveOption(workerOption); });
+                //Change from parent option to child options
+                workerOption = OPM.createOptionPanel("WorkerOption", workerOption, dummyoptionList, workerOption.transform.position);
+                workerOption.SetActive(false);
             }
             if (tmp = currentOptionList.transform.Find("Building"))
             {
-                buildingOptionParent = tmp.gameObject;
-                this.GetComponent<OptionManager>().createOptionPanel("BuildingOption", buildingOptionParent, optionList, currentOptionList.transform.position);
+                buildingOption = tmp.gameObject;
+                buildingOption.GetComponent<Button>().onClick.AddListener(() => { this.setActiveOption(buildingOption); });
+                //Change from parent option to child options
+                buildingOption = OPM.createOptionPanel("BuildingOption", buildingOption, buildingOptionList, buildingOption.transform.position);
+                buildingOption.SetActive(false);
             }
         }
         else
@@ -62,12 +73,20 @@ public class UIManager : MonoBehaviour
         trigger.triggers.Add(entry2);
     }
 
+    private void setActiveOption(GameObject daOption)
+    {
+        foreach(Transform child in currentOptionList.transform)
+            child.Find(child.name + "Option").gameObject.SetActive(false);
+        daOption.SetActive(true);
+    }
+
     private void Start()
     {
         foreach(Transform child in transform)
         {
             addMouseHoverListener(child.gameObject);
         }
+        OPM = this.GetComponent<OptionManager>();
     }
 
     public void onMouseHoverUI()

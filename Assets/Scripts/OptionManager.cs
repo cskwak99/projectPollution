@@ -24,8 +24,7 @@ public class OptionManager : MonoBehaviour
             n++;
         }
         panel.transform.SetParent(parent.transform, false);
-        panel.transform.position = iniPosition + new Vector3(-25, 0, 0);
+        panel.transform.position = iniPosition + new Vector3(-25, 10, 0);
         return panel;
     } 
-   
 }

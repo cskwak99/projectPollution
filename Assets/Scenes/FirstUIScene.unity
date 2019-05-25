@@ -1460,7 +1460,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 9.022894e-19, z: 8.98e-43, w: 8.1019115e-19}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 8.98e-43, w: -2.3792613e-15}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -8347,6 +8347,7 @@ GameObject:
   - component: {fileID: 1554100383}
   - component: {fileID: 1554100386}
   - component: {fileID: 1554100387}
+  - component: {fileID: 1554100388}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -8450,8 +8451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1d6593e36ff0438d17adb9a0f0d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 4228071385824964806, guid: 8ab49f197c0d18d47b527b5b3a97f07e,
-    type: 3}
   isMouseOnUI: 0
 --- !u!114 &1554100387
 MonoBehaviour:
@@ -8465,6 +8464,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687be465be45f9142beeead2be0418c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1554100388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554100381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef710a4a1bc613438812e3f242f9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 4228071385824964806, guid: 8ab49f197c0d18d47b527b5b3a97f07e,
+    type: 3}
 --- !u!4 &1561731887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
