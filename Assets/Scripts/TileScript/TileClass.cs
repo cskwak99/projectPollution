@@ -9,7 +9,7 @@ public class TileClass
     public string tileDescription;
     public float polluAmount = 30;
     public float maxPolluAmount = 100;
-    Vector4 resources = new Vector4();
+    public Vector4 resources = new Vector4(); // food, water, metal, waste
 
 
     void Start()
