@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineTileClass : TileClass
+public class RuinTile : TileClass
 {
-    Vec4 resources;
+    Vector4 resources = new Vector4();
 
     // Start is called before the first frame update
     void Start()
