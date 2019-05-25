@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CityTileClass : TileClass
+public class DomeTile : TileClass
 {
     // Start is called before the first frame update
     void Start()

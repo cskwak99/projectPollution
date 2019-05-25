@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RuinTile : TileClass
 {
-    Vec4 resources;
+    Vector4 resources;
 
     // Start is called before the first frame update
     void Start()

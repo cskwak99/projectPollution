@@ -6,23 +6,15 @@ using UnityEngine;
 public class clickHandler : MonoBehaviour {
 
     public Ray ray;
-    public Canvas mainUI;
-    public bool isMouseOnUI;
+    UIManager UIM;
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + ray.direction * 1000.0f);
     }
-    public void onMouseHoverUI()
-    {
-        isMouseOnUI = true;
-    }
-    public void onMouseLeaveUI()
-    {
-        isMouseOnUI = false;
-    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isMouseOnUI)
+        if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
         {
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,10 +29,14 @@ public class clickHandler : MonoBehaviour {
                 tile = (TileClass) hit.transform.GetComponent(tile_type);
             }
 
-            UIManager uiManager = mainUI.GetComponent<UIManager>();
+            UIManager uiManager = this.GetComponent<UIManager>();
             uiManager.manageUI(tile);
         }
     }
 
+    private void Start()
+    {
+        this.UIM = this.GetComponent<UIManager>();
+    }
 
 }

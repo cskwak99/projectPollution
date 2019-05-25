@@ -78,7 +78,7 @@ public class PlayerStats
         Vector4 production = new Vector4(0, 0, 0, 0);
         foreach (Building build in product_buildings)
         {
-            production = production + build.product_resource;
+            //production = production + build.product_resource;
         }
         this.Update_resources(production);
     }
