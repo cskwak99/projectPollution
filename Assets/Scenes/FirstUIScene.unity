@@ -1460,7 +1460,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 9.022894e-19, z: 8.98e-43, w: 8.1019115e-19}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2165,7 +2165,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseHoverUI
           m_Mode: 1
           m_Arguments:
@@ -2182,7 +2182,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseLeaveUI
           m_Mode: 1
           m_Arguments:
@@ -2390,7 +2390,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseHoverUI
           m_Mode: 1
           m_Arguments:
@@ -2407,7 +2407,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseLeaveUI
           m_Mode: 1
           m_Arguments:
@@ -4875,7 +4875,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseHoverUI
           m_Mode: 1
           m_Arguments:
@@ -4892,7 +4892,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseLeaveUI
           m_Mode: 1
           m_Arguments:
@@ -8322,6 +8322,7 @@ GameObject:
   - component: {fileID: 1554100384}
   - component: {fileID: 1554100383}
   - component: {fileID: 1554100386}
+  - component: {fileID: 1554100387}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -8423,6 +8424,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5de1d6593e36ff0438d17adb9a0f0d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 4228071385824964806, guid: 8ab49f197c0d18d47b527b5b3a97f07e,
+    type: 3}
+  isMouseOnUI: 0
+--- !u!114 &1554100387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554100381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687be465be45f9142beeead2be0418c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1561731887 stripped
@@ -9434,7 +9450,6 @@ GameObject:
   - component: {fileID: 1714981890}
   - component: {fileID: 1714981889}
   - component: {fileID: 1714981888}
-  - component: {fileID: 1714981891}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -9490,20 +9505,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1714981891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714981887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 687be465be45f9142beeead2be0418c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainUI: {fileID: 1554100385}
-  isMouseOnUI: 0
 --- !u!1 &1720685196
 GameObject:
   m_ObjectHideFlags: 0
@@ -9533,13 +9534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {x: 0, y: 0, z: 0, w: 0}
-  antivaxHP_max: 0
-  antivaxHP_present: 0
-  worker_max: 0
-  worker_present: 0
-  support_rate: 0
-  player_number: 1
 --- !u!4 &1720685198
 Transform:
   m_ObjectHideFlags: 0
@@ -10509,7 +10503,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseHoverUI
           m_Mode: 1
           m_Arguments:
@@ -10526,7 +10520,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseLeaveUI
           m_Mode: 1
           m_Arguments:
@@ -10918,7 +10912,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseHoverUI
           m_Mode: 1
           m_Arguments:
@@ -10935,7 +10929,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1714981891}
+        - m_Target: {fileID: 0}
           m_MethodName: onMouseLeaveUI
           m_Mode: 1
           m_Arguments:

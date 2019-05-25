@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineTileClass : TileClass
+public class WaterTileClass : TileClass
 {
-
-    Vector4 resources = new Vector4();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        resources = new Vector4(0, float.PositiveInfinity, 0, 0); //initiate resources, second place is water
     }
 
     // Update is called once per frame

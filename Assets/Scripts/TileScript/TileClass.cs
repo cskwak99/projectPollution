@@ -9,6 +9,7 @@ public class TileClass : MonoBehaviour
     public string tileDescription;
     public float polluAmount = 30;
     public float maxPolluAmount = 100;
+    public Vector4 resources = new Vector4(); // food, water, metal, waste
 
 
     void Start()
@@ -27,6 +28,12 @@ public class TileClass : MonoBehaviour
         polluAmount += pollu;
     }
 
+    Vector4 getResources(Vector4 resourcesTaken)
+    {
+        Vector4 resourcesTrulyTaken = Vector4.Min(resourcesTaken, resources);
+        resources = resources - resourcesTrulyTaken;
+        return resourcesTrulyTaken;
+    }
 
 }
 

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinTile : TileClass
+public class MineTileClass : TileClass
 {
-    Vector4 resources = new Vector4();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        resources = new Vector4(0, 0, 100, 0); //initiate resources, third place is metal
     }
 
     // Update is called once per frame
@@ -17,4 +16,5 @@ public class RuinTile : TileClass
     {
         
     }
+
 }
