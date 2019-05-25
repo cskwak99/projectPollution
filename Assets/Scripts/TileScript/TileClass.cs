@@ -26,19 +26,19 @@ public class TileClass : MonoBehaviour
         
     }
 
-    void UpdatePolluAmount (float pollu)
+    public void UpdatePolluAmount (float pollu)
     {
         polluAmount += pollu;
     }
 
-    Vector4 getResources(Vector4 resourcesTaken)
+    public Vector4 getResources(Vector4 resourcesTaken)
     {
         Vector4 resourcesTrulyTaken = Vector4.Min(resourcesTaken, resources);
         resources = resources - resourcesTrulyTaken;
         return resourcesTrulyTaken;
     }
 
-    int thresholdLevel()
+    public int thresholdLevel()
     {
         int thresholdLvl = 0;
         return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdKill) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
