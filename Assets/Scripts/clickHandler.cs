@@ -27,7 +27,6 @@ public class clickHandler : MonoBehaviour {
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 1000.0f);
-
             TileClass tile;
             if (hit.transform == null)
                 tile = null;
