@@ -22,7 +22,7 @@ public class cameraMovement : MonoBehaviour
             }
             else
             {
-                this.transform.position = (iniCamPos + (iniMousePos - Input.mousePosition)*camSpeed);
+                this.transform.position = iniCamPos + Quaternion.Euler(90, 0, 0)*((iniMousePos - Input.mousePosition)*camSpeed);
             }
         }
         else

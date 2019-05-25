@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
             BroadcastMessage("onTileSelected", tile);
             //string[] optionList = tile.getOptions();
             string[] dummyoptionList = { "Worker", "Build", "Building" };
-            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Input.mousePosition);
+            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Camera.main.WorldToScreenPoint(tile.transform.position));
             Transform tmp;
             GameObject buildOption;
             string[] buildOptionList = {};
@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
             string[] workerOptionList = {};
             GameObject buildingOption;
             string[] buildingOptionList = {};
+            ////////////////////////BUILD OPTION/////////////////////////////
             if(tmp = currentOptionList.transform.Find("Build"))
             {
                 buildOption = tmp.gameObject;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
                 buildOption = OPM.createOptionPanel("BuildOption", buildOption, dummyoptionList, buildOption.transform.position);
                 buildOption.SetActive(false);
             }
+            ////////////////////////WORKER OPTION///////////////////////////////
             if (tmp = currentOptionList.transform.Find("Worker"))
             {
                 workerOption = tmp.gameObject;
@@ -44,6 +46,7 @@ public class UIManager : MonoBehaviour
                 workerOption = OPM.createOptionPanel("WorkerOption", workerOption, dummyoptionList, workerOption.transform.position);
                 workerOption.SetActive(false);
             }
+            ///////////////////////BUILDING OPTION/////////////////////////////////
             if (tmp = currentOptionList.transform.Find("Building"))
             {
                 buildingOption = tmp.gameObject;
