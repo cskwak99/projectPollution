@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CityTileClass : TileClass
+public class Dome_tile : TileClass
 {
 
     int antiVaxxerPop;

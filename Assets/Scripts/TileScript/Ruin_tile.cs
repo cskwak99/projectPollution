@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinTile : TileClass
+public class Ruin_tile : TileClass
 {
 
     // Start is called before the first frame update
