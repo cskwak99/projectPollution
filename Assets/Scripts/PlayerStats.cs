@@ -10,14 +10,14 @@ public class PlayerStats : MonoBehaviour
     public int worker_max;
     public int worker_present;
     public int support_rate;
-    public Building[] unlocked_buildings;
+    public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
     public int player_number;
-    public Building[] product_buildings; //saves building class instances about product to this array, and use it for resource production calculation
+    public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
 
 
     public PlayerStats()
     {
-        player_number = 1;
+        player_number = 1; 
     }
 
     public PlayerStats(int number)
@@ -72,7 +72,7 @@ public class PlayerStats : MonoBehaviour
     {
         return support_rate;
     }
-    
+    /*
     public void Resource_produce_perturn()
     {
         Vector4 production = new Vector4(0, 0, 0, 0);
@@ -82,5 +82,5 @@ public class PlayerStats : MonoBehaviour
         }
         this.Update_resources(production);
     }
-    
+    */
 }
