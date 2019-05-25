@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
                 GameObject opt = Instantiate(buttonPrefab);
                 opt.GetComponentInChildren<Text>().text = option;
                 opt.transform.SetParent(panel.transform);
+                opt.transform.Translate(new Vector3(0, -0.1f, 0));
             }
             panel.transform.SetParent(this.transform, false);
             currentOptionList = panel;

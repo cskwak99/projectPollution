@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class TileClass
+public class TileClass : MonoBehaviour
 {
     // Start is called before the first frame update
     public string tileDescription;
