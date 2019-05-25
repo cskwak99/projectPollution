@@ -29,7 +29,8 @@ public class BuildingOnTile : MonoBehaviour
     }
 
     void Start(){
-        fixBuilding();
+        if(building != null)
+            fixBuilding();
     }
 
 }
