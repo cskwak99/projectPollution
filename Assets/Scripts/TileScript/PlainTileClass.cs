@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlainTileClass : TileClass
 {
-    Building building; // The building built on the class (if it exist)
 
     // Start is called before the first frame update
     void Start()

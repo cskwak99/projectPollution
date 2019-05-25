@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinTile : TileClass
+public class CityTileClass : TileClass
 {
-    Vector4 resources;
+
+    int antiVaxxerPop;
+    int maxAntiVaxxerPop;
 
     // Start is called before the first frame update
     void Start()

@@ -10,7 +10,13 @@ public class Building
     public int wasteMk;
     public int airPoMk;
 
-    //public Vector4 getResources(Vector4 remainResources); //For every building, return Vec4 info about resources that player get
-    //public int makeAirPo(); //For factory building, make fixed amout of air pollution
+    public Vector4 getResources(Vector4 remainResources) //For every building, return Vec4 info about resources that player get
+    {
+        return new Vector4(); //dummy value
+    }
+    public int makeAirPo() //For factory building, make fixed amout of air pollution
+    {
+        return 5; //dummy value
+    }
     
 }
