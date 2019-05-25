@@ -10,19 +10,23 @@ public class show_resources : MonoBehaviour
     public Text foodText;
     public Text metalText;
     public Text wasteText;
-    public PlayerStats currentPlayer;
+
+    private GameObject currentPlayer;
+    private GameObject TM;
+
     void Start()
     {
-        currentPlayer = new PlayerStats();
-        currentPlayer.resources = new Vector4(100, 100, 100, 100);
+        TM = GameObject.Find("TurnManager");
+        currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
     }
 
     // Update is called once per frame
     void Update()
     {
-        waterText.text = "Water: " + currentPlayer.Get_water();
-        foodText.text = "Food: " + currentPlayer.Get_food();
-        metalText.text = "Metal: " + currentPlayer.Get_metal();
-        wasteText.text = "Waste: " + currentPlayer.Get_waste();
+        currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
+        waterText.text = "Water: " + currentPlayer.GetComponent<PlayerStats>().Get_water();
+        foodText.text = "Food: " + currentPlayer.GetComponent<PlayerStats>().Get_food();
+        metalText.text = "Metal: " + currentPlayer.GetComponent<PlayerStats>().Get_metal();
+        wasteText.text = "Waste: " + currentPlayer.GetComponent<PlayerStats>().Get_waste();
     }
 }

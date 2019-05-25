@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats
+public class PlayerStats : MonoBehaviour
 {
     public Vector4 resources; //metal, water, food, waste
     public int antivaxHP_max;
@@ -82,4 +82,5 @@ public class PlayerStats
         }
         this.Update_resources(production);
     }
+    
 }

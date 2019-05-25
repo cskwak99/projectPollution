@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnMananger : MonoBehaviour
+public class EndturnClick : MonoBehaviour
 {
+    private GameObject TM;
+    private GameObject current_player;
     // Start is called before the first frame update
-    public PlayerStats player1 = new PlayerStats(1);
-    public PlayerStats player2 = new PlayerStats(2);
-
     void Start()
     {
-        
+        TM = GameObject.Find("TurnManager");
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void Endturn_click()
+    {
+        TM.GetComponent<TurnManager>().Swap_player();
     }
 }
