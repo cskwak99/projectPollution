@@ -4682,7 +4682,7 @@ GameObject:
   - component: {fileID: 704845573}
   - component: {fileID: 704845572}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FarmButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5448,7 +5448,7 @@ GameObject:
   - component: {fileID: 799865069}
   - component: {fileID: 799865068}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: LandfillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5660,7 +5660,7 @@ GameObject:
   - component: {fileID: 831119718}
   - component: {fileID: 831119717}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: ResidentalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7458,7 +7458,7 @@ GameObject:
   - component: {fileID: 1084826677}
   - component: {fileID: 1084826676}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: FactoryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9357,7 +9357,7 @@ GameObject:
   - component: {fileID: 1554856185}
   - component: {fileID: 1554856184}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: MineButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11828,7 +11828,7 @@ GameObject:
   - component: {fileID: 1945853815}
   - component: {fileID: 1945853814}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: WaterpumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
