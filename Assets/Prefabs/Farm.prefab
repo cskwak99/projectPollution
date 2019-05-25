@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8223109034579213083}
   - component: {fileID: 8223109034580343259}
   - component: {fileID: 8223109034585396443}
+  - component: {fileID: 7975535939275410325}
   m_Layer: 0
-  m_Name: tree_plantation
+  m_Name: Farm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,3 +100,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7975535939275410325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223109034578143003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e830a7af6ef1d941be7ddc3723f47d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: 
+  efficiency: 0
+  assignedWorker: {fileID: 0}
+  wasteMk: 0
+  airPoMk: 0
+  parentTile: {fileID: 0}
+  tileType: 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3310984702366440656}
   - component: {fileID: 3310984702366440657}
   - component: {fileID: 3310984702366440670}
-  - component: {fileID: 356839464587807014}
   - component: {fileID: 285891074448009933}
   m_Layer: 0
   m_Name: Plain_tile
@@ -94,19 +93,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300136, guid: 4a53e387fd903a043aa08cf9438f89c1, type: 3}
---- !u!114 &356839464587807014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3310984702366440668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67156fa6493501a40b3f6b6d0de1518a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  building: {fileID: 0}
 --- !u!114 &285891074448009933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,4 +108,7 @@ MonoBehaviour:
   tileDescription: 
   polluAmount: 30
   maxPolluAmount: 100
+  thresholdSafe: 30
+  thresholdKill: 60
+  thresholdDeadLand: 90
   resources: {x: 0, y: 0, z: 0, w: 0}
