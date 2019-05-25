@@ -7,8 +7,11 @@ public class TileClass : MonoBehaviour
 {
     // Start is called before the first frame update
     public string tileDescription;
-    public float polluAmount = 30;
+    public float polluAmount = 0;
     public float maxPolluAmount = 100;
+    public float thresholdSafe = 30;
+    public float thresholdKill = 60;
+    public float thresholdDeadLand = 90;
     public Vector4 resources = new Vector4(); // food, water, metal, waste
 
 
@@ -33,6 +36,12 @@ public class TileClass : MonoBehaviour
         Vector4 resourcesTrulyTaken = Vector4.Min(resourcesTaken, resources);
         resources = resources - resourcesTrulyTaken;
         return resourcesTrulyTaken;
+    }
+
+    int thresholdLevel()
+    {
+        int thresholdLvl = 0;
+        return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdKill) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
     }
 
 }
