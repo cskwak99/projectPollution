@@ -51,7 +51,7 @@ public class TileClass : MonoBehaviour
     public string[] getBuildable()
     {
         string[] buildable = { "" };
-        return buidable;
+        return buildable;
     }
 
 }

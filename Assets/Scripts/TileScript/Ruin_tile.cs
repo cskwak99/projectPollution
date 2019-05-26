@@ -18,9 +18,9 @@ public class Ruin_tile : TileClass
         
     }
 
-    new public string[] getBuildable()
+    public override string[] getBuildable()
     {
         string[] buildable = { "" };
-        return buidable;
+        return buildable;
     }
 }
