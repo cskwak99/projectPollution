@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     private GameObject currentOptionList;
     private OptionManager OPM;
     public bool isMouseOnUI;
+    public GameObject gameEndPanel;
     public void manageUI(TileClass tile)
     {
         destroyCurrentOption();
@@ -79,6 +80,12 @@ public class UIManager : MonoBehaviour
             print("SPACE");
             BroadcastMessage("onTileUnSelected");
         }
+    }
+    public void showGameEnd()
+    {
+        GameObject endPanel = Instantiate(gameEndPanel);
+        endPanel.transform.SetParent(transform);
+        endPanel.GetComponent<RectTransform>().anchoredPosition = gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
     public void destroyCurrentOption()
     {
