@@ -1068,6 +1068,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMouseOnUI: 0
+  gameEndPanel: {fileID: 1987849845137377265, guid: b1758c6c4a3e2c647b65b9be9afbf921,
+    type: 3}
 --- !u!114 &121920328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2395,6 +2397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d8126117d8e8845a35bfa890cedf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerText: {fileID: 1378555049}
   waterText: {fileID: 689655656}
   foodText: {fileID: 874427185}
   metalText: {fileID: 215205743}
