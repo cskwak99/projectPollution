@@ -9038,6 +9038,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0, type: 3}
+--- !u!1 &1602383461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602383463}
+  - component: {fileID: 1602383462}
+  m_Layer: 0
+  m_Name: _BuildManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1602383462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602383461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6030f7585675e4a479338ae7f1ea657f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  farm: {fileID: 8223109034578143003, guid: f88dba9cce062bb4eb7a047fdbeb38f0, type: 3}
+  waterpump: {fileID: 5662247317372242516, guid: 2a7b92ae63ea50c438f718b082be0dfe,
+    type: 3}
+  landfill: {fileID: 3908311142550112439, guid: 56a5ef9119a365442ad0bed2947959fc,
+    type: 3}
+  residental: {fileID: 9218127697316253660, guid: 534a93e43affcb0488f89d1e9d47b17a,
+    type: 3}
+  mine: {fileID: 4788098851882680553, guid: d0ac4142949c47f45a71a68f9d5271b2, type: 3}
+--- !u!4 &1602383463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602383461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 423, y: 146.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614189982
 GameObject:
   m_ObjectHideFlags: 0
@@ -10035,7 +10086,6 @@ MonoBehaviour:
   player_number: 1
   workers: []
   buildings: []
-  dome: {fileID: 0}
   dome_tile: {fileID: 0}
 --- !u!4 &1720685198
 Transform:
@@ -11885,7 +11935,6 @@ MonoBehaviour:
   player_number: 1
   workers: []
   buildings: []
-  dome: {fileID: 0}
   dome_tile: {fileID: 0}
 --- !u!1001 &2018438574
 PrefabInstance:
@@ -12020,7 +12069,6 @@ MonoBehaviour:
   player_number: 2
   workers: []
   buildings: []
-  dome: {fileID: 0}
   dome_tile: {fileID: 0}
 --- !u!1001 &2026643808
 PrefabInstance:
