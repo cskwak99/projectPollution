@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     public bool isMouseOnUI;
     public void manageUI(TileClass tile)
     {
-        Destroy(currentOptionList);
+        destroyCurrentOption();
         if (tile!=null)
         {
             print(tile.gameObject.name);
@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
             //string[] optionList = tile.getOptions();
             Building buildingOnTile = tile.transform.GetComponentInChildren<Building>();
             string[] dummyoptionList = { "Worker", "Build", "Building" };
-            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Camera.main.WorldToScreenPoint(tile.transform.position));
+            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Input.mousePosition);
             Transform tmp;
             GameObject buildOption = null;
             string[] buildOptionList = {};
@@ -34,8 +34,17 @@ public class UIManager : MonoBehaviour
             {
                 GameObject buildOptionRoot = tmp.gameObject;
                 buildOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
-                    buildingOptionList = tile.getBuildable();
-                    buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, dummyoptionList, buildOptionRoot.transform.position);
+                    buildOptionList = tile.getBuildable();
+                    buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
+                    foreach(Transform option in buildOption.transform)
+                    {
+                        Button btn = option.GetComponent<Button>();
+                        if (!btn)
+                            continue;
+                        btn.onClick.AddListener(() => {
+                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name);
+                        });
+                    }
                     this.setActiveOption(buildOption, workerOption, buildingOption);
                 });
             }
@@ -71,7 +80,10 @@ public class UIManager : MonoBehaviour
             BroadcastMessage("onTileUnSelected");
         }
     }
-
+    public void destroyCurrentOption()
+    {
+        Destroy(currentOptionList);
+    }
     public void addMouseHoverListener(GameObject obj)
     {
         EventTrigger trigger = obj.AddComponent<EventTrigger>();
@@ -91,7 +103,8 @@ public class UIManager : MonoBehaviour
         foreach (GameObject other in otherOptions)
             if(other != null)
                 other.SetActive(false);
-        daOption.SetActive(true);
+        if(daOption != null)
+            daOption.SetActive(true);
     }
 
     private void Start()

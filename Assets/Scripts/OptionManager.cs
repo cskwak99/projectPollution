@@ -20,7 +20,8 @@ public class OptionManager : MonoBehaviour
             opt.GetComponentInChildren<Text>().text = option;
             opt.transform.SetParent(panel.transform);
             float height = opt.GetComponent<RectTransform>().rect.height;
-            opt.GetComponent<RectTransform>().anchoredPosition -= new Vector2(-20, n * height);
+            float width = opt.GetComponent<RectTransform>().rect.width;
+            opt.GetComponent<RectTransform>().anchoredPosition -= new Vector2(width-50, n * height);
             n++;
         }
         panel.transform.SetParent(parent.transform, false);
