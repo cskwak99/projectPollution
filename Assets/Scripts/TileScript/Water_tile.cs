@@ -69,4 +69,9 @@ public class Water_tile : TileClass
     {
         
     }
+
+    public void UpdatePolluAmount(float pollu)
+    {
+        polluAmount = resources.w / 5;
+    }
 }
