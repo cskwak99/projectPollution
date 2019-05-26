@@ -18,7 +18,7 @@ public class Building : MonoBehaviour
     //For resource Vector -> (water, food, metal, waste)
     public void setBuildingType(){ //set Building type form its name
         string name = this.gameObject.name;
-        string[] temp = name.Split(' ');
+        string[] temp = name.Split('(');
         this.buildingType = temp[0];
     }
 
@@ -163,7 +163,7 @@ public class Building : MonoBehaviour
     }
     
     private void Start() {
-        setInitial();    
+        //setInitial();    
     }
     private void Update() {
         //Vector4 test = this.getResources();
