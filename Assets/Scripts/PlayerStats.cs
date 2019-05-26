@@ -17,6 +17,17 @@ public class PlayerStats : MonoBehaviour
     public TileClass dome;
     public GameObject dome_tile;
 
+    public int updateWorkerMax(){
+        int temp = 0;
+        foreach(GameObject building in buildings){
+            if(building.GetComponent<Building>().isitResidential()){
+                temp += 1;
+            }
+        }
+        this.worker_max = temp/2;
+        return worker_max;
+    }
+
     public PlayerStats()
     {
         player_number = 1;

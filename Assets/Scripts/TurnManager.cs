@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
         current_player = player1;
+        turnNum = 1;
     }
 
     // Update is called once per frame
@@ -35,6 +36,7 @@ public class TurnManager : MonoBehaviour
         {
             current_player = player1;
         }
+        turnNum+=1;
     }
 
     public GameObject Get_current_player()
@@ -66,9 +68,16 @@ public class TurnManager : MonoBehaviour
         //random events
         //player do action
         //turn end
+        ResourceGatheringPhase();
+        WorkerPhase();
+        ConsumePhase();
+        PollutionPhase();
+        SupportRatePhase();
+        CheckLosePhase();
+        randomEvents();
     }
 
-    public void ResourceGathering(){
+    public void ResourceGatheringPhase(){
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         GameObject[] buildings = player.buildings;
 
@@ -98,6 +107,15 @@ public class TurnManager : MonoBehaviour
         player.resources += resources;
     }
 
+    public void WorkerPhase(){
+        //do something with worker
+        //Check the number of player's Residential area in the map
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        int maxWorker = player.updateWorkerMax();
+        int currentWorker = player.worker_present;
+        //Current worker < max worker -> pop up new worker on the  one of residential area
+    }
+
     public void ConsumePhase(){
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         float water = (float)player.antivaxHP_present + player.worker_present;
@@ -114,6 +132,30 @@ public class TurnManager : MonoBehaviour
     }
 
     public void PollutionPhase(){
-        
+        //Calc pollution meter for every tile that players worker & building is on
+        //Calc efficiency different in worker on tile
+        //Calc dome tile pollution and kill anti vaxxer
     }
+
+    public void SupportRatePhase(){
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        //Calc about it
+    }
+
+    public void CheckLosePhase(){
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        if (player.antivaxHP_present <= 0 || player.support_rate <= 0){
+            //game end -> do something
+            Debug.Log("Game End");
+        }
+    }
+
+    public void randomEvents(){
+        if(turnNum == 6 || turnNum == 7){
+            Debug.Log("Anti vaxxer want water memory");
+            PlayerStats player = current_player.GetComponent<PlayerStats>();
+            player.resources.y -= 3;
+        }
+    }
+
 }
