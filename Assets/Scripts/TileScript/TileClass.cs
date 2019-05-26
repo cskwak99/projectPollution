@@ -27,7 +27,12 @@ public class TileClass : MonoBehaviour
 
     public void UpdatePolluAmount (float pollu)
     {
-        polluAmount = resources.z/10;
+        polluAmount = resources.w/10;
+    }
+
+    public void AddWaste(float waste)
+    {
+        resources.w = waste;
     }
 
     public Vector4 getResources(Vector4 resourcesTaken)
