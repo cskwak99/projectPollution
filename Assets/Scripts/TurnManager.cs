@@ -8,6 +8,8 @@ public class TurnManager : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public GameObject current_player;
+    public int totalWaste;
+    public int turnNum;
 
 
     void Start()
@@ -40,4 +42,78 @@ public class TurnManager : MonoBehaviour
         return current_player;
     }
 
+    public void initiateTurn(){
+        //Updating waste flow every turn 
+        //Resource Gathering Phase
+          //Check gather buildings and get resources from it
+          //check tile that has player's building and get waste from it
+          //waste saves on the landfill, but if it is over capacity, save waste on the dome tile
+        //Worker Check Phase
+          //Check the number of player's Residential area in the map
+          //Current worker < max worker -> pop up new worker on the  one of residential area
+        //Consuming Resource Phase
+          // Consume water and food proportional to number of worker + fixed amount from anti vaxxer
+          // Not enough -> kill some of anti vaxxer, decrease every anti vaxxer's efficiency
+        //Pollution Check Phase
+          //Calculate pollution on the tiles
+          //Calculate worker efficiency
+          //Pollution meter high in dome tile -> kill anti vaxxer
+        //Support rate Check Phase
+          //increase it fixed rate
+          //Calculate decreased support rate proportional to worker efficiency and current/max number
+        //Check game end Phase
+          //support rate & anti vaxxer -> 0 -> game end
+        //random events
+        //player do action
+        //turn end
+    }
+
+    public void ResourceGathering(){
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        GameObject[] buildings = player.buildings;
+
+        //Gather reources
+        Vector4 resources = new Vector4(0,0,0,0); 
+        float waste = 0;
+        foreach (GameObject building in buildings){
+            Vector4 gathered = building.GetComponent<Building>().getResources();
+            resources += gathered;
+            float gatheredWaste = building.GetComponent<Building>().giveWaste();
+            waste += gatheredWaste;
+        }
+        float remain = waste;
+        foreach (GameObject building in buildings){
+            if (building.GetComponent<Building>().buildingType == "Landfill"){
+                remain = building.GetComponent<Building>().saveWaste(remain);
+                if(remain <= -1){
+                    break;
+                }
+            }
+        }
+        if(remain > 0){
+            //add remain Waste on player's dome tile
+            player.dome_tile.GetComponent<Dome_tile>().resources.w += remain;
+        }
+        resources.w = waste;
+        player.resources += resources;
+    }
+
+    public void ConsumePhase(){
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        float water = (float)player.antivaxHP_present + player.worker_present;
+        float food = (float)player.antivaxHP_present + player.worker_present;
+        if(player.resources.x >= water && player.resources.y >= food){
+            player.resources.x -= water;
+            player.resources.y -= food;
+        }else{
+            player.antivaxHP_present -= 1;
+            foreach (GameObject worker in player.workers){
+                //decrease efficiency? support rate?
+            }
+        }
+    }
+
+    public void PollutionPhase(){
+        
+    }
 }

@@ -12,6 +12,9 @@ public class Building : MonoBehaviour
     public GameObject parentTile; //parent tile that building attached
     public string tileType; // parentTile type
 
+    public float wasteCapacity;// For landfill
+    public float nowWaste; //For landfill
+
     //For resource Vector -> (water, food, metal, waste)
     public void setBuildingType(){ //set Building type form its name
         string name = this.gameObject.name;
@@ -42,7 +45,7 @@ public class Building : MonoBehaviour
 
         this.fixBuilding();
     }
-    public Vector4 giveWaste(){
+    public float giveWaste(){
         float waste = 0;
         if(buildingType == "Farm"){
             waste = parentTile.GetComponent<Plain_tile>().resources.w; 
@@ -55,6 +58,21 @@ public class Building : MonoBehaviour
             parentTile.GetComponent<Water_tile>().resources.w = 0; 
         }
         return waste;
+    }
+
+    public float saveWaste(float waste){
+        if(buildingType == "Landfill"){
+            if(wasteCapacity > nowWaste + waste){
+                nowWaste += waste;
+                return (float)-1.0;
+            }else{
+                float remain = nowWaste + waste - wasteCapacity;
+                nowWaste = wasteCapacity;
+                return remain;
+            }
+        }else{
+            return (float)-11.0;
+        }
     }
 
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
