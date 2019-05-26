@@ -31,7 +31,7 @@ public class Water_tile : TileClass
                 nextWater = null;
             }
         }
-        else if (y.Equals("O7"))
+        else if (y.Equals("07"))
         {
             if (x.Equals("01"))
             {
