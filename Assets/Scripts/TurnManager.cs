@@ -46,6 +46,15 @@ public class TurnManager : MonoBehaviour
 
     public void initiateTurn(){
         //Updating waste flow every turn 
+        if (turnNum%2 == 1)
+        {
+            string[] waterFlow = { "0107", "0207", "0203", "0204", "0304", "0404", "0504", "0604", "0704", "0805", "0905", "1005", "1105", "1205", "1201", "1301" };
+            foreach (string coordinate in waterFlow)
+            {
+                Water_tile tile = (Water_tile) GameObject.FindWithTag(coordinate).GetComponent("Water_tile");
+                tile.UpdateWasteFlow();
+            }
+        }
         //Resource Gathering Phase
           //Check gather buildings and get resources from it
           //check tile that has player's building and get waste from it
