@@ -36,6 +36,15 @@ public class UIManager : MonoBehaviour
                 buildOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
                     buildOptionList = tile.getBuildable();
                     buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
+                    foreach(Transform option in buildOption.transform)
+                    {
+                        Button btn = option.GetComponent<Button>();
+                        if (!btn)
+                            continue;
+                        btn.onClick.AddListener(() => {
+                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name);
+                        });
+                    }
                     this.setActiveOption(buildOption, workerOption, buildingOption);
                 });
             }
