@@ -25,7 +25,7 @@ public class TileClass : MonoBehaviour
         
     }
 
-    public virtual void UpdatePolluAmount (float pollu)
+    public virtual void UpdatePolluAmount ()
     {
         polluAmount = resources.w/10;
     }

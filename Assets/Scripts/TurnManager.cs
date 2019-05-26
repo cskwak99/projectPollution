@@ -67,6 +67,11 @@ public class TurnManager : MonoBehaviour
           // Not enough -> kill some of anti vaxxer, decrease every anti vaxxer's efficiency
         //Pollution Check Phase
           //Calculate pollution on the tiles
+          foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
+        {
+            TileClass tile = child.GetComponent<TileClass>();
+            tile.UpdatePolluAmount();
+        }
           //Calculate worker efficiency
           //Pollution meter high in dome tile -> kill anti vaxxer
         //Support rate Check Phase
