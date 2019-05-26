@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class TileClass : MonoBehaviour
 {
@@ -13,10 +14,9 @@ public class TileClass : MonoBehaviour
     public float thresholdKill = 60;
     public float thresholdDeadLand = 90;
     public Vector4 resources = new Vector4(); // food, water, metal, waste
-    public TileClass[] adjacent;
+    public List<TileClass> adjacent = new List<TileClass>();
     void Start()
     {
-        tileDescription = "A Description";
     }
 
     // Update is called once per frame
