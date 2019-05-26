@@ -12,7 +12,8 @@ public class worker : MonoBehaviour
     public GameObject worker_obj;
     public string name;
     public int turn_left;
-    enum cur_action
+    public Action cur_action;
+    public enum Action
     {
         idle,
         moving,
@@ -29,12 +30,12 @@ public class worker : MonoBehaviour
         hp = 100;
         support = 100;
         location = player.dome;
-        cur_action = idle;
+        cur_action = Action.idle;
         turn_left = 0;
     }
     void Start()
     {
-        worker_obj = (GameObject)Instantiate(worker_asset, location.transform.position+new Vector3(0,0.05,0), Quaternion.identity);
+        worker_obj = (GameObject)Instantiate(worker_asset, location.transform.position+new Vector3(0f,0.05f,0f), Quaternion.identity);
         worker_obj.name = this.name;
     }
 

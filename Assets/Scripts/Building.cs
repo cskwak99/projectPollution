@@ -42,12 +42,26 @@ public class Building : MonoBehaviour
 
         this.fixBuilding();
     }
+    public Vector4 giveWaste(){
+        float waste = 0;
+        if(buildingType == "Farm"){
+            waste = parentTile.GetComponent<Plain_tile>().resources.w; 
+            parentTile.GetComponent<Plain_tile>().resources.w = 0;
+        }else if(buildingType == "Mine"){
+            waste = parentTile.GetComponent<Mine_tile>().resources.w;
+            parentTile.GetComponent<Mine_tile>().resources.w = 0; 
+        }else if(buildingType == "Waterpump"){
+            waste = parentTile.GetComponent<Water_tile>().resources.w;
+            parentTile.GetComponent<Water_tile>().resources.w = 0; 
+        }
+        return waste;
+    }
 
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
     {
         Vector4 resources = new Vector4(0,0,0,0);
         if(assignedWorker == null){
-            return new Vector4(-1,-1,-1,-1);
+            return new Vector4(0,0,0,0);
         }else{
             int polMeter = parentTile.GetComponent<TileClass>().thresholdLevel();
             //efficiency = this.assiagnedWorker.GetComponent<Worker>().getEfficiency(polMeter);
@@ -58,7 +72,7 @@ public class Building : MonoBehaviour
                 required.x = food * efficiency;
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
 
-                resources.w = wasteMk;
+                parentTile.GetComponent<Plain_tile>().resources.w += wasteMk; 
 
                 return resources;
             }else if(buildingType == "Mine"){
@@ -67,7 +81,7 @@ public class Building : MonoBehaviour
                 required.z = metal * efficiency;
                 resources = this.parentTile.GetComponent<Mine_tile>().getResources(required);
 
-                resources.w = wasteMk;
+                parentTile.GetComponent<Mine_tile>().resources.w += wasteMk; 
 
                 return resources;
             }else if(buildingType == "Waterpump"){
@@ -76,11 +90,10 @@ public class Building : MonoBehaviour
                 required.y = water * efficiency;
                 resources = this.parentTile.GetComponent<Water_tile>().getResources(required);
 
-                resources.w = wasteMk;
+                parentTile.GetComponent<Water_tile>().resources.w += wasteMk; 
 
                 return resources;
             }else{
-                resources.w = wasteMk;
                 return resources;
             }
         }
