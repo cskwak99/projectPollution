@@ -17,4 +17,9 @@ public class Mine_tile : TileClass
         
     }
 
+    new public string[] getBuildable()
+    {
+        string[] buildable = { "Mine" };
+        return buidable;
+    }
 }

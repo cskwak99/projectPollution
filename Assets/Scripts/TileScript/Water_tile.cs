@@ -93,4 +93,10 @@ public class Water_tile : TileClass
             resources += previousWater.getResources(new Vector4(0, 0, 0, 15));
         }
     }
+
+    new public string[] getBuildable()
+    {
+        string[] buildable = { "Water Pump" };
+        return buidable;
+    }
 }
