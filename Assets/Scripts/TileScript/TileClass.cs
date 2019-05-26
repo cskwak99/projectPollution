@@ -14,7 +14,6 @@ public class TileClass : MonoBehaviour
     public float thresholdDeadLand = 90;
     public Vector4 resources = new Vector4(); // food, water, metal, waste
 
-
     void Start()
     {
         tileDescription = "A Description";
@@ -28,7 +27,7 @@ public class TileClass : MonoBehaviour
 
     public void UpdatePolluAmount (float pollu)
     {
-        polluAmount += pollu;
+        polluAmount = resources.z/10;
     }
 
     public Vector4 getResources(Vector4 resourcesTaken)
