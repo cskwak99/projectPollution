@@ -25,7 +25,7 @@ public class TileClass : MonoBehaviour
         
     }
 
-    public void UpdatePolluAmount (float pollu)
+    public virtual void UpdatePolluAmount ()
     {
         polluAmount = resources.w/10;
     }
@@ -48,9 +48,9 @@ public class TileClass : MonoBehaviour
         return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdKill) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
     }
 
-    virtual public string[] getBuildable()
+    public virtual string[] getBuildable()
     {
-        string[] buildable = { "SA" };
+        string[] buildable = { "" };
         return buildable;
     }
 

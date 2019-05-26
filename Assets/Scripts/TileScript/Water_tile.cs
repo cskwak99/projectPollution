@@ -71,7 +71,7 @@ public class Water_tile : TileClass
         
     }
 
-    new public void UpdatePolluAmount(float pollu)
+    public override void UpdatePolluAmount()
     {
         polluAmount = resources.w / 5;
     }
@@ -95,7 +95,7 @@ public class Water_tile : TileClass
         }
     }
 
-    new public string[] getBuildable()
+    public override string[] getBuildable()
     {
         string[] buildable = { "Water Pump" };
         return buildable;

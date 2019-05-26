@@ -18,7 +18,7 @@ public class Mine_tile : TileClass
         
     }
 
-    new public string[] getBuildable()
+    public override string[] getBuildable()
     {
         string[] buildable = { "Mine" };
         return buildable;

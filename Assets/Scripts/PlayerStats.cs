@@ -16,6 +16,28 @@ public class PlayerStats : MonoBehaviour
     public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public GameObject dome_tile;
 
+    public void initSet(){
+        antivaxHP_max = 10;
+        antivaxHP_present = 10;
+        worker_max = 3;
+        worker_present = 3;
+        support_rate = 50;
+        //add worker list
+        //add building list
+        //add dome tile
+    }
+
+    public int updateWorkerMax(){
+        int temp = 0;
+        foreach(GameObject building in buildings){
+            if(building.GetComponent<Building>().isitResidential()){
+                temp += 1;
+            }
+        }
+        this.worker_max = temp/2;
+        return worker_max;
+    }
+
     public PlayerStats()
     {
         player_number = 1;
