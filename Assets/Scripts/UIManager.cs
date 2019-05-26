@@ -19,41 +19,53 @@ public class UIManager : MonoBehaviour
             print(tile.gameObject.name);
             BroadcastMessage("onTileSelected", tile);
             //string[] optionList = tile.getOptions();
+            Building buildingOnTile = tile.transform.GetComponentInChildren<Building>();
             string[] dummyoptionList = { "Worker", "Build", "Building" };
             currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Camera.main.WorldToScreenPoint(tile.transform.position));
             Transform tmp;
-            GameObject buildOption;
+            GameObject buildOption = null;
             string[] buildOptionList = {};
-            GameObject workerOption;
+            GameObject workerOption = null;
             string[] workerOptionList = {};
-            GameObject buildingOption;
+            GameObject buildingOption = null;
             string[] buildingOptionList = {};
             ////////////////////////BUILD OPTION/////////////////////////////
             if(tmp = currentOptionList.transform.Find("Build"))
             {
-                buildOption = tmp.gameObject;
-                buildOption.GetComponent<Button>().onClick.AddListener(/*() => buildingOptionList = tile.getBuildingList()*/() => { this.setActiveOption(buildOption); });
-                //Change from parent option to child options
-                buildOption = OPM.createOptionPanel("BuildOption", buildOption, dummyoptionList, buildOption.transform.position);
-                buildOption.SetActive(false);
+                GameObject buildOptionRoot = tmp.gameObject;
+                buildOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
+                    if (false)
+                    {
+                        //buildingOptionList = tile.getBuildingList();
+                    }
+                    buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, dummyoptionList, buildOptionRoot.transform.position);
+                    this.setActiveOption(buildOption, workerOption, buildingOption);
+                });
             }
             ////////////////////////WORKER OPTION///////////////////////////////
             if (tmp = currentOptionList.transform.Find("Worker"))
             {
-                workerOption = tmp.gameObject;
-                workerOption.GetComponent<Button>().onClick.AddListener( /*() =>workerOptionList = tile.getBuildingList()*/() => { this.setActiveOption(workerOption); });
-                //Change from parent option to child options
-                workerOption = OPM.createOptionPanel("WorkerOption", workerOption, dummyoptionList, workerOption.transform.position);
-                workerOption.SetActive(false);
+                GameObject workerOptionRoot = tmp.gameObject;
+                workerOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
+                    if(false)
+                    {
+                        workerOptionList = tile.transform.GetComponentInChildren<Building>().getBuildingFunc();
+                    }
+                    workerOption = OPM.createOptionPanel("WorkerOption", workerOptionRoot, dummyoptionList, workerOptionRoot.transform.position);
+                    this.setActiveOption(workerOption, buildingOption, buildOption);
+                });
             }
             ///////////////////////BUILDING OPTION/////////////////////////////////
             if (tmp = currentOptionList.transform.Find("Building"))
             {
-                buildingOption = tmp.gameObject;
-                buildingOption.GetComponent<Button>().onClick.AddListener(() => { this.setActiveOption(buildingOption); });
-                //Change from parent option to child options
-                buildingOption = OPM.createOptionPanel("BuildingOption", buildingOption, buildingOptionList, buildingOption.transform.position);
-                buildingOption.SetActive(false);
+                GameObject buildingOptionRoot = tmp.gameObject;
+                buildingOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
+                    if(buildingOnTile){
+                        buildingOptionList = buildingOnTile.getBuildingFunc();
+                    }
+                    buildingOption = OPM.createOptionPanel("BuildingOption", buildingOptionRoot, buildingOptionList, buildingOptionRoot.transform.position);
+                    this.setActiveOption(buildingOption, buildOption, workerOption);
+                });
             }
         }
         else
@@ -76,10 +88,12 @@ public class UIManager : MonoBehaviour
         trigger.triggers.Add(entry2);
     }
 
-    private void setActiveOption(GameObject daOption)
+    private void setActiveOption(GameObject daOption, params GameObject[] otherOptions)
     {
-        foreach(Transform child in currentOptionList.transform)
-            child.Find(child.name + "Option").gameObject.SetActive(false);
+        //FIRST OPTION SENT WILL BE ACTIVATED, ELSE WILL BE DEACTIVATED
+        foreach (GameObject other in otherOptions)
+            if(other != null)
+                other.SetActive(false);
         daOption.SetActive(true);
     }
 
