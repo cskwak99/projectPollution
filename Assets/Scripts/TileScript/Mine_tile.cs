@@ -9,6 +9,7 @@ public class Mine_tile : TileClass
     void Start()
     {
         resources = new Vector4(0, 0, 100, 0); //initiate resources, third place is metal
+        tileDescription = "Some kind of metal deposit, useful for building and research";
     }
 
     // Update is called once per frame
