@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WorkerManager : MonoBehaviour
 {
+    /*
     List<worker> worker_list;
     int worker_max;
     int worker_present;
@@ -182,5 +183,6 @@ public class WorkerManager : MonoBehaviour
     void Update()
     {
     }
+    */
 }
 

@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     {
         GameObject endPanel = Instantiate(gameEndPanel);
         endPanel.transform.SetParent(transform);
-        endPanel.GetComponent<RectTransform>().anchoredPosition = gameObject.GetComponent<RectTransform>().anchoredPosition;
+        endPanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
     public void destroyCurrentOption()
     {
