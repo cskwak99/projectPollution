@@ -7,12 +7,13 @@ public class worker : MonoBehaviour
     public PlayerStats player;
     public int hp;
     public int support;
-    public TileClass location;
+    public GameObject location;
     public GameObject worker_asset;
     public GameObject worker_obj;
     public string worker_name;
     public int turn_left;
     public Action cur_action;
+    public Action cur_queue;
     public enum Action
     {
         idle,
@@ -29,7 +30,7 @@ public class worker : MonoBehaviour
         worker_name = name;
         hp = 100;
         support = 100;
-        location = player.dome;
+        location = player.dome_tile;
         cur_action = Action.idle;
         turn_left = 0;
     }
