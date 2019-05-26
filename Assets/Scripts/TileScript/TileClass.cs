@@ -13,7 +13,7 @@ public class TileClass : MonoBehaviour
     public float thresholdKill = 60;
     public float thresholdDeadLand = 90;
     public Vector4 resources = new Vector4(); // food, water, metal, waste
-
+    public TileClass[] adjacent;
     void Start()
     {
         tileDescription = "A Description";

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class WorkerManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class WorkerManager : MonoBehaviour
         List<worker> worker_list = new List<worker>();
         for (int i = 0; i < worker_present; i++)
         {
-            worker_list.add(new worker(player,"worker"+"i"));
+            worker_list.Add(new worker(player,"worker"+"i"));
         }
     }
     //call by ui or something else
@@ -27,14 +28,33 @@ public class WorkerManager : MonoBehaviour
     //information can be sent to the workermanager.
     public int Update_Worker(string name,int action,TileClass dest)
     {
-        foreach(worker in worker_list)
+        worker selected = new worker();
+        foreach(worker candidate in worker_list)
         {
-            if(worker.name == name)
+            if(candidate.name == name)
             {
-
+                selected = candidate;
             }
         }
+        //for each turn check for the left turn or to abort.
+        return 0;
     }
+    //calculate path from current to destination. 
+    //called every turn by all moving workers
+    //if there is a obstacle blocks way, calls player.
+    public Vector2Int Calc_Path(TileClass curr, TileClass dest)
+    {
+        Vector2Int res = new Vector2Int();
+        /*
+        int cur_x = Convert.ToInt32(curr.gameObject.name.Substring(0, 2));
+        int cur_y = Convert.ToInt32(curr.gameObject.name.Substring(2, 4));
+        int dest_x = Convert.ToInt32(dest.gameObject.name.Substring(0, 2));
+        int dest_y = Convert.ToInt32(dest.gameObject.name.Substring(2, 4));
+        */
+        //visited list
+        //adjacent list, from the start, make the list.
+        return res;
+    } 
     void Start()
     {
     }

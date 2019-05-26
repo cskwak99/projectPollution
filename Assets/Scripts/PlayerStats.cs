@@ -13,20 +13,21 @@ public class PlayerStats : MonoBehaviour
     public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
     public int player_number;
     public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
-
+    public TileClass dome;
 
     public PlayerStats()
     {
-        player_number = 1; 
+        player_number = 1;
     }
 
     public PlayerStats(int number)
     {
         player_number = number;
     }
-
+    
     public void Update_resources(Vector4 vec4)
     {
+        
         resources = resources + vec4;
     }
 
