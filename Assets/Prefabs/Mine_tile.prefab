@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3406572338638638441}
   - component: {fileID: 3406572338638638440}
   - component: {fileID: 3406572338638638455}
+  - component: {fileID: 1072361797290752156}
   m_Layer: 0
   m_Name: Mine_tile
   m_TagString: Untagged
@@ -92,3 +93,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300150, guid: 4a53e387fd903a043aa08cf9438f89c1, type: 3}
+--- !u!114 &1072361797290752156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406572338638638453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b2fea028155d043adf727aa393d4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileDescription: 
+  polluAmount: 0
+  maxPolluAmount: 100
+  thresholdSafe: 30
+  thresholdKill: 60
+  thresholdDeadLand: 90
+  resources: {x: 0, y: 0, z: 0, w: 0}
