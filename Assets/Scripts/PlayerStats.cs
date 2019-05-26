@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject[] workers;
     public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public TileClass dome;
+    public GameObject dome_tile;
 
     public PlayerStats()
     {
