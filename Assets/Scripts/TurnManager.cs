@@ -171,6 +171,7 @@ public class TurnManager : MonoBehaviour
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         if (player.antivaxHP_present <= 0 || player.support_rate <= 0){
             //game end -> do something
+            GameObject.Find("UI").GetComponent<UIManager>().showGameEnd();
             Debug.Log("Game End");
         }
     }

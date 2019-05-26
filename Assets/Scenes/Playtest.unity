@@ -8135,6 +8135,8 @@ MonoBehaviour:
   residental: {fileID: 9218127697316253660, guid: 534a93e43affcb0488f89d1e9d47b17a,
     type: 3}
   mine: {fileID: 4788098851882680553, guid: d0ac4142949c47f45a71a68f9d5271b2, type: 3}
+  TurnManager: {fileID: 1544295792}
+  currentPlayer: {fileID: 0}
 --- !u!4 &1206833774
 Transform:
   m_ObjectHideFlags: 0
