@@ -16,4 +16,10 @@ public class Plain_tile : TileClass
     {
         
     }
+
+    new public string[] getBuildable()
+    {
+        string[] buildable = { "Residential", "Farm", "Lanfill" };
+        return buidable;
+    }
 }
