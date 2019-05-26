@@ -17,14 +17,21 @@ public class PlayerStats : MonoBehaviour
     public TileClass dome;
     public GameObject dome_tile;
 
+    private void Start() {
+        initSet();
+    }
     public void initSet(){
         antivaxHP_max = 10;
         antivaxHP_present = 10;
         worker_max = 3;
         worker_present = 3;
         support_rate = 50;
+        resources = new Vector4(10,10,10,0);
         //add worker list
         //add building list
+        foreach(GameObject building in buildings){
+            building.GetComponent<Building>().setInitial();
+        }
         //add dome tile
     }
 
