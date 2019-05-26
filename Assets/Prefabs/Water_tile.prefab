@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2208542709983570002}
   - component: {fileID: 2208542709983570013}
   - component: {fileID: 2208542709983570012}
+  - component: {fileID: 3718707612872522683}
   m_Layer: 0
   m_Name: Water_tile
   m_TagString: Untagged
@@ -92,3 +93,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300202, guid: 4a53e387fd903a043aa08cf9438f89c1, type: 3}
+--- !u!114 &3718707612872522683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208542709983570014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654a0dc8ccac7d648b54fa8ebeed2a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileDescription: 
+  polluAmount: 0
+  maxPolluAmount: 100
+  thresholdSafe: 30
+  thresholdKill: 60
+  thresholdDeadLand: 90
+  resources: {x: 0, y: 0, z: 0, w: 0}
