@@ -70,8 +70,27 @@ public class Water_tile : TileClass
         
     }
 
-    public void UpdatePolluAmount(float pollu)
+    new public void UpdatePolluAmount(float pollu)
     {
         polluAmount = resources.w / 5;
+    }
+
+    public void UpdateWasteFlow()
+    {
+        if (nextWater != null)
+        {
+            float wasteFlowing = Mathf.Min(resources.w, 15);
+            nextWater.AddWaste(wasteFlowing);
+            resources.w -= wasteFlowing;
+        }
+        else
+        {
+            float wasteFlowing = Mathf.Min(resources.w, 15);
+            resources.w -= wasteFlowing;
+        }
+        if (previousWater != null)
+        {
+            resources += previousWater.getResources(new Vector4(0, 0, 0, 15));
+        }
     }
 }
