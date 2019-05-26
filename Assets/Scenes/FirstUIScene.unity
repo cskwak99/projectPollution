@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0207Water_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0207
+      objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -287,6 +292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0606Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0606
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -431,6 +441,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0001Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0001
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -510,6 +525,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1000Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,6 +598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0304Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0304
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -648,6 +673,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0407Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0407
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -716,6 +746,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0604Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0604
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -786,6 +821,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0303Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0303
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -855,6 +895,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0505Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0505
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -923,6 +968,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0102Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0102
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -1003,6 +1053,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0904Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0904
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1081,6 +1136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0901Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0901
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -1330,6 +1390,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0400Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0400
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1460,7 +1525,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: -0.03125, y: -1, z: 6, w: 7}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1601,6 +1666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0402Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0402
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -1746,6 +1816,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0801Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0801
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1814,6 +1889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0803Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0803
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -2531,6 +2611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1005Water_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1005
+      objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2605,6 +2690,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0700Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0700
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -2819,6 +2909,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0600Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0600
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2887,6 +2982,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0204Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0204
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -2974,6 +3074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1001Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1001
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -3386,6 +3491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0601Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0601
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3454,6 +3564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0703Mine_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0703
       objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
@@ -3680,6 +3795,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1007Mine_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1007
+      objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3818,6 +3938,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0404Water_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0404
+      objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3898,6 +4023,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0301Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0301
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -4146,6 +4276,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0205Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0205
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4301,6 +4436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0405Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0405
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -4521,6 +4661,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0200Mine_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0200
+      objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4683,6 +4828,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0206Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0206
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4757,6 +4907,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0106Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0106
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -5016,6 +5171,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0403Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0403
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5178,6 +5338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0907Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0907
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5246,6 +5411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0504Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0504
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -5636,6 +5806,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0100Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0100
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5711,6 +5886,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0903Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0903
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5779,6 +5959,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0704Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0704
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -5890,6 +6075,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0507Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0507
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -6051,6 +6241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0900Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0900
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6125,6 +6320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0406Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0406
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -6201,6 +6401,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0003Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0003
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6269,6 +6474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0007Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0007
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -6339,6 +6549,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0004Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0004
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6407,6 +6622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0101Dome_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011985398084254116, guid: e2b8b998020e44849b61ca7c0e962d31,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0101
       objectReference: {fileID: 0}
     - target: {fileID: 9011985398084254119, guid: e2b8b998020e44849b61ca7c0e962d31,
         type: 3}
@@ -6553,6 +6773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021869940}
+  - component: {fileID: 1021869941}
   m_Layer: 0
   m_Name: Hexagon_Map
   m_TagString: Untagged
@@ -6694,6 +6915,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1021869941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021869939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2db7baf91a72d49a563fe6e44b36b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1042258814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
@@ -6717,6 +6950,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0502Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0502
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -6787,6 +7025,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1003Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1003
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6855,6 +7098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0806Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0806
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -6930,6 +7178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0902Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0902
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -7011,6 +7264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0000Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0000
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -7240,6 +7498,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0500Mine_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0500
+      objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7308,6 +7571,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0905Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0905
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -7389,6 +7657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0701Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0701
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -7533,6 +7806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0305Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0305
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -7696,6 +7974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0707Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0707
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7770,6 +8053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0906Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0906
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -8018,6 +8306,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0804Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0804
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8103,6 +8396,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0604Water_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0604
+      objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8177,6 +8475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0201Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0201
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -8270,6 +8573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0203Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0203
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -8571,6 +8879,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0107Water_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0107
+      objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8651,6 +8964,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1100Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1100
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -8807,6 +9125,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0105Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0105
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8886,6 +9209,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0103Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0103
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8964,6 +9292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0104Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0104
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9056,6 +9389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0202Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0202
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9143,6 +9481,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1300Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1300
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9211,6 +9554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1400Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1400
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9281,6 +9629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0607Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0607
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9349,6 +9702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0602Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0602
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9419,6 +9777,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0307Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0307
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9487,6 +9850,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0706Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0706
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9654,7 +10022,10 @@ MonoBehaviour:
   - Residential_area
   - Mine
   player_number: 1
+  workers: []
   buildings: []
+  dome: {fileID: 0}
+  dome_tile: {fileID: 0}
 --- !u!4 &1720685198
 Transform:
   m_ObjectHideFlags: 0
@@ -9680,6 +10051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0002Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0002
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9806,6 +10182,8 @@ MonoBehaviour:
   player1: {fileID: 0}
   player2: {fileID: 0}
   current_player: {fileID: 0}
+  totalWaste: 0
+  turnNum: 0
 --- !u!1001 &1768631967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9817,6 +10195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0800Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0800
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9886,6 +10269,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0702Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0702
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -9962,6 +10350,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0807Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0807
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10030,6 +10423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0501Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0501
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -10184,6 +10582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0503Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0503
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -10357,6 +10760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0306Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0306
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10437,6 +10845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0802Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0802
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -10682,6 +11095,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0603Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0603
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10819,6 +11237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0300Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0300
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -11091,6 +11514,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0506Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0506
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11160,6 +11588,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1200Mine_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 1200
+      objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11228,6 +11661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0302Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0302
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -11434,7 +11872,10 @@ MonoBehaviour:
   - Residential_area
   - Mine
   player_number: 1
+  workers: []
   buildings: []
+  dome: {fileID: 0}
+  dome_tile: {fileID: 0}
 --- !u!1001 &2018438574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11446,6 +11887,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0805Water_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208542709983570014, guid: 1d44f5478f273de4fbb47e42628862f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0805
       objectReference: {fileID: 0}
     - target: {fileID: 2208542709983570015, guid: 1d44f5478f273de4fbb47e42628862f5,
         type: 3}
@@ -11561,7 +12007,10 @@ MonoBehaviour:
   - Residential_area
   - Mine
   player_number: 2
+  workers: []
   buildings: []
+  dome: {fileID: 0}
+  dome_tile: {fileID: 0}
 --- !u!1001 &2026643808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11573,6 +12022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0401Plain_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0401
       objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
@@ -11642,6 +12096,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0705Mine_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0705
       objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
@@ -12149,6 +12608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0006Plain_tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3310984702366440668, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0006
+      objectReference: {fileID: 0}
     - target: {fileID: 3310984702366440671, guid: 2e1b8e1a380d67e4caa345bc22a7e3b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12310,6 +12774,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 0005Mine_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
+        type: 3}
+      propertyPath: m_TagString
+      value: 0005
       objectReference: {fileID: 0}
     - target: {fileID: 3406572338638638454, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
         type: 3}
