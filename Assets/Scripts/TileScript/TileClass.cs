@@ -13,7 +13,7 @@ public class TileClass : MonoBehaviour
     public float thresholdSafe = 30;
     public float thresholdKill = 60;
     public float thresholdDeadLand = 90;
-    public Vector4 resources = new Vector4(); // food, water, metal, waste
+    public Vector4 resources = new Vector4(); // water, food, metal, waste
     public List<TileClass> adjacent = new List<TileClass>();
     void Start()
     {
@@ -37,6 +37,7 @@ public class TileClass : MonoBehaviour
 
     public Vector4 getResources(Vector4 resourcesTaken)
     {
+        Debug.Log(resources);
         Vector4 resourcesTrulyTaken = Vector4.Min(resourcesTaken, resources);
         resources = resources - resourcesTrulyTaken;
         return resourcesTrulyTaken;

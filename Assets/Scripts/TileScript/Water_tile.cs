@@ -11,7 +11,7 @@ public class Water_tile : TileClass
     // Start is called before the first frame update
     void Start()
     {
-        resources = new Vector4(0, float.PositiveInfinity, 0, 0); //initiate resources, second place is water
+        resources = new Vector4(float.PositiveInfinity,0, 0, 0); //initiate resources, first place is water
         tileDescription = "A river, source of life";
         string[] waterFlow = { "0203", "0204", "0304", "0404", "0504", "0604", "0704", "0805", "0905", "1005", "1105", "1205" };
         string name = this.gameObject.name;

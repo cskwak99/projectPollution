@@ -52,6 +52,7 @@ public class BuildManager : MonoBehaviour
         clone_farm.transform.parent = target_tile.transform;
         clone_farm.GetComponent<Building>().setInitial();
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_farm);
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
     }
     public void Init_Waterpump(TileClass target_tile)
     {
@@ -59,6 +60,7 @@ public class BuildManager : MonoBehaviour
         clone_waterpump.transform.parent = target_tile.transform;
         clone_waterpump.GetComponent<Building>().setInitial();
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_waterpump);
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
     }
     public void Init_Landfill(TileClass target_tile)
     {
@@ -66,6 +68,7 @@ public class BuildManager : MonoBehaviour
         clone_landfill.transform.parent = target_tile.transform;
         clone_landfill.GetComponent<Building>().setInitial();
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_landfill);
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
     }
     public void Init_Residental(TileClass target_tile)
     {
@@ -73,6 +76,7 @@ public class BuildManager : MonoBehaviour
         clone_residental.transform.parent = target_tile.transform;
         clone_residental.GetComponent<Building>().setInitial();
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_residental);
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
     }
     public void Init_Mine(TileClass target_tile)
     {
@@ -80,5 +84,6 @@ public class BuildManager : MonoBehaviour
         clone_mine.transform.parent = target_tile.transform;
         clone_mine.GetComponent<Building>().setInitial();
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_mine);
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
     }
 }
