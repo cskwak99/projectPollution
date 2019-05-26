@@ -37,6 +37,7 @@ public class TurnManager : MonoBehaviour
             current_player = player1;
         }
         turnNum+=1;
+        initiateTurn();
     }
 
     public GameObject Get_current_player()
@@ -46,6 +47,7 @@ public class TurnManager : MonoBehaviour
 
     public void initiateTurn(){
         //Updating waste flow every turn 
+        /*
         if (turnNum%2 == 1)
         {
             string[] waterFlow = { "0107", "0207", "0203", "0204", "0304", "0404", "0504", "0604", "0704", "0805", "0905", "1005", "1105", "1205", "1201", "1301" };
@@ -82,9 +84,10 @@ public class TurnManager : MonoBehaviour
         //random events
         //player do action
         //turn end
+        */
         ResourceGatheringPhase();
         WorkerPhase();
-        ConsumePhase();
+        if(turnNum != 2) ConsumePhase();
         PollutionPhase();
         SupportRatePhase();
         CheckLosePhase();
@@ -93,7 +96,7 @@ public class TurnManager : MonoBehaviour
 
     public void ResourceGatheringPhase(){
         PlayerStats player = current_player.GetComponent<PlayerStats>();
-        GameObject[] buildings = player.buildings;
+        List<GameObject> buildings = player.buildings;
 
         //Gather reources
         Vector4 resources = new Vector4(0,0,0,0); 
@@ -107,7 +110,7 @@ public class TurnManager : MonoBehaviour
         float remain = waste;
         foreach (GameObject building in buildings){
             if (building.GetComponent<Building>().buildingType == "Landfill"){
-                remain = building.GetComponent<Building>().saveWaste(remain);
+                remain = building.GetComponent<Building>().saveWaste(remain*100);
                 if(remain <= -1){
                     break;
                 }
@@ -115,7 +118,7 @@ public class TurnManager : MonoBehaviour
         }
         if(remain > 0){
             //add remain Waste on player's dome tile
-            player.dome_tile.GetComponent<Dome_tile>().resources.w += remain;
+            player.dome_tile.GetComponent<Dome_tile>().resources.w += remain * 100;
         }
         resources.w = waste;
         player.resources += resources;
@@ -139,6 +142,7 @@ public class TurnManager : MonoBehaviour
             player.resources.y -= food;
         }else{
             player.antivaxHP_present -= 1;
+            Debug.Log("anti vaxxer dies");
             foreach (GameObject worker in player.workers){
                 //decrease efficiency? support rate?
             }
@@ -149,6 +153,13 @@ public class TurnManager : MonoBehaviour
         //Calc pollution meter for every tile that players worker & building is on
         //Calc efficiency different in worker on tile
         //Calc dome tile pollution and kill anti vaxxer
+        PlayerStats player = current_player.GetComponent<PlayerStats>();
+        foreach(GameObject building in player.buildings){
+            building.GetComponent<Building>().parentTile.GetComponent<TileClass>().UpdatePolluAmount();
+        }
+        player.dome_tile.GetComponent<TileClass>().UpdatePolluAmount();
+
+        //UpdatePolluAmount
     }
 
     public void SupportRatePhase(){
@@ -168,7 +179,7 @@ public class TurnManager : MonoBehaviour
         if(turnNum == 6 || turnNum == 7){
             Debug.Log("Anti vaxxer want water memory");
             PlayerStats player = current_player.GetComponent<PlayerStats>();
-            player.resources.y -= 3;
+            player.resources.x -= 3;
         }
     }
 

@@ -39,6 +39,8 @@ public class Building : MonoBehaviour
     public void setInitial(){
         this.wasteMk = 1;
         this.airPoMk = 1;
+        this.wasteCapacity = 1000f;
+        this.nowWaste = 0f;
 
         this.setBuildingType();
         this.setParentTile();
@@ -85,10 +87,12 @@ public class Building : MonoBehaviour
             //efficiency = this.assiagnedWorker.GetComponent<Worker>().getEfficiency(polMeter);
             efficiency = (float)1.0;
             if(buildingType == "Farm"){
-                int food = 1;
+                int food = 10;
                 Vector4 required = new Vector4(0,0,0,0);
-                required.x = food * efficiency;
+                required.y = food * efficiency;
+                Debug.Log(required);
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
+                Debug.Log(resources);
 
                 parentTile.GetComponent<Plain_tile>().resources.w += wasteMk; 
 
@@ -103,9 +107,9 @@ public class Building : MonoBehaviour
 
                 return resources;
             }else if(buildingType == "Waterpump"){
-                int water = 1;
+                int water = 10;
                 Vector4 required = new Vector4(0,0,0,0);
-                required.y = water * efficiency;
+                required.x = water * efficiency;
                 resources = this.parentTile.GetComponent<Water_tile>().getResources(required);
 
                 parentTile.GetComponent<Water_tile>().resources.w += wasteMk; 

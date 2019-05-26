@@ -12,6 +12,7 @@ public class Dome_tile : TileClass
     void Start()
     {
         tileDescription = "Headquarter of the mighty antivaxxer ! They have generously taken upon them the curse of staying in the dome all their life to avoid autism and be intellectually superior";
+        resources = new Vector4(0,0,0,0);
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class Dome_tile : TileClass
 
     public override string[] getBuildable()
     {
-        string[] buildable = { "" };
+        string[] buildable = { };
         return buildable;
     }
 }

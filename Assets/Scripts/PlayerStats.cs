@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public Vector4 resources; //metal, water, food, waste
+    public Vector4 resources; //water, food, metal, waste
     public int antivaxHP_max;
     public int antivaxHP_present;
     public int worker_max;
@@ -13,17 +13,25 @@ public class PlayerStats : MonoBehaviour
     public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
     public int player_number;
     public GameObject[] workers;
-    public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
+    public List<GameObject> buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public GameObject dome_tile;
 
+    private void Start() {
+        initSet();
+    }
     public void initSet(){
-        antivaxHP_max = 10;
-        antivaxHP_present = 10;
+        antivaxHP_max = 5;
+        antivaxHP_present = 5;
         worker_max = 3;
         worker_present = 3;
         support_rate = 50;
+        resources = new Vector4(10,10,10,0);
         //add worker list
         //add building list
+        //buildings = new List<GameObject>();
+        foreach(GameObject building in buildings){
+            building.GetComponent<Building>().setInitial();
+        }
         //add dome tile
     }
 
@@ -70,15 +78,15 @@ public class PlayerStats : MonoBehaviour
 
     public int Get_metal()
     {
-        return (int)resources[0];
+        return (int)resources[2];
     }
     public int Get_water()
     {
-        return (int)resources[1];
+        return (int)resources[0];
     }
     public int Get_food()
     {
-        return (int)resources[2];
+        return (int)resources[1];
     }
     public int Get_waste()
     {
