@@ -15,10 +15,12 @@ public class BuildManager : MonoBehaviour
     public GameObject landfill;
     public GameObject residental;
     public GameObject mine;
+    public GameObject TurnManager;
+    public GameObject currentPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        target_tile = GameObject.Find("0400Plain_tile"); // we should implement it
+
     }
 
     // Update is called once per frame
@@ -27,8 +29,13 @@ public class BuildManager : MonoBehaviour
         
     }
 
+    public void setCurrent(){
+        currentPlayer = TurnManager.GetComponent<TurnManager>().current_player;
+    }
+
     public void route_construction(string buildingName, TileClass target_tile)
     {
+        setCurrent();
         switch (buildingName)
         {
             case "Farm": Init_Farm(target_tile); break;
@@ -44,29 +51,34 @@ public class BuildManager : MonoBehaviour
         clone_farm = Instantiate(farm);
         clone_farm.transform.parent = target_tile.transform;
         clone_farm.GetComponent<Building>().setInitial();
+        currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_farm);
     }
     public void Init_Waterpump(TileClass target_tile)
     {
         clone_waterpump = Instantiate(waterpump);
         clone_waterpump.transform.parent = target_tile.transform;
         clone_waterpump.GetComponent<Building>().setInitial();
+        currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_waterpump);
     }
     public void Init_Landfill(TileClass target_tile)
     {
         clone_landfill = Instantiate(landfill);
         clone_landfill.transform.parent = target_tile.transform;
         clone_landfill.GetComponent<Building>().setInitial();
+        currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_landfill);
     }
     public void Init_Residental(TileClass target_tile)
     {
         clone_residental = Instantiate(residental);
         clone_residental.transform.parent = target_tile.transform;
         clone_residental.GetComponent<Building>().setInitial();
+        currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_residental);
     }
     public void Init_Mine(TileClass target_tile)
     {
         clone_mine = Instantiate(mine);
         clone_mine.transform.parent = target_tile.transform;
         clone_mine.GetComponent<Building>().setInitial();
+        currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_mine);
     }
 }

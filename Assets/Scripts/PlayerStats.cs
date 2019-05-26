@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
     public int player_number;
     public GameObject[] workers;
-    public GameObject[] buildings; //saves building class instances about product to this array, and use it for resource production calculation
+    public List<GameObject> buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public GameObject dome_tile;
 
     private void Start() {
@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
         resources = new Vector4(10,10,10,0);
         //add worker list
         //add building list
+        //buildings = new List<GameObject>();
         foreach(GameObject building in buildings){
             building.GetComponent<Building>().setInitial();
         }
