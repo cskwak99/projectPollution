@@ -8,6 +8,7 @@ public class WorkerManager : MonoBehaviour
     List<worker> worker_list;
     int worker_max;
     int worker_present;
+    int worker_num;
     PlayerStats player;
     // Start is called before the first frame update
     Boolean is_updated;
@@ -22,6 +23,7 @@ public class WorkerManager : MonoBehaviour
         {
             worker_list.Add(new worker(player,"worker"+"i"));
         }
+        worker_num = worker_present;
     }
     //call by ui or something else
     //action can be move, assignment, abort
@@ -30,49 +32,75 @@ public class WorkerManager : MonoBehaviour
     //Action can be only work, build, move.
     //End of the each turn, update the workers
     //Update worker by ui inputs
-    public int Update_Worker(string name,worker.Action Action,GameObject dest)
+    public void Turn_Start_Update_Worker()
     {
-        worker selected = new worker();
-        foreach(worker candidate in worker_list)
+        foreach (worker obj in worker_list)
         {
-            if(candidate.name == name)
-            {
-                selected = candidate;
-                break;
-            }
+            if (!obj.is_Updated)
+                Update_Worker(obj, obj.cur_action, obj.destination);
+            Update_hp(obj);
         }
+        //condition for worker increase
+        if (true)
+        {
+            worker_list.Add(Create_Worker());
+        }
+    }
+    public void Update_hp(worker obj)
+    {
+        //update worker hp.
+        if (obj.location.GetComponent<TileClass>.polluAmount)
+        {
+
+        }
+    }
+    public worker Create_Worker()
+    {
+        worker_num += 1;
+        return new worker(player, "worker" + worker_num);
+    }
+    //when selected by UI
+    public void Update_Worker(worker selected, worker.Action Action, GameObject dest)
+    {
+        //assigned by UI, build somewhere, move somewhere, work somewhere, Abort something
         selected.cur_queue = (worker.Action)Action;
+        selected.is_updated = true;
         if (Action == worker.Action.aborting)
         {
             //cancel worker action
             selected.cur_action = worker.Action.idle;
             selected.cur_queue = worker.Action.idle;
         }
+        //if on same tile 
         else if (!(System.Object.ReferenceEquals(selected.location, dest)))
         {
+            //if action was not moving, make it moving.
             if (Action != worker.Action.moving)
             {
                 selected.cur_action = worker.Action.moving;
             }
+            //move worker to certain place.
             selected.location = Calc_Path(selected.location, dest);
-            //suddenly move
-            selected.worker_obj.transform.Translate(selected.location.transform.position);
-
+            //selected.worker_obj.transform.Translate(selected.location.transform.position);
+            StartCoroutine(move_worker);
         }
         else {
+            //worker arrived to the destination
             if(selected.cur_action == worker.Action.moving)
             {
-                selected.cur_queue = worker.Action.idle;
-                selected.cur_action = worker.Action.idle;
+                if (selected.cur_queue == worker.Action.working)
+                    selected.is_updated = false;
+                selected.cur_action = selected.cur_queue;
             }
             //the worker is on the same tile player assigned
-            else if (Action == worker.Action.constructing)
+            else if(Action == worker.Action.constructing)
             {
                 if (selected.turn_left > 0)
                 {
                     selected.turn_left -= 1;
                 }
                 else {
+                    selected.is_updated = false;
                     selected.cur_queue = worker.Action.idle;
                     selected.cur_action = worker.Action.idle;
                     //call player it finished constructing
@@ -80,13 +108,23 @@ public class WorkerManager : MonoBehaviour
                 }
 
             }
+            else if(Action == worker.Action.working)
+            {
+                //produce resources;
+            }
+    }
+    IEnumerator move_worker(worker obj,GameObject dest)
+    {
+        workerPos = obj.worker_obj.transform.position;
+        Vector3 destination = dest.transform.position;
+        Vector3 direction = (destination - workerPos)/10;
+        for(int i =0; i < 9; i++)
+        {
+            obj.worker_obj.transform.Translate(direction.x, direction.y, direction.z);
+            yield return new WaitForSeconds(0.1);
         }
-        //for each turn check for the left turn or to abort.
-        /*
-        if (is_updated = false)
-            is_updated = true;
-        */
-        return 0;
+        obj.worker_obj.transform.position = destination;
+        yield return new WaitForSeconds(0.1);
     }
     //calculate path from current to destination. 
     //called every turn by all moving workers
@@ -137,10 +175,7 @@ public class WorkerManager : MonoBehaviour
         //adjacent list, from the start, make the list.
         return result;
     } 
-    void Start()
-    {
-        is_updated = false;
-    }
+    void Start(){ }
 
     // Update is called once per frame
     void Update()

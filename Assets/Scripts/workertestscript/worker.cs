@@ -8,12 +8,14 @@ public class worker : MonoBehaviour
     public int hp;
     public int support;
     public GameObject location;
+    public GameObject destination;
     public GameObject worker_asset;
     public GameObject worker_obj;
     public string worker_name;
     public int turn_left;
     public Action cur_action;
     public Action cur_queue;
+    public bool is_updated;
     public enum Action
     {
         idle,
@@ -33,6 +35,7 @@ public class worker : MonoBehaviour
         location = player.dome_tile;
         cur_action = Action.idle;
         turn_left = 0;
+        is_updated = false;
     }
     void Start()
     {
