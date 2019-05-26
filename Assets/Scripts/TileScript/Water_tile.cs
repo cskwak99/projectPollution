@@ -98,6 +98,6 @@ public class Water_tile : TileClass
     new public string[] getBuildable()
     {
         string[] buildable = { "Water Pump" };
-        return buidable;
+        return buildable;
     }
 }

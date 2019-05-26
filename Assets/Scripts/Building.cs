@@ -54,7 +54,7 @@ public class Building : MonoBehaviour
             waste = parentTile.GetComponent<Water_tile>().resources.w;
             parentTile.GetComponent<Water_tile>().resources.w = 0; 
         }
-        return waste;
+        return new Vector4(0,0,0,waste);
     }
 
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
