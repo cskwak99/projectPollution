@@ -52,7 +52,7 @@ public class Water_tile : TileClass
                 previousWater = null;
                 nextWater = (Water_tile) GameObject.Find(waterFlow[index + 1] + "Water_tile").GetComponent("Water_tile"); ;
             }
-            else if (index == waterFlow.Length)
+            else if (index == waterFlow.Length - 1)
             {
                 previousWater = (Water_tile) GameObject.Find(waterFlow[index - 1] + "Water_tile").GetComponent("Water_tile"); ;
                 nextWater = null;
