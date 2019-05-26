@@ -129,6 +129,7 @@ public class WorkerManager : MonoBehaviour
     //calculate path from current to destination. 
     //called every turn by all moving workers
     //if there is a obstacle blocks way, calls player.
+    }
     public GameObject Calc_Path(GameObject curr, GameObject dest)
     {
         GameObject result = null;
@@ -182,3 +183,4 @@ public class WorkerManager : MonoBehaviour
     {
     }
 }
+
