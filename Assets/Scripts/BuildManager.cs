@@ -27,6 +27,18 @@ public class BuildManager : MonoBehaviour
         
     }
 
+    public void route_construction(string buildingName)
+    {
+        switch (buildingName)
+        {
+            case "farm": Init_Farm(); break;
+            case "water_pump": Init_Waterpump(); break;
+            case "landfill": Init_Landfill(); break;
+            case "residental": Init_Residental(); break;
+            case "mine": Init_Mine(); break;
+        }
+    }
+
     public void Init_Farm()
     {
         clone_farm = Instantiate(farm);
