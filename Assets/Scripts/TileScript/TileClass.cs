@@ -48,10 +48,10 @@ public class TileClass : MonoBehaviour
         return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdKill) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
     }
 
-    virtual public string[] getBuildable()
+    public string[] getBuildable()
     {
-        string[] buildable = { "SA" };
-        return buildable;
+        string[] buildable = { "" };
+        return buidable;
     }
 
 }

@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileDescription: 
-  polluAmount: 0
+  polluAmount: 30
   maxPolluAmount: 100
   thresholdSafe: 30
   thresholdKill: 60
