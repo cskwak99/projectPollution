@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
                         if (!btn)
                             continue;
                         btn.onClick.AddListener(() => {
-                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name);
+                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
                         });
                     }
                     this.setActiveOption(buildOption, workerOption, buildingOption);
