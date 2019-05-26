@@ -23,7 +23,9 @@ public class WorkerManager : MonoBehaviour
     }
     //call by ui or something else
     //action can be move, assignment, abort
-    public int Update_Worker(string name,int action)
+    //if you click on worker menu, you select action first and then select destination tile
+    //information can be sent to the workermanager.
+    public int Update_Worker(string name,int action,TileClass dest)
     {
         foreach(worker in worker_list)
         {
