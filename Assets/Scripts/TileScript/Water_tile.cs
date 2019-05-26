@@ -71,7 +71,7 @@ public class Water_tile : TileClass
         
     }
 
-    public override void UpdatePolluAmount(float pollu)
+    public override void UpdatePolluAmount()
     {
         polluAmount = resources.w / 5;
     }
