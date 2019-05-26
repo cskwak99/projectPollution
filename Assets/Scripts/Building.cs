@@ -15,7 +15,8 @@ public class Building : MonoBehaviour
     //For resource Vector -> (water, food, metal, waste)
     public void setBuildingType(){ //set Building type form its name
         string name = this.gameObject.name;
-        this.buildingType = name;
+        string[] temp = name.Split(' ');
+        this.buildingType = temp[0];
     }
 
     public void setParentTile(){
@@ -26,6 +27,10 @@ public class Building : MonoBehaviour
 
     public void assignWorker(GameObject worker){
         this.assignedWorker = worker;
+    }
+
+    public void unassignWorker(){
+        this.assignedWorker = null;
     }
 
     public void setInitial(){
@@ -46,6 +51,7 @@ public class Building : MonoBehaviour
         }else{
             int polMeter = parentTile.GetComponent<TileClass>().thresholdLevel();
             //efficiency = this.assiagnedWorker.GetComponent<Worker>().getEfficiency(polMeter);
+            efficiency = (float)1.0;
             if(buildingType == "Farm"){
                 int food = 1;
                 Vector4 required = new Vector4(0,0,0,0);
@@ -81,6 +87,26 @@ public class Building : MonoBehaviour
         
     }
 
+    public bool isitResidential(){
+        if(buildingType == "Residential_area"){
+            return true;
+        }else return false;
+    }
+
+    public string[] getBuildingFunc(){
+        if(buildingType == "Residential_area"){
+            string[] answer = {};
+            return answer;
+        }else if(assignedWorker == null){
+            string[] answer = new string[] {"Assign Worker"};
+            return answer;
+        }else{
+            string[] answer = new string[] {"Unassign Worker"};
+            return answer;
+        }
+    }
+
+
      public void fixBuilding(){
         string name = this.buildingType;
         Transform tile = this.parentTile.GetComponent<Transform>();
@@ -109,7 +135,7 @@ public class Building : MonoBehaviour
         setInitial();    
     }
     private void Update() {
-        Vector4 test = this.getResources();
-        Debug.Log(test);
+        //Vector4 test = this.getResources();
+        //Debug.Log(test);
     }
 }
