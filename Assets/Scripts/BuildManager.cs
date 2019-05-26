@@ -27,43 +27,43 @@ public class BuildManager : MonoBehaviour
         
     }
 
-    public void route_construction(string buildingName)
+    public void route_construction(string buildingName, TileClass target_tile)
     {
         switch (buildingName)
         {
-            case "farm": Init_Farm(); break;
-            case "water_pump": Init_Waterpump(); break;
-            case "landfill": Init_Landfill(); break;
-            case "residental": Init_Residental(); break;
-            case "mine": Init_Mine(); break;
+            case "Farm": Init_Farm(target_tile); break;
+            case "Water Pump": Init_Waterpump(target_tile); break;
+            case "Landfill": Init_Landfill(target_tile); break;
+            case "Residential": Init_Residental(target_tile); break;
+            case "Mine": Init_Mine(target_tile); break;
         }
     }
 
-    public void Init_Farm()
+    public void Init_Farm(TileClass target_tile)
     {
         clone_farm = Instantiate(farm);
         clone_farm.transform.parent = target_tile.transform;
         clone_farm.GetComponent<Building>().setInitial();
     }
-    public void Init_Waterpump()
+    public void Init_Waterpump(TileClass target_tile)
     {
         clone_waterpump = Instantiate(waterpump);
         clone_waterpump.transform.parent = target_tile.transform;
         clone_waterpump.GetComponent<Building>().setInitial();
     }
-    public void Init_Landfill()
+    public void Init_Landfill(TileClass target_tile)
     {
         clone_landfill = Instantiate(landfill);
         clone_landfill.transform.parent = target_tile.transform;
         clone_landfill.GetComponent<Building>().setInitial();
     }
-    public void Init_Residental()
+    public void Init_Residental(TileClass target_tile)
     {
         clone_residental = Instantiate(residental);
         clone_residental.transform.parent = target_tile.transform;
         clone_residental.GetComponent<Building>().setInitial();
     }
-    public void Init_Mine()
+    public void Init_Mine(TileClass target_tile)
     {
         clone_mine = Instantiate(mine);
         clone_mine.transform.parent = target_tile.transform;
