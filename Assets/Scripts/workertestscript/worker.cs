@@ -10,7 +10,7 @@ public class worker : MonoBehaviour
     public TileClass location;
     public GameObject worker_asset;
     public GameObject worker_obj;
-    public string name;
+    public string worker_name;
     public int turn_left;
     public Action cur_action;
     public enum Action
@@ -26,7 +26,7 @@ public class worker : MonoBehaviour
     public worker(PlayerStats player,string name)
     {
         this.player = player;
-        this.name = name;
+        worker_name = name;
         hp = 100;
         support = 100;
         location = player.dome;
