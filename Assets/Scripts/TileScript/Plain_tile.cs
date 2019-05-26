@@ -20,7 +20,7 @@ public class Plain_tile : TileClass
 
     public override string[] getBuildable()
     {
-        string[] buildable = { "Residential", "Farm", "Lanfill" };
+        string[] buildable = { "Residential", "Farm", "Landfill" };
         return buildable;
     }
 }
