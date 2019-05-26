@@ -9,6 +9,7 @@ public class Plain_tile : TileClass
     void Start()
     {
         resources = new Vector4(float.PositiveInfinity, 0, 0, 0); //initiate resources, first place is food
+        tileDescription = "A plain, useful to build something on.";
     }
 
     // Update is called once per frame
