@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7318569455741627009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329443010540713676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e53ebd52d5e4d4b914cea9cd4bc2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  hp: 0
+  support: 0
+  location: {fileID: 0}
+  destination: {fileID: 0}
+  worker_obj: {fileID: 0}
+  worker_name: 
+  action_list: []
+  turn_left: 0
+  cur_action: 0
+  cur_queue: 0
+  is_updated: 0
 --- !u!1001 &329443010540614028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +33,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100160, guid: 55adbbd9e9fdfb947aa0c70b0abaa2ec, type: 3}
       propertyPath: m_Name
-      value: idleworker
+      value: idleworker Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400160, guid: 55adbbd9e9fdfb947aa0c70b0abaa2ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57,3 +81,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55adbbd9e9fdfb947aa0c70b0abaa2ec, type: 3}
+--- !u!1 &329443010540713676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100160, guid: 55adbbd9e9fdfb947aa0c70b0abaa2ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 329443010540614028}
+  m_PrefabAsset: {fileID: 0}

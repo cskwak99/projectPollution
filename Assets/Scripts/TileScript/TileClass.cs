@@ -13,8 +13,8 @@ public class TileClass : MonoBehaviour
     public float thresholdSafe = 30;
     public float thresholdKill = 60;
     public float thresholdDeadLand = 90;
+    public List<GameObject> tile_worker = new List<GameObject>();
     public Vector4 resources = new Vector4(); // water, food, metal, waste
-    public List<TileClass> adjacent = new List<TileClass>();
     void Start()
     {
     }
@@ -53,6 +53,17 @@ public class TileClass : MonoBehaviour
     {
         string[] buildable = { "" };
         return buildable;
+    }
+    public string[] getWorker()
+    {
+        string[] result = new string[tile_worker.Count];
+        int i = 0;
+        foreach (GameObject worker in tile_worker)
+        {
+            result[i] = worker.GetComponent<worker>().worker_name;
+            i++;
+        }
+        return result;
     }
 
 }

@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     public List<GameObject> workers;
     public List<GameObject> buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public GameObject dome_tile;
-
+    public GameObject workerManager;
     private void Start() {
         initSet();
     }
@@ -23,13 +23,14 @@ public class PlayerStats : MonoBehaviour
         antivaxHP_max = 5;
         antivaxHP_present = 5;
         worker_max = 3;
-        worker_present = 3;
+        worker_present = 2;
         support_rate = 50;
         resources = new Vector4(10,10,10,0);
         //add worker list
         //add building list
         //buildings = new List<GameObject>();
-        foreach(GameObject building in buildings){
+        workerManager.GetComponent<WorkerManager>().init();
+        foreach (GameObject building in buildings){
             building.GetComponent<Building>().setInitial();
         }
         //add dome tile

@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public void manageUI(TileClass tile)
     {
         destroyCurrentOption();
-        if (tile!=null)
+        if (tile != null)
         {
             print(tile.gameObject.name);
             BroadcastMessage("onTileSelected", tile);
@@ -25,24 +25,27 @@ public class UIManager : MonoBehaviour
             currentOptionList = OPM.createOptionPanel("TileOption", gameObject, dummyoptionList, Input.mousePosition);
             Transform tmp;
             GameObject buildOption = null;
-            string[] buildOptionList = {};
+            string[] buildOptionList = { };
             GameObject workerOption = null;
-            string[] workerOptionList = {};
+            string[] workerOptionList = { };
             GameObject buildingOption = null;
-            string[] buildingOptionList = {};
+            string[] buildingOptionList = { };
             ////////////////////////BUILD OPTION/////////////////////////////
-            if(tmp = currentOptionList.transform.Find("Build"))
+            if (tmp = currentOptionList.transform.Find("Build"))
             {
                 GameObject buildOptionRoot = tmp.gameObject;
-                buildOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
+                buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+                {
                     buildOptionList = tile.getBuildable();
+                    //public GameObject createOptionPanel(string name, GameObject parent, string[] optionList, Vector3 iniPosition)
                     buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
-                    foreach(Transform option in buildOption.transform)
+                    foreach (Transform option in buildOption.transform)
                     {
                         Button btn = option.GetComponent<Button>();
                         if (!btn)
                             continue;
-                        btn.onClick.AddListener(() => {
+                        btn.onClick.AddListener(() =>
+                        {
                             GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
                         });
                     }
@@ -50,15 +53,105 @@ public class UIManager : MonoBehaviour
                 });
             }
             ////////////////////////WORKER OPTION///////////////////////////////
+            //worker and building should be distinguishable between players.
             if (tmp = currentOptionList.transform.Find("Worker"))
             {
                 GameObject workerOptionRoot = tmp.gameObject;
-                workerOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
-                    if(false)
+                GameObject workerQueue;
+                workerOptionList = tile.getWorker();
+                workerOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    //generate worker UI panel
+                    if (workerOptionList.Length > 0)
                     {
-                        workerOptionList = tile.transform.GetComponentInChildren<Building>().getBuildingFunc();
+                        workerOption = OPM.createOptionPanel("WorkerList", workerOptionRoot, workerOptionList, workerOptionRoot.transform.position);
+                        foreach (Transform option in workerOption.transform)
+                        {
+                            Button btn = option.GetComponent<Button>();
+                            if (!btn)
+                                continue;
+
+
+                            /*
+                            Debug.Log(worker_action_root.transform.position);
+                            worker_action_root.transform.position = btn.gameObject.transform.position;
+                            */
+                            GameObject worker_action_root = option.transform.gameObject;
+                            btn.onClick.AddListener(() =>
+                            {
+                                //GameObject.Find("Option").GetComponent<UIManager>().route_construction(option.name, tile);
+
+                                workerQueue = OPM.createOptionPanel("WorkerOption", worker_action_root, GameObject.Find(option.name).GetComponent<worker>().action_list, worker_action_root.transform.position);
+                                GameObject worker = GameObject.Find(option.name);
+                                GameObject worker_manager;
+                                if (GameObject.Find("TurnManager").GetComponent<TurnManager>().current_player.GetComponent<PlayerStats>().player_number == 1)
+                                    worker_manager = GameObject.Find("wm_player1");
+                                else
+                                {
+                                    worker_manager = GameObject.Find("wm_player2");
+                                }
+                                //Debug.Log("1");
+                                foreach (Transform option_ in workerQueue.transform)
+                                {
+                                    //Debug.Log("2");
+                                    Button btn_ = option_.GetComponent<Button>();
+                                    if (!btn_)
+                                        continue;
+                                    //Debug.Log("8");
+                                    btn_.onClick.AddListener(() =>
+                                    {
+                                        //Debug.Log("7");
+                                        if (option_.name == "idle")
+                                        {
+                                            //Debug.Log("5");
+                                            worker_manager.GetComponent<WorkerManager>().Update_Worker(worker, (worker.Action)0, worker.GetComponent<worker>().location);
+                                        }
+                                        else if (option_.name == "abort")
+                                        {
+                                            //Debug.Log("6");
+                                            worker_manager.GetComponent<WorkerManager>().Update_Worker(worker, (worker.Action)4, worker.GetComponent<worker>().location);
+                                        }
+                                        else
+                                        {
+                                            //Debug.Log("4");
+                                            GameObject dest = null;
+                                            Ray ray;
+                                            /*
+                                            while(dest==null)
+                                            {
+                                                Debug.Log("3");
+                                                if (Input.GetMouseButtonDown(0) && !this.isMouseOnUI)
+                                                {
+                                                    RaycastHit hit;
+                                                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                                                    Physics.Raycast(ray, out hit, 1000.0f);
+                                                    if (hit.transform != null)
+                                                    {
+                                                        dest = hit.transform.gameObject;
+                                                    }
+                                                }
+                                                await Task.Delay(10);
+                                            }
+                                            */
+                                            if (option_.name == "move")
+                                            {
+                                                worker_manager.GetComponent<WorkerManager>().Update_Worker(worker, (worker.Action)1, dest);
+                                            }
+                                            else if (option_.name == "work")
+                                            {
+                                                worker_manager.GetComponent<WorkerManager>().Update_Worker(worker, (worker.Action)3, dest);
+                                            }
+                                            else if (option_.name == "build")
+                                            {
+                                                worker_manager.GetComponent<WorkerManager>().Update_Worker(worker, (worker.Action)2, dest);
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     }
-                    workerOption = OPM.createOptionPanel("WorkerOption", workerOptionRoot, dummyoptionList, workerOptionRoot.transform.position);
+                    //workerOption = OPM.createOptionPanel("WorkerOption", workerOptionRoot, dummyoptionList, workerOptionRoot.transform.position);
                     this.setActiveOption(workerOption, buildingOption, buildOption);
                 });
             }
@@ -66,8 +159,10 @@ public class UIManager : MonoBehaviour
             if (tmp = currentOptionList.transform.Find("Building"))
             {
                 GameObject buildingOptionRoot = tmp.gameObject;
-                buildingOptionRoot.GetComponent<Button>().onClick.AddListener(() => {
-                    if(buildingOnTile){
+                buildingOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    if (buildingOnTile)
+                    {
                         buildingOptionList = buildingOnTile.getBuildingFunc();
                     }
                     buildingOption = OPM.createOptionPanel("BuildingOption", buildingOptionRoot, buildingOptionList, buildingOptionRoot.transform.position);

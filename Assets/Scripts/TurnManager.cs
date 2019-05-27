@@ -37,6 +37,7 @@ public class TurnManager : MonoBehaviour
             current_player = player1;
         }
         turnNum+=1;
+        Debug.Log("turn:" + turnNum);
         initiateTurn();
     }
 
@@ -131,6 +132,7 @@ public class TurnManager : MonoBehaviour
         int maxWorker = player.updateWorkerMax();
         int currentWorker = player.worker_present;
         //Current worker < max worker -> pop up new worker on the  one of residential area
+        player.workerManager.GetComponent<WorkerManager>().Turn_Update_Worker();
     }
 
     public void ConsumePhase(){
