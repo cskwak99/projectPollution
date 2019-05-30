@@ -12,9 +12,43 @@ public class clickHandler : MonoBehaviour {
         Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + ray.direction * 1000.0f);
     }
 
+    public IEnumerator getDestTile(System.Action<TileClass> passedTile)
+    {
+        this.UIM.isOnDestTileSelection = true;
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
+            {
+                RaycastHit hit;
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Physics.Raycast(ray, out hit, 1000.0f);
+                TileClass tile;
+                if (hit.transform == null)
+                    tile = null;
+                else
+                {
+                    string tile_type = hit.transform.gameObject.name.Substring(4);
+                    print("SELECTED "+ tile_type);
+                    tile = (TileClass)hit.transform.GetComponent(tile_type);
+                }
+                passedTile(tile);
+                this.UIM.isOnDestTileSelection = false;
+                yield break;
+                
+            }
+            if(Input.GetKey(KeyCode.Escape))
+            {
+                passedTile(null);
+                this.UIM.isOnDestTileSelection = false;
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
+        if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
         {
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -25,10 +59,9 @@ public class clickHandler : MonoBehaviour {
             else
             {
                 string tile_type = hit.transform.gameObject.name.Substring(4);
-                print(tile_type);
+                //print(tile_type);
                 tile = (TileClass) hit.transform.GetComponent(tile_type);
             }
-
             UIManager uiManager = this.GetComponent<UIManager>();
             uiManager.manageUI(tile);
         }

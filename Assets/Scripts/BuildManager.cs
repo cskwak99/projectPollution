@@ -44,6 +44,7 @@ public class BuildManager : MonoBehaviour
             case "Residential": Init_Residental(target_tile); break;
             case "Mine": Init_Mine(target_tile); break;
         }
+        GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
     }
 
     public void Init_Farm(TileClass target_tile)

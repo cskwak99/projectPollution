@@ -144,18 +144,23 @@ public class WorkerManager : MonoBehaviour
         }
     }
 
-    IEnumerator move_worker(worker obj, GameObject dest)
+    public IEnumerator move_worker(worker obj/*, GameObject dest*/)
     {
-        Vector3 workerPos = obj.worker_obj.transform.position;
-        Vector3 destination = dest.transform.position;
-        Vector3 direction = (destination - workerPos) / 10;
+        //Vector3 workerPos = obj.worker_obj.transform.position;
+        //Vector3 destination = dest.transform.position;
+        //Vector3 direction = (destination - workerPos) / 10;
+        TileClass destTile = null;
+        yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile=tile));
+        print(destTile);
+        /*
         for (int i = 0; i < 9; i++)
         {
             obj.worker_obj.transform.Translate(direction.x, direction.y, direction.z);
-            yield return new WaitForSeconds(0.05f);
+            //yield return new WaitForSeconds(0.05f);
         }
-        obj.worker_obj.transform.position = destination;
-        yield return new WaitForSeconds(0.05f);
+        */
+        //obj.worker_obj.transform.position = destination;
+        //yield return new WaitForSeconds(0.05f);
     }
     //calculate path from current to destination. 
     //called every turn by all moving workers
