@@ -22,13 +22,19 @@ public class clickHandler : MonoBehaviour {
                 RaycastHit hit;
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Physics.Raycast(ray, out hit, 1000.0f);
-                TileClass tile;
+                TileClass tile = null;
                 if (hit.transform == null)
                     tile = null;
                 else
                 {
                     string tile_type = hit.transform.gameObject.name.Substring(4);
                     print("SELECTED "+ tile_type);
+                    if (tile_type == "Water_tile")
+                    {
+                        passedTile(tile);
+                        this.UIM.isOnDestTileSelection = false;
+                        yield break;
+                    }
                     tile = (TileClass)hit.transform.GetComponent(tile_type);
                 }
                 passedTile(tile);

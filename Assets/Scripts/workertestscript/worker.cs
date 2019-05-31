@@ -16,6 +16,7 @@ public class worker : MonoBehaviour
     public Action cur_action;
     public Action cur_queue;
     public bool is_updated = false;
+    public bool is_assigned = false;
     public enum Action
     {
         idle,
@@ -50,6 +51,12 @@ public class worker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
+        if (is_move)
+        {
+            //StartCoroutine();
+            is_move = false;
+        }
+        */
     }
 }

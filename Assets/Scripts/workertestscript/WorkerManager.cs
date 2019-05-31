@@ -151,7 +151,12 @@ public class WorkerManager : MonoBehaviour
         //Vector3 direction = (destination - workerPos) / 10;
         TileClass destTile = null;
         yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile=tile));
-        print(destTile);
+        if (destTile != null)
+        {
+            obj.destination = destTile.gameObject;
+            StartCoroutine(move_action(obj));
+            Debug.Log("Destination set : " + destTile);
+        }
         /*
         for (int i = 0; i < 9; i++)
         {
@@ -165,14 +170,43 @@ public class WorkerManager : MonoBehaviour
     //calculate path from current to destination. 
     //called every turn by all moving workers
     //if there is a obstacle blocks way, calls player
+    public IEnumerator move_action(worker obj)
+    {
+        GameObject next = Calc_Path(obj.location, obj.destination);
+        Debug.Log(next.name);
+        StartCoroutine(move_animation(obj,next));
+        obj.location.GetComponent<TileClass>().tile_worker.Remove(obj.gameObject);
+        obj.location = next;
+        obj.is_assigned = true;
+        next.GetComponent<TileClass>().tile_worker.Add(obj.gameObject);
+        yield return null;
+    }
+    public IEnumerator move_animation(worker obj,GameObject dest)
+    {
+        Vector3 workerPos = obj.gameObject.transform.position;
+        Vector3 destination = dest.transform.position;
+        Vector3 direction = (destination - workerPos) / 10;
+        for (int i = 0; i < 10; i++)
+        {
+            obj.gameObject.transform.Translate(direction.x, 0, direction.z);
+            yield return new WaitForSeconds(0.05f);
+        }
+        obj.worker_obj.transform.position = new Vector3(destination.x,workerPos.y,destination.z);
+        yield return new WaitForSeconds(0.05f);
+    }
+
     public GameObject Calc_Path(GameObject curr, GameObject dest)
     {
+        Debug.Log("Calculating path");
         GameObject result = null;
         string fmt = "00";
+        Debug.Log(curr.name);
+        Debug.Log(curr.name.Substring(0, 2));
         int cur_x = Convert.ToInt32(curr.name.Substring(0, 2));
-        int cur_y = Convert.ToInt32(curr.name.Substring(2, 4));
+        Debug.Log(curr.name.Substring(2, 2));
+        int cur_y = Convert.ToInt32(curr.name.Substring(2, 2));
         int dest_x = Convert.ToInt32(dest.name.Substring(0, 2));
-        int dest_y = Convert.ToInt32(dest.name.Substring(2, 4));
+        int dest_y = Convert.ToInt32(dest.name.Substring(2, 2));
         Vector2 dest_dir = new Vector2((float)(dest_x - cur_x), (float)(dest_y - cur_y));
         Vector2[] dir = new Vector2[6] { new Vector2(1.0f, 0.0f), new Vector2(0.5f, (float)Math.Sqrt(3) * 0.5f), new Vector2(-0.5f, (float)Math.Sqrt(3) * 0.5f), new Vector2(-1.0f, 0.0f), new Vector2(-0.5f, -1.0f * (float)Math.Sqrt(3) * 0.5f), new Vector2(0.5f, -1.0f * (float)Math.Sqrt(3) * 0.5f) };
         List<float> dot_product = new List<float>();

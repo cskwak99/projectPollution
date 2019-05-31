@@ -17,13 +17,14 @@ MonoBehaviour:
   support: 0
   location: {fileID: 0}
   destination: {fileID: 0}
-  worker_obj: {fileID: 0}
+  worker_obj: {fileID: 329443010540713676}
   worker_name: 
   action_list: []
   turn_left: 0
   cur_action: 0
   cur_queue: 0
   is_updated: 0
+  is_move: 0
 --- !u!1001 &329443010540614028
 PrefabInstance:
   m_ObjectHideFlags: 0
