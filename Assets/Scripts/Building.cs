@@ -49,32 +49,50 @@ public class Building : MonoBehaviour
     }
     public float giveWaste(){
         float waste = 0;
-        if(buildingType == "Farm"){
-            waste = parentTile.GetComponent<Plain_tile>().resources.w; 
-            parentTile.GetComponent<Plain_tile>().resources.w = 0;
-        }else if(buildingType == "Mine"){
-            waste = parentTile.GetComponent<Mine_tile>().resources.w;
-            parentTile.GetComponent<Mine_tile>().resources.w = 0; 
-        }else if(buildingType == "Waterpump"){
-            waste = parentTile.GetComponent<Water_tile>().resources.w;
-            parentTile.GetComponent<Water_tile>().resources.w = 0; 
+        if (assignedWorker != null)
+        {
+            if (buildingType == "Farm")
+            {
+                waste = parentTile.GetComponent<Plain_tile>().resources.w;
+                parentTile.GetComponent<Plain_tile>().resources.w = 0;
+            }
+            else if (buildingType == "Mine")
+            {
+                waste = parentTile.GetComponent<Mine_tile>().resources.w;
+                parentTile.GetComponent<Mine_tile>().resources.w = 0;
+            }
+            else if (buildingType == "Waterpump")
+            {
+                waste = parentTile.GetComponent<Water_tile>().resources.w;
+                parentTile.GetComponent<Water_tile>().resources.w = 0;
+            }
         }
         return waste;
     }
 
     public float saveWaste(float waste){
-        if(buildingType == "Landfill"){
-            if(wasteCapacity > nowWaste + waste){
-                nowWaste += waste;
-                return (float)-1.0;
-            }else{
-                float remain = nowWaste + waste - wasteCapacity;
-                nowWaste = wasteCapacity;
-                return remain;
+        if (assignedWorker != null)
+        {
+            if (buildingType == "Landfill")
+            {
+                if (wasteCapacity > nowWaste + waste)
+                {
+                    nowWaste += waste;
+                    return (float)-1.0;
+                }
+                else
+                {
+                    float remain = nowWaste + waste - wasteCapacity;
+                    nowWaste = wasteCapacity;
+                    return remain;
+                }
             }
-        }else{
-            return (float)-11.0;
+            else
+            {
+                return (float)-11.0;
+            }
         }
+        return (float)-11.0;
     }
 
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get

@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7417838860318780735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202301003345879852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e53ebd52d5e4d4b914cea9cd4bc2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  hp: 0
+  support: 0
+  location: {fileID: 0}
+  destination: {fileID: 0}
+  worker_obj: {fileID: 1202301003345879852}
+  worker_name: 
+  action_list: []
+  turn_left: 0
+  cur_action: 0
+  is_assigned: 0
+  capacity: 0
+  waste_on_worker: 0
 --- !u!1001 &1202301003345912940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +34,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100160, guid: c3b8f136db763e34aa83484101dab8be, type: 3}
       propertyPath: m_Name
-      value: Heavy_load_01_IP_FINAL2
+      value: wasteworker Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400160, guid: c3b8f136db763e34aa83484101dab8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57,3 +82,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b8f136db763e34aa83484101dab8be, type: 3}
+--- !u!1 &1202301003345879852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100160, guid: c3b8f136db763e34aa83484101dab8be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1202301003345912940}
+  m_PrefabAsset: {fileID: 0}
