@@ -24,16 +24,23 @@ public class WorkerManager : MonoBehaviour
     //Update worker by ui inputs
     public void Turn_Update_Worker()
     {
+        Debug.Log("Turn Update Worker");
         foreach (GameObject obj in worker_list)
         {
-            if (!obj.GetComponent<worker>().is_assigned)
-                Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);       
+            Debug.Log(obj.name);
+            Debug.Log(obj.GetComponent<worker>().is_assigned);
+            Debug.Log(obj.GetComponent<worker>().cur_action);
+            //if (!obj.GetComponent<worker>().is_assigned)
+            Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);       
             Update_hp(obj);
             if (obj.GetComponent<worker>().cur_action == worker.Action.collect || obj.GetComponent<worker>().cur_action == worker.Action.dump)
             {
                 //only take 1 turn to collect and dump
                 obj.GetComponent<worker>().cur_action = worker.Action.idle;
             }            
+            /*
+            if(obj.GetComponent<worker>().cur_action != worker.Action.move && obj.GetComponent<worker>().cur_action != worker.Action.work)
+            */
             obj.GetComponent<worker>().is_assigned = false;
         }
         //condition for worker increase
@@ -91,6 +98,7 @@ public class WorkerManager : MonoBehaviour
     //when selected by UI
     public void Update_Worker(GameObject obj, worker.Action Action, GameObject dest)
     {
+        Debug.Log("Update worker");
         worker selected = obj.GetComponent<worker>();
         //assigned by UI, build somewhere, move somewhere, work somewhere, Abort something
         //selected.cur_queue = (worker.Action)Action;
@@ -111,7 +119,7 @@ public class WorkerManager : MonoBehaviour
             selected.destination = selected.location;
         }
         //if not on same tile 
-        else if (!(System.Object.ReferenceEquals(selected.location, dest)))
+        if (!(System.Object.ReferenceEquals(selected.location, dest)))
         {
             //if the player set a worker to move then keep move
             if (Action == worker.Action.move)
@@ -125,6 +133,7 @@ public class WorkerManager : MonoBehaviour
             //worker arrived to the destination
             if (Action == worker.Action.move)
             {
+                Debug.Log("arrived");
                 selected.cur_action = worker.Action.idle;
                 //selected.action_list = new string[1] { "abort" };
             }
@@ -179,10 +188,13 @@ public class WorkerManager : MonoBehaviour
         //Vector3 destination = dest.transform.position;
         //Vector3 direction = (destination - workerPos) / 10;
         TileClass destTile = null;
+        obj.cur_action = worker.Action.move;
         yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
         if (destTile != null)
         {
             if (System.Object.ReferenceEquals(destTile, obj.location))
+                yield break;
+            if (destTile.name.Substring(4) == "Water_Tile")
                 yield break;
             obj.destination = destTile.gameObject;
             StartCoroutine(move_action(obj));
@@ -204,7 +216,7 @@ public class WorkerManager : MonoBehaviour
     public IEnumerator move_action(worker obj)
     {
         GameObject next = Calc_Path(obj.location, obj.destination);
-        Debug.Log(next.name);
+        Debug.Log("move action "+next.name);
         StartCoroutine(move_animation(obj,next));
         obj.location.GetComponent<TileClass>().tile_worker.Remove(obj.gameObject);
         obj.location = next;
@@ -242,17 +254,25 @@ public class WorkerManager : MonoBehaviour
         int cur_y = Convert.ToInt32(curr.name.Substring(2, 2));
         int dest_x = Convert.ToInt32(dest.name.Substring(0, 2));
         int dest_y = Convert.ToInt32(dest.name.Substring(2, 2));
-        Vector2 dest_dir = new Vector2((float)(dest_x - cur_x), (float)(dest_y - cur_y));
+        Vector2 dest_dir = new Vector2((float)(dest.transform.position.x - curr.transform.position.x), (float)(dest.transform.position.z - curr.transform.position.z));
         Vector2[] dir = new Vector2[6] { new Vector2(1.0f, 0.0f), new Vector2(0.5f, (float)Math.Sqrt(3) * 0.5f), new Vector2(-0.5f, (float)Math.Sqrt(3) * 0.5f), new Vector2(-1.0f, 0.0f), new Vector2(-0.5f, -1.0f * (float)Math.Sqrt(3) * 0.5f), new Vector2(0.5f, -1.0f * (float)Math.Sqrt(3) * 0.5f) };
         List<float> dot_product = new List<float>();
-        Vector2Int[] tile_dir = new Vector2Int[6] { new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, +1), new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1) };
+        Vector2Int[] tile_dir;
+        if (cur_y % 2 == 0)
+        {
+            tile_dir = new Vector2Int[6] { new Vector2Int(-1, 0), new Vector2Int(0, +1), new Vector2Int(1, +1), new Vector2Int(+1, 0), new Vector2Int(1, -1), new Vector2Int(0, -1) };
+        }
+        else
+        {
+            tile_dir = new Vector2Int[6] { new Vector2Int(-1, 0), new Vector2Int(-1, +1), new Vector2Int(0, +1), new Vector2Int(+1, 0), new Vector2Int(0, -1), new Vector2Int(-1, -1) };
+        }
         float temp;
 
         float max = 0;
         int max_idx = 0;
         for (int i = 0; i < 6; i++)
         {
-            temp = Vector2.Dot(dest_dir, dir[i]);
+            temp = (dest_dir.x * dir[i].x + dest_dir.y * dir[i].y)/(float)Math.Sqrt(dest_dir.x*dest_dir.x+dest_dir.y*dest_dir.y);
             dot_product.Add(temp);
         }
         Debug.Log(dest_dir.x + ", " + dest_dir.y);
@@ -263,7 +283,7 @@ public class WorkerManager : MonoBehaviour
             max_idx = 0;
             for (int i = 0; i < dot_product.Count; i++)
             {
-                if (max < dot_product[i])
+                if (max <= dot_product[i])
                 {
                     max = dot_product[i];
                     max_idx = i;
@@ -272,9 +292,11 @@ public class WorkerManager : MonoBehaviour
             string next_x = (cur_x + tile_dir[max_idx].x).ToString(fmt);
             string next_y = (cur_y + tile_dir[max_idx].y).ToString(fmt);
             result = GameObject.FindGameObjectsWithTag(next_x + next_y)[0];
-            if (result.name.Substring(4).Equals("Water_Tile"))
+            Debug.Log(result.name);
+            if (result.name.Substring(4).Equals("Water_tile"))
             {
                 dot_product.RemoveAt(max_idx);
+                Debug.Log("result was water tile");
                 continue;
             }
             break;

@@ -136,6 +136,7 @@ public class TurnManager : MonoBehaviour
         int maxWorker = player.updateWorkerMax();
         int currentWorker = player.worker_present;
         //Current worker < max worker -> pop up new worker on the  one of residential area
+        Debug.Log(player.player_number + ": workerphase");
         player.workerManager.GetComponent<WorkerManager>().Turn_Update_Worker();
     }
 
