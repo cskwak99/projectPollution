@@ -30,12 +30,6 @@ public class clickHandler : MonoBehaviour {
                 {
                     string tile_type = hit.transform.gameObject.name.Substring(4);
                     print("SELECTED "+ tile_type);
-                    if (tile_type == "Water_tile")
-                    {
-                        passedTile(tile);
-                        this.UIM.isOnDestTileSelection = false;
-                        yield break;
-                    }
                     tile = (TileClass)hit.transform.GetComponent(tile_type);
                 }
                 passedTile(tile);

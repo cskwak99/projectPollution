@@ -168,10 +168,15 @@ public class UIManager : MonoBehaviour
     }
     public void onClickBuildButton(string buildingName)
     {
+        Destroy(currentOptionList);
+        StartCoroutine(buildTileSelection(buildingName));
+    }
+    IEnumerator buildTileSelection(string buildingName)
+    {
         BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
         TileClass destTile = null;
-        StartCoroutine(gameObject.GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
-        if(destTile.getBuildable().Contains(buildingName))
+        yield return StartCoroutine(gameObject.GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
+        if (destTile.getBuildable().Contains(buildingName))
         {
             BM.route_construction(buildingName, destTile);
         }
@@ -180,6 +185,7 @@ public class UIManager : MonoBehaviour
             showPopup("The building can't be built here");
         }
     }
+
     public void showGameEnd()
     {
         GameObject endPanel = Instantiate(gameEndPanel);
