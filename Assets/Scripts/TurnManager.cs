@@ -10,10 +10,11 @@ public class TurnManager : MonoBehaviour
     public GameObject current_player;
     public int totalWaste;
     public int turnNum;
-
+    private UIManager UIM;
 
     void Start()
     {
+        UIM = GameObject.Find("UI").GetComponent<UIManager>();
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
         current_player = player1;
@@ -58,6 +59,7 @@ public class TurnManager : MonoBehaviour
                 tile.UpdateWasteFlow();
             }
         }
+          //Calculate resource per turn
         //Resource Gathering Phase
           //Check gather buildings and get resources from it
           //check tile that has player's building and get waste from it
@@ -123,6 +125,8 @@ public class TurnManager : MonoBehaviour
         }
         resources.w = waste;
         player.resources += resources;
+        //Calculate resource per turn to UI
+        GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(current_player.GetComponent<PlayerStats>());
     }
 
     public void WorkerPhase(){
@@ -144,7 +148,8 @@ public class TurnManager : MonoBehaviour
             player.resources.y -= food;
         }else{
             player.antivaxHP_present -= 1;
-            Debug.Log("anti vaxxer dies");
+            UIM.showPopup("An anti vaxxer dies!");
+            //Debug.Log("anti vaxxer dies");
             foreach (GameObject worker in player.workers){
                 //decrease efficiency? support rate?
             }
@@ -173,14 +178,15 @@ public class TurnManager : MonoBehaviour
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         if (player.antivaxHP_present <= 0 || player.support_rate <= 0){
             //game end -> do something
-            GameObject.Find("UI").GetComponent<UIManager>().showGameEnd();
+            UIM.showGameEnd();
             Debug.Log("Game End");
         }
     }
 
     public void randomEvents(){
         if(turnNum == 6 || turnNum == 7){
-            Debug.Log("Anti vaxxer want water memory");
+            //Debug.Log("Anti vaxxer want water memory");
+            UIM.showPopup("Anti vaxxer want water memory, we lose some water");
             PlayerStats player = current_player.GetComponent<PlayerStats>();
             player.resources.x -= 3;
         }

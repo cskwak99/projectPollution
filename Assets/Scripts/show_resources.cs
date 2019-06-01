@@ -21,7 +21,6 @@ public class show_resources : MonoBehaviour
     void Start()
     {
         TM = GameObject.Find("TurnManager");
-        currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
     }
 
     public void calcResourcePerTurn(PlayerStats current_player)
@@ -59,6 +58,7 @@ public class show_resources : MonoBehaviour
     {
         currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
         playerText.text = currentPlayer.name;
+        calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
         waterText.text = "Water: " + currentPlayer.GetComponent<PlayerStats>().Get_water()+" "+waterPerTurn+"/turn";
         foodText.text = "Food: " + currentPlayer.GetComponent<PlayerStats>().Get_food()+" " + foodPerTurn + "/turn";
         metalText.text = "Metal: " + currentPlayer.GetComponent<PlayerStats>().Get_metal()+" " + metalPerTurn + "/turn";

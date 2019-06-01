@@ -11,9 +11,9 @@ public class UIManager : MonoBehaviour
     private GameObject currentOptionList;
     private OptionManager OPM;
     public bool isMouseOnUI;
-    public bool isOnDestTileSelection; 
+    public bool isOnDestTileSelection;
     public GameObject gameEndPanel;
-
+    public GameObject popUpPanel;
     public void manageUI(TileClass tile)
     {
         destroyCurrentOption();
@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
                             continue;
                         btn.onClick.AddListener(() =>
                         {
-                            GameObject.Find ("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
+                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
                         });
                     }
                     this.setActiveOption(buildOption, workerOption, buildingOption);
@@ -153,20 +153,31 @@ public class UIManager : MonoBehaviour
         //FIRST OPTION SENT WILL BE ACTIVATED, ELSE WILL BE DEACTIVATED
         foreach (GameObject other in otherOptions)
             Destroy(other);
-        if(daOption != null)
+        if (daOption != null)
             daOption.SetActive(true);
     }
 
     private void Start()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             addMouseHoverListener(child.gameObject);
         }
         this.isOnDestTileSelection = false;
         OPM = this.GetComponent<OptionManager>();
     }
-
+    public void showPopup(string popUpText)
+    {
+        GameObject popUp = Instantiate(popUpPanel, transform, false);
+        popUp.transform.SetParent(transform);
+        popUp.GetComponentInChildren<Text>().text = popUpText;
+        StartCoroutine(DestroyPopup(popUp));
+    }
+    IEnumerator DestroyPopup(GameObject popUp)
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(popUp);
+    }
     public void onMouseHoverUI()
     {
         this.isMouseOnUI = true;
