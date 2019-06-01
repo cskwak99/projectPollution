@@ -71,6 +71,7 @@ public class worker : MonoBehaviour
         {
             result.Add("work");
         }
+        result.Add("Move");
         return result.ToArray();
     }
     void Start()

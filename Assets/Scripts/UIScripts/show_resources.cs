@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class show_resources : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text playerText;
     public Text waterText;
     public Text foodText;
     public Text metalText;
@@ -57,7 +56,6 @@ public class show_resources : MonoBehaviour
     void Update()
     {
         currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
-        playerText.text = currentPlayer.name;
         calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
         waterText.text = "Water: " + currentPlayer.GetComponent<PlayerStats>().Get_water()+" "+waterPerTurn+"/turn";
         foodText.text = "Food: " + currentPlayer.GetComponent<PlayerStats>().Get_food()+" " + foodPerTurn + "/turn";

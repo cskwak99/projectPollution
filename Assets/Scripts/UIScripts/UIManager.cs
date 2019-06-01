@@ -98,6 +98,8 @@ public class UIManager : MonoBehaviour
                                     {
                                         Debug.Log(unitAction.gameObject.name);
                                         StartCoroutine(worker_manager.GetComponent<WorkerManager>().move_worker(selected_worker.GetComponent<worker>()));
+                                        isMouseOnUI = false;
+                                        Destroy(currentOptionList);
                                     });
                                 }
                                 else if (unitAction.name == "Pollute")
