@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
@@ -166,25 +166,6 @@ public class UIManager : MonoBehaviour
             BroadcastMessage("onTileUnSelected");
         }
     }
-    public void onClickBuildButton(string buildingName)
-    {
-        Destroy(currentOptionList);
-        StartCoroutine(buildTileSelection(buildingName));
-    }
-    IEnumerator buildTileSelection(string buildingName)
-    {
-        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
-        TileClass destTile = null;
-        yield return StartCoroutine(gameObject.GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
-        if (destTile.getBuildable().Contains(buildingName))
-        {
-            BM.route_construction(buildingName, destTile);
-        }
-        else
-        {
-            showPopup("The building can't be built here");
-        }
-    }
 
     public void showGameEnd()
     {
@@ -222,9 +203,11 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            addMouseHoverListener(child.gameObject);
+            if(child.name != "BuildingInfo")
+                addMouseHoverListener(child.gameObject);
         }
         this.isOnDestTileSelection = false;
+        BroadcastMessage("onTileUnSelected");
         OPM = this.GetComponent<OptionManager>();
     }
     public void showPopup(string popUpText)
