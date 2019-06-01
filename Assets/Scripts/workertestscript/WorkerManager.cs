@@ -28,6 +28,7 @@ public class WorkerManager : MonoBehaviour
         {
             if (!obj.GetComponent<worker>().is_updated)
                 Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);
+            obj.GetComponent<worker>().is_assigned = false;
             Update_hp(obj);
         }
         //condition for worker increase
@@ -83,41 +84,40 @@ public class WorkerManager : MonoBehaviour
             selected.destination = dest;
         }
         selected.is_updated = true;
-        if (Action == worker.Action.aborting)
+        if (Action == worker.Action.abort)
         {
             //cancel worker action
             selected.cur_action = worker.Action.idle;
             selected.cur_queue = worker.Action.idle;
             selected.destination = selected.location;
-            selected.action_list = new string[4] { "idle", "move", "build", "work" };
+            //selected.action_list = new string[4] { "idle", "move", "build", "work" };
+            selected.is_assigned = true;
         }
         //if not on same tile 
         else if (!(System.Object.ReferenceEquals(selected.location, dest)))
         {
             //if action was not moving, make it moving.
-            if (Action != worker.Action.moving)
+            if (Action != worker.Action.move)
             {
-                selected.cur_action = worker.Action.moving;
+                selected.cur_action = worker.Action.move;
             }
-            //move worker to certain place.
-            selected.location.GetComponent<TileClass>().tile_worker.Remove(obj);
-            selected.location = Calc_Path(selected.location, dest);
-            selected.location.GetComponent<TileClass>().tile_worker.Add(obj);
-            selected.action_list = new string[1] { "abort" };
+            //move worker to certain place.               
+            //selected.action_list = new string[1] { "abort" };
             //selected.worker_obj.transform.Translate(selected.location.transform.position);
-            StartCoroutine("move_worker");
+            StartCoroutine(move_action(selected));
         }
         else
         {
             //worker arrived to the destination
-            if (selected.cur_action == worker.Action.moving)
+            if (selected.cur_action == worker.Action.move)
             {
-                if (selected.cur_queue == worker.Action.working)
+                if (selected.cur_queue == worker.Action.work)
                     selected.is_updated = false;
                 selected.cur_action = selected.cur_queue;
-                selected.action_list = new string[1] { "abort" };
+                //selected.action_list = new string[1] { "abort" };
             }
             //the worker is on the same tile player assigned
+            /*
             else if (Action == worker.Action.constructing)
             {
                 if (selected.turn_left > 0)
@@ -136,10 +136,11 @@ public class WorkerManager : MonoBehaviour
                 }
 
             }
-            else if (Action == worker.Action.working)
+            */
+            else if (Action == worker.Action.work)
             {
                 //produce resources;
-                selected.action_list = new string[1] { "abort" };
+                //selected.action_list = new string[1] { "abort" };
             }
         }
     }
@@ -150,7 +151,7 @@ public class WorkerManager : MonoBehaviour
         //Vector3 destination = dest.transform.position;
         //Vector3 direction = (destination - workerPos) / 10;
         TileClass destTile = null;
-        yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile=tile));
+        yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile=tile,obj));
         if (destTile != null)
         {
             obj.destination = destTile.gameObject;
@@ -184,11 +185,15 @@ public class WorkerManager : MonoBehaviour
     public IEnumerator move_animation(worker obj,GameObject dest)
     {
         Vector3 workerPos = obj.gameObject.transform.position;
+        Debug.Log(dest.name);
         Vector3 destination = dest.transform.position;
+        Debug.Log(workerPos.x + ", " + workerPos.z);
+        Debug.Log(destination.x + ", " + destination.z);
         Vector3 direction = (destination - workerPos) / 10;
+        Debug.Log(direction.x + ", " + direction.z);
         for (int i = 0; i < 10; i++)
         {
-            obj.gameObject.transform.Translate(direction.x, 0, direction.z);
+            obj.gameObject.transform.position = obj.gameObject.transform.position + new Vector3(direction.x, 0, direction.z);
             yield return new WaitForSeconds(0.05f);
         }
         obj.worker_obj.transform.position = new Vector3(destination.x,workerPos.y,destination.z);
@@ -212,6 +217,7 @@ public class WorkerManager : MonoBehaviour
         List<float> dot_product = new List<float>();
         Vector2Int[] tile_dir = new Vector2Int[6] { new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(-1, +1), new Vector2Int(-1, 0), new Vector2Int(-1, -1), new Vector2Int(0, -1) };
         float temp;
+
         float max = 0;
         int max_idx = 0;
         for (int i = 0; i < 6; i++)
@@ -219,6 +225,8 @@ public class WorkerManager : MonoBehaviour
             temp = Vector2.Dot(dest_dir, dir[i]);
             dot_product.Add(temp);
         }
+        Debug.Log(dest_dir.x + ", " + dest_dir.y);
+        Debug.Log(dot_product[0] + ", " + dot_product[1] + ", " + dot_product[2] + ", " + dot_product[3] + ", " + dot_product[4] + ", " + dot_product[5]);
         while (dot_product.Count > 0)
         {
             max = 0;

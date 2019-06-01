@@ -15,15 +15,20 @@ public class worker : MonoBehaviour
     public int turn_left;
     public Action cur_action;
     public Action cur_queue;
+    // if worker has been updated by player
     public bool is_updated = false;
+    // if worker has been assigned by player
     public bool is_assigned = false;
+    public int capacity;
+    public int waste_on_worker;
     public enum Action
     {
         idle,
-        moving,
-        constructing,
-        working,
-        aborting
+        move,
+        collect,
+        dump,
+        work,
+        abort
     }
     // Start is called before the first frame update
     public void init_worker(PlayerStats player, string name, GameObject worker_prefab)
@@ -32,16 +37,41 @@ public class worker : MonoBehaviour
         worker_name = name;
         hp = 100;
         support = 100;
+        capacity = 100;
         location = this.transform.parent.gameObject;
         cur_action = Action.idle;
         turn_left = 0;
         is_updated = false;
-        action_list = new string[4] { "idle", "move", "build", "work" };
+        is_assigned = false;
+        action_list = new string[3] { "idle", "move", "collect" };
+        waste_on_worker = 0;
         destination = this.transform.parent.gameObject;
         this.gameObject.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
         this.gameObject.transform.position = location.transform.position + new Vector3(0f, 0.05f, 0f);
         Debug.Log("new worker");
 
+    }
+    public string[] get_action()
+    {
+        List<string> result = new List<string>();
+        if(cur_action == worker.Action.move || cur_action == worker.Action.work)
+        {
+            result.Add("abort");
+            return result.ToArray();
+        }
+        if (waste_on_worker < capacity)
+        {
+            result.Add("collect");
+        }
+        if (waste_on_worker > 0)
+        {
+            result.Add("dump");
+        }
+        else if (location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>() != null)
+        {
+            result.Add("work");
+        }
+        return result.ToArray();
     }
     void Start()
     {
