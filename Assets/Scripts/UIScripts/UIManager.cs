@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
@@ -102,21 +103,7 @@ public class UIManager : MonoBehaviour
                                         Destroy(currentOptionList);
                                     });
                                 }
-                                else if (unitAction.name == "Collect")
-                                {
-                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
-                                    {
-                                        Debug.Log(unitAction.gameObject.name);
-                                    });
-                                }
-                                else if (unitAction.name == "Dump")
-                                {
-                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
-                                    {
-                                        Debug.Log(unitAction.gameObject.name);
-                                    });
-                                }
-                                else if (unitAction.name == "Work")
+                                else if (unitAction.name == "Pollute")
                                 {
                                     unitAction.GetComponent<Button>().onClick.AddListener(() =>
                                     {
@@ -157,6 +144,20 @@ public class UIManager : MonoBehaviour
         {
             print("SPACE");
             BroadcastMessage("onTileUnSelected");
+        }
+    }
+    public void onClickBuildButton(string buildingName)
+    {
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
+        TileClass destTile = null;
+        StartCoroutine(gameObject.GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
+        if(destTile.getBuildable().Contains(buildingName))
+        {
+            BM.route_construction(buildingName, destTile);
+        }
+        else
+        {
+            showPopup("The building can't be built here");
         }
     }
     public void showGameEnd()
