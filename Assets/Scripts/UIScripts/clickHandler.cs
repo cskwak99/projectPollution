@@ -15,6 +15,7 @@ public class clickHandler : MonoBehaviour {
     public IEnumerator getDestTile(System.Action<TileClass> passedTile,worker obj)
     {
         this.UIM.isOnDestTileSelection = true;
+        UIM.showPopup("Select a destination tile");
         while (true)
         {
             if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
