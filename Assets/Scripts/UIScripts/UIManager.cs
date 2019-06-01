@@ -42,17 +42,20 @@ public class UIManager : MonoBehaviour
                     buildOptionList = tile.getBuildable();
                     //public GameObject createOptionPanel(string name, GameObject parent, string[] optionList, Vector3 iniPosition)
                     buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
-                    foreach (Transform option in buildOption.transform)
+                    if (buildingOnTile == null)
                     {
-                        Button btn = option.GetComponent<Button>();
-                        if (!btn)
-                            continue;
-                        btn.onClick.AddListener(() =>
+                        foreach (Transform option in buildOption.transform)
                         {
-                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
-                        });
+                            Button btn = option.GetComponent<Button>();
+                            if (!btn)
+                                continue;
+                            btn.onClick.AddListener(() =>
+                            {
+                                GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
+                            });
+                        }
+                        this.setActiveOption(buildOption, workerOption, buildingOption);
                     }
-                    this.setActiveOption(buildOption, workerOption, buildingOption);
                 });
             }
             ////////////////////////WORKER OPTION///////////////////////////////
@@ -103,11 +106,28 @@ public class UIManager : MonoBehaviour
                                         Destroy(currentOptionList);
                                     });
                                 }
-                                else if (unitAction.name == "Pollute")
+                                else if (unitAction.name == "Collect")
                                 {
                                     unitAction.GetComponent<Button>().onClick.AddListener(() =>
                                     {
                                         Debug.Log(unitAction.gameObject.name);
+                                        worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker,worker.Action.collect,selected_worker.GetComponent<worker>().location);
+                                    });
+                                }
+                                else if (unitAction.name == "Dump")
+                                {
+                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
+                                    {
+                                        Debug.Log(unitAction.gameObject.name);
+                                        worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker, worker.Action.dump, selected_worker.GetComponent<worker>().location);
+                                    });
+                                }
+                                else if (unitAction.name == "Work")
+                                {
+                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
+                                    {
+                                        Debug.Log(unitAction.gameObject.name);
+                                        worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker, worker.Action.work, selected_worker.GetComponent<worker>().location);
                                     });
                                 }
                                 else if (unitAction.name == "Abort")

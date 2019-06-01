@@ -53,7 +53,7 @@ public class worker : MonoBehaviour
     public string[] get_action()
     {
         List<string> result = new List<string>();
-        if(cur_action == worker.Action.move || cur_action == worker.Action.work || cur_action == worker.Action.collect || cur_action == worker.Action.dump)
+        if(cur_action == worker.Action.move || cur_action == worker.Action.work)
         {
             result.Add("Abort");
             return result.ToArray();

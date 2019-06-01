@@ -103,13 +103,17 @@ public class WorkerManager : MonoBehaviour
         if (Action == worker.Action.abort)
         {
             //cancel worker action
+            if(selected.cur_action == worker.Action.work)
+            {
+                dismiss_worker(selected);
+            }
             selected.cur_action = worker.Action.idle;
             selected.destination = selected.location;
         }
         //if not on same tile 
         else if (!(System.Object.ReferenceEquals(selected.location, dest)))
         {
-            //if action was not moving, make it moving.
+            //if the player set a worker to move then keep move
             if (Action == worker.Action.move)
             {
                 //move worker to certain place.               
@@ -127,33 +131,59 @@ public class WorkerManager : MonoBehaviour
             else if(Action == worker.Action.collect)
             {
                 selected.cur_action = worker.Action.collect ;
-                //StartCoroutine(collect_action(selected));
+                collect_waste(selected);
             }
             else if(Action == worker.Action.dump)
             {
                 selected.cur_action = worker.Action.dump;
-                //StartCoroutine(dump_action(selected));
+                dump_waste(selected);
             }
             else if (Action == worker.Action.work)
             {
-                //produce resources
-            }
-            else if(Action == worker.Action.idle)
-            {
-                //restore worker hp
+                selected.cur_action = worker.Action.work;
+                work_worker(selected);                
             }
         }
     }
-
+    public void collect_waste(worker obj)
+    {
+        if(obj.location.GetComponent<TileClass>().resources.w <= obj.capacity)
+        {
+            obj.waste_on_worker = (int)obj.location.GetComponent<TileClass>().resources.w;
+            obj.location.GetComponent<TileClass>().resources.w = (float)0;
+        }
+        else
+        {
+            obj.waste_on_worker = obj.capacity;
+            obj.location.GetComponent<TileClass>().resources.w -= (float)obj.capacity;
+        }
+    }
+    public void dump_waste(worker obj)
+    {
+        obj.location.GetComponent<TileClass>().resources.w += (float)obj.waste_on_worker;
+        obj.waste_on_worker = 0;
+    }
+    public void work_worker(worker obj)
+    {
+        Building buildingOnTile = obj.location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>();
+        buildingOnTile.assignedWorker = obj.gameObject;
+    }
+    public void dismiss_worker(worker obj)
+    {
+        Building buildingOnTile = obj.location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>();
+        buildingOnTile.assignedWorker = null;
+    }
     public IEnumerator move_worker(worker obj/*, GameObject dest*/)
     {
         //Vector3 workerPos = obj.worker_obj.transform.position;
         //Vector3 destination = dest.transform.position;
         //Vector3 direction = (destination - workerPos) / 10;
         TileClass destTile = null;
-        yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile=tile,obj));
+        yield return StartCoroutine(GameObject.Find("UI").GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
         if (destTile != null)
         {
+            if (System.Object.ReferenceEquals(destTile, obj.location))
+                yield break;
             obj.destination = destTile.gameObject;
             StartCoroutine(move_action(obj));
             Debug.Log("Destination set : " + destTile);

@@ -12,7 +12,7 @@ public class clickHandler : MonoBehaviour {
         Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + ray.direction * 1000.0f);
     }
 
-    public IEnumerator getDestTile(System.Action<TileClass> passedTile,worker obj)
+    public IEnumerator getDestTile(System.Action<TileClass> passedTile)
     {
         this.UIM.isOnDestTileSelection = true;
         UIM.showPopup("Select a destination tile");
@@ -28,12 +28,6 @@ public class clickHandler : MonoBehaviour {
                     tile = null;
                 else
                 {
-                    if(System.Object.ReferenceEquals(hit.transform.gameObject,obj.location))
-                    {
-                        passedTile(tile);
-                        this.UIM.isOnDestTileSelection = false;
-                        yield break;
-                    }
                     string tile_type = hit.transform.gameObject.name.Substring(4);
                     print("SELECTED "+ tile_type);
                     if (tile_type == "Water_tile")
