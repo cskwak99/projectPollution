@@ -26,10 +26,15 @@ public class WorkerManager : MonoBehaviour
     {
         foreach (GameObject obj in worker_list)
         {
-            if (!obj.GetComponent<worker>().is_updated)
-                Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);
-            obj.GetComponent<worker>().is_assigned = false;
+            if (!obj.GetComponent<worker>().is_assigned)
+                Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);       
             Update_hp(obj);
+            if (obj.GetComponent<worker>().cur_action == worker.Action.collect || obj.GetComponent<worker>().cur_action == worker.Action.dump)
+            {
+                //only take 1 turn to collect and dump
+                obj.GetComponent<worker>().cur_action = worker.Action.idle;
+            }            
+            obj.GetComponent<worker>().is_assigned = false;
         }
         //condition for worker increase
         Debug.Log("addworker");
@@ -49,12 +54,22 @@ public class WorkerManager : MonoBehaviour
     public void Update_hp(GameObject obj)
     {
         //update worker hp.
-        /*
-        if (obj.location.GetComponent<TileClass>.polluAmount)
+        int hp = obj.GetComponent<worker>().hp;
+        if (obj.GetComponent<worker>().cur_action == worker.Action.idle)
         {
-
+            hp = Math.Min(100, hp + 5);
         }
-        */
+        hp = Math.Max(0, hp - 10 * obj.GetComponent<worker>().location.GetComponent<TileClass>().thresholdLevel());
+        obj.GetComponent<worker>().hp = hp;
+        if (obj.GetComponent<worker>().hp == 0)
+            Kill_Worker(obj);
+    }
+    public void Kill_Worker(GameObject obj)
+    {
+        worker_list.Remove(obj);
+        obj.GetComponent<worker>().location.GetComponent<TileClass>().tile_worker.Remove(obj);
+        //remove from the building
+        Destroy(obj);
     }
     public GameObject Create_Worker(string name)
     {
@@ -78,69 +93,54 @@ public class WorkerManager : MonoBehaviour
     {
         worker selected = obj.GetComponent<worker>();
         //assigned by UI, build somewhere, move somewhere, work somewhere, Abort something
-        selected.cur_queue = (worker.Action)Action;
-        if (dest != selected.destination)
+        //selected.cur_queue = (worker.Action)Action;
+        if (dest != selected.destination && dest !=selected.location)
         {
             selected.destination = dest;
         }
-        selected.is_updated = true;
+        //worker has been updated by the player
+        selected.is_assigned = true;
         if (Action == worker.Action.abort)
         {
             //cancel worker action
             selected.cur_action = worker.Action.idle;
-            selected.cur_queue = worker.Action.idle;
             selected.destination = selected.location;
-            //selected.action_list = new string[4] { "idle", "move", "build", "work" };
-            selected.is_assigned = true;
         }
         //if not on same tile 
         else if (!(System.Object.ReferenceEquals(selected.location, dest)))
         {
             //if action was not moving, make it moving.
-            if (Action != worker.Action.move)
+            if (Action == worker.Action.move)
             {
-                selected.cur_action = worker.Action.move;
+                //move worker to certain place.               
+                StartCoroutine(move_action(selected));            
             }
-            //move worker to certain place.               
-            //selected.action_list = new string[1] { "abort" };
-            //selected.worker_obj.transform.Translate(selected.location.transform.position);
-            StartCoroutine(move_action(selected));
         }
         else
         {
             //worker arrived to the destination
-            if (selected.cur_action == worker.Action.move)
+            if (Action == worker.Action.move)
             {
-                if (selected.cur_queue == worker.Action.work)
-                    selected.is_updated = false;
-                selected.cur_action = selected.cur_queue;
+                selected.cur_action = worker.Action.idle;
                 //selected.action_list = new string[1] { "abort" };
             }
-            //the worker is on the same tile player assigned
-            /*
-            else if (Action == worker.Action.constructing)
+            else if(Action == worker.Action.collect)
             {
-                if (selected.turn_left > 0)
-                {
-                    selected.turn_left -= 1;
-                    selected.action_list = new string[1] { "abort" };
-                }
-                else
-                {
-                    selected.is_updated = false;
-                    selected.cur_queue = worker.Action.idle;
-                    selected.cur_action = worker.Action.idle;
-                    selected.action_list = new string[4] { "idle", "move", "build", "work" };
-                    //call player it finished constructing
-                    //build the actuall building
-                }
-
+                selected.cur_action = worker.Action.collect ;
+                //StartCoroutine(collect_action(selected));
             }
-            */
+            else if(Action == worker.Action.dump)
+            {
+                selected.cur_action = worker.Action.dump;
+                //StartCoroutine(dump_action(selected));
+            }
             else if (Action == worker.Action.work)
             {
-                //produce resources;
-                //selected.action_list = new string[1] { "abort" };
+                //produce resources
+            }
+            else if(Action == worker.Action.idle)
+            {
+                //restore worker hp
             }
         }
     }

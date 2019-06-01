@@ -102,7 +102,21 @@ public class UIManager : MonoBehaviour
                                         Destroy(currentOptionList);
                                     });
                                 }
-                                else if (unitAction.name == "Pollute")
+                                else if (unitAction.name == "Collect")
+                                {
+                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
+                                    {
+                                        Debug.Log(unitAction.gameObject.name);
+                                    });
+                                }
+                                else if (unitAction.name == "Dump")
+                                {
+                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
+                                    {
+                                        Debug.Log(unitAction.gameObject.name);
+                                    });
+                                }
+                                else if (unitAction.name == "Work")
                                 {
                                     unitAction.GetComponent<Button>().onClick.AddListener(() =>
                                     {

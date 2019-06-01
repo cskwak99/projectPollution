@@ -14,9 +14,9 @@ public class worker : MonoBehaviour
     public string[] action_list;
     public int turn_left;
     public Action cur_action;
-    public Action cur_queue;
+    //public Action cur_queue;
     // if worker has been updated by player
-    public bool is_updated = false;
+    //public bool is_updated = false;
     // if worker has been assigned by player
     public bool is_assigned = false;
     public int capacity;
@@ -41,7 +41,6 @@ public class worker : MonoBehaviour
         location = this.transform.parent.gameObject;
         cur_action = Action.idle;
         turn_left = 0;
-        is_updated = false;
         is_assigned = false;
         action_list = new string[3] { "idle", "move", "collect" };
         waste_on_worker = 0;
@@ -54,24 +53,30 @@ public class worker : MonoBehaviour
     public string[] get_action()
     {
         List<string> result = new List<string>();
-        if(cur_action == worker.Action.move || cur_action == worker.Action.work)
+        if(cur_action == worker.Action.move || cur_action == worker.Action.work || cur_action == worker.Action.collect || cur_action == worker.Action.dump)
         {
-            result.Add("abort");
+            result.Add("Abort");
             return result.ToArray();
         }
-        if (waste_on_worker < capacity)
+        if (is_assigned == false)
         {
-            result.Add("collect");
+            if (waste_on_worker < capacity)
+            {
+                if (location.GetComponent<TileClass>().resources.w > 0)
+                {
+                    result.Add("Collect");
+                }
+            }
+            if (waste_on_worker > 0)
+            {
+                result.Add("Dump");
+            }
+            else if (location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>() != null)
+            {
+                result.Add("Work");
+            }
+            result.Add("Move");
         }
-        if (waste_on_worker > 0)
-        {
-            result.Add("dump");
-        }
-        else if (location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>() != null)
-        {
-            result.Add("work");
-        }
-        result.Add("Move");
         return result.ToArray();
     }
     void Start()
