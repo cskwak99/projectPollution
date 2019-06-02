@@ -55,7 +55,8 @@ public class worker : MonoBehaviour
         List<string> result = new List<string>();
         if(cur_action == worker.Action.move || cur_action == worker.Action.work)
         {
-            result.Add("Abort");
+            if(!System.Object.ReferenceEquals(location,destination))
+                result.Add("Abort");
             return result.ToArray();
         }
         if (is_assigned == false)

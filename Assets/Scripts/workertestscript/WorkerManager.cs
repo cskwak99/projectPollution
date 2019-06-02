@@ -41,7 +41,7 @@ public class WorkerManager : MonoBehaviour
             /*
             if(obj.GetComponent<worker>().cur_action != worker.Action.move && obj.GetComponent<worker>().cur_action != worker.Action.work)
             */
-            obj.GetComponent<worker>().is_assigned = false;
+            //obj.GetComponent<worker>().is_assigned = false;
         }
         //condition for worker increase
         Debug.Log("addworker");
@@ -107,7 +107,6 @@ public class WorkerManager : MonoBehaviour
             selected.destination = dest;
         }
         //worker has been updated by the player
-        selected.is_assigned = true;
         if (Action == worker.Action.abort)
         {
             //cancel worker action
@@ -117,6 +116,7 @@ public class WorkerManager : MonoBehaviour
             }
             selected.cur_action = worker.Action.idle;
             selected.destination = selected.location;
+            selected.is_assigned = false;
         }
         //if not on same tile 
         if (!(System.Object.ReferenceEquals(selected.location, dest)))
@@ -124,7 +124,8 @@ public class WorkerManager : MonoBehaviour
             //if the player set a worker to move then keep move
             if (Action == worker.Action.move)
             {
-                //move worker to certain place.               
+                //move worker to certain place.    
+                selected.is_assigned = true;
                 StartCoroutine(move_action(selected));            
             }
         }
@@ -135,6 +136,7 @@ public class WorkerManager : MonoBehaviour
             {
                 Debug.Log("arrived");
                 selected.cur_action = worker.Action.idle;
+                selected.is_assigned = false;
                 //selected.action_list = new string[1] { "abort" };
             }
             else if(Action == worker.Action.collect)
@@ -149,6 +151,7 @@ public class WorkerManager : MonoBehaviour
             }
             else if (Action == worker.Action.work)
             {
+                selected.is_assigned = true;
                 selected.cur_action = worker.Action.work;
                 work_worker(selected);                
             }
