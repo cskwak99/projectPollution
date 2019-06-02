@@ -6,7 +6,7 @@ using UnityEngine;
 public class TileInfoUIManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    void onTileSelected(TileClass tile)
+    public void onTileSelected(TileClass tile)
     {
         this.GetComponent<CanvasGroup>().alpha = 1f;
         transform.Find("TileInfo_Text").GetComponent<Text>().text = "\t"+tile.tileDescription;

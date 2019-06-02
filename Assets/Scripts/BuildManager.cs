@@ -17,6 +17,8 @@ public class BuildManager : MonoBehaviour
     public GameObject mine;
     public GameObject TurnManager;
     public GameObject currentPlayer;
+    public GameObject P1Border;
+    public GameObject P2Border;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,14 @@ public class BuildManager : MonoBehaviour
             case "Landfill": Init_Landfill(target_tile); break;
             case "Residential": Init_Residental(target_tile); break;
             case "Mine": Init_Mine(target_tile); break;
+            default: return;
         }
+        GameObject border;
+        if (currentPlayer.name == "Player1")
+            border = Instantiate(P1Border, target_tile.gameObject.transform);
+        else
+            border = Instantiate(P2Border, target_tile.gameObject.transform);
+        border.transform.position = target_tile.transform.position + new Vector3(0, 0.05f, 0);
         GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
     }
 

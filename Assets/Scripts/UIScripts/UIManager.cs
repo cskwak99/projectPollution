@@ -9,19 +9,41 @@ public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private GUI tileInfo;
-    private GameObject currentOptionList;
     private OptionManager OPM;
     public bool isMouseOnUI;
     public bool isOnDestTileSelection;
+    public bool isOnTileSelected;
     public GameObject gameEndPanel;
     public GameObject popUpPanel;
+    public GameObject tileSelectionBorder;
+    private GameObject currentOptionList;
+    private GameObject currentBorder;
+    public void hoverTile(TileClass tile)
+    {
+        destroyBorder();
+        if (tile != null)
+        {
+            BroadcastMessage("onTileSelected", tile);
+            currentBorder = Instantiate(tileSelectionBorder, tile.gameObject.transform);
+            currentBorder.transform.position = currentBorder.transform.parent.position + new Vector3(0,0.05f,0);
+        }
+        else
+        {
+            print("SPACE");
+            BroadcastMessage("onTileUnSelected");
+        }
+
+    }
+    public void destroyBorder()
+    {
+        Destroy(currentBorder);
+    }
     public void manageUI(TileClass tile)
     {
         destroyCurrentOption();
         if (tile != null)
         {
             //print(tile.gameObject.name);
-            BroadcastMessage("onTileSelected", tile);
             //string[] optionList = tile.getOptions();
             Building buildingOnTile = tile.transform.GetComponentInChildren<Building>();
             string[] dummyoptionList = { "Worker", "Build", "Building" };
@@ -224,11 +246,6 @@ public class UIManager : MonoBehaviour
                 });
             }
         }
-        else
-        {
-            print("SPACE");
-            BroadcastMessage("onTileUnSelected");
-        }
     }
 
     public void showGameEnd()
@@ -265,6 +282,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        currentBorder = null;
         foreach (Transform child in transform)
         {
             if(child.name != "BuildingInfo")

@@ -49,12 +49,13 @@ public class clickHandler : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
+        UIManager uiManager = this.GetComponent<UIManager>();
+        TileClass tile = null;
+        if (!UIM.isMouseOnUI)
         {
             RaycastHit hit;
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit, 1000.0f);
-            TileClass tile;
+            Physics.Raycast(ray, out hit, 1000.0f);  
             if (hit.transform == null)
                 tile = null;
             else
@@ -63,10 +64,22 @@ public class clickHandler : MonoBehaviour {
                 //print(tile_type);
                 tile = (TileClass) hit.transform.GetComponent(tile_type);
             }
-            UIManager uiManager = this.GetComponent<UIManager>();
-            uiManager.manageUI(tile);
+            if(!UIM.isOnTileSelected)
+                uiManager.hoverTile(tile);
         }
-
+        if (Input.GetMouseButton(0) && !UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
+        {
+            if (!UIM.isOnTileSelected)
+            {
+                uiManager.manageUI(tile);
+                if (tile != null)
+                    UIM.isOnTileSelected = true;
+            }
+            else
+            {
+                UIM.isOnTileSelected = false;
+            }
+        }
         //ON CLICK MOUSE2 (MIDDLEMOUSE) CAMERA CAN MOVE (VIEW SCRIPT IN THE CAMERA)
     }
 

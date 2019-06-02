@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HPUIManager : MonoBehaviour
 {
-    void onTileSelected(TileClass tile)
+    public void onTileSelected(TileClass tile)
     {
         this.GetComponent<RectTransform>().anchoredPosition = new Vector3(284.9f, 12.8f, 0.0f);
     }
-    void onTileUnSelected()
+    public void onTileUnSelected()
     {
         this.GetComponent<RectTransform>().anchoredPosition = new Vector3(12.5f, 12.8f, 0.0f);
     }
