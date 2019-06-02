@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            print("SPACE");
+            //print("SPACE");
             BroadcastMessage("onTileUnSelected");
         }
 
@@ -63,9 +63,10 @@ public class UIManager : MonoBehaviour
                 {
                     buildOptionList = tile.getBuildable();
                     //public GameObject createOptionPanel(string name, GameObject parent, string[] optionList, Vector3 iniPosition)
-                    buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
+                    
                     if (buildingOnTile == null)
                     {
+                        buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
                         foreach (Transform option in buildOption.transform)
                         {
                             Button btn = option.GetComponent<Button>();
@@ -74,6 +75,7 @@ public class UIManager : MonoBehaviour
                             btn.onClick.AddListener(() =>
                             {
                                 GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
+                                isMouseOnUI = false;
                             });
                         }
                         this.setActiveOption(buildOption, workerOption, buildingOption);
@@ -134,6 +136,7 @@ public class UIManager : MonoBehaviour
                                     {
                                         Debug.Log(unitAction.gameObject.name);
                                         worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker,worker.Action.collect,selected_worker.GetComponent<worker>().location);
+                                        isMouseOnUI = false;
                                     });
                                 }
                                 else if (unitAction.name == "Dump")
@@ -142,6 +145,7 @@ public class UIManager : MonoBehaviour
                                     {
                                         Debug.Log(unitAction.gameObject.name);
                                         worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker, worker.Action.dump, selected_worker.GetComponent<worker>().location);
+                                        isMouseOnUI = false;
                                     });
                                 }
                                 else if (unitAction.name == "Work")
@@ -150,6 +154,7 @@ public class UIManager : MonoBehaviour
                                     {
                                         Debug.Log(unitAction.gameObject.name);
                                         worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker, worker.Action.work, selected_worker.GetComponent<worker>().location);
+                                        isMouseOnUI = false;
                                     });
                                 }
                                 else if (unitAction.name == "Abort")
@@ -158,6 +163,22 @@ public class UIManager : MonoBehaviour
                                     {
                                         Debug.Log(unitAction.gameObject.name);
                                         worker_manager.GetComponent<WorkerManager>().Update_Worker(selected_worker, worker.Action.abort, selected_worker.GetComponent<worker>().location);
+                                        isMouseOnUI = false;
+                                    });
+                                }
+                                else if(unitAction.name == "Info")
+                                {
+                                    GameObject popUp = Instantiate(popUpPanel, transform, false);
+                                    IEnumerator destroy_pop = DestroyPopup(popUp);
+                                    unitAction.GetComponent<Button>().onClick.AddListener(() =>
+                                    {
+                                        popUp.transform.SetParent(transform);
+                                        string popUpText = "Name : "+selected_worker.name+", HP : "+ selected_worker.GetComponent<worker>().hp+", Waste : " + selected_worker.GetComponent<worker>().waste_on_worker;
+                                        Debug.Log(unitAction.gameObject.name);
+                                        popUp.GetComponentInChildren<Text>().text = popUpText;
+                                        //destroy_pop= DestroyPopup(popUp);
+                                        StartCoroutine(destroy_pop);
+                                        isMouseOnUI = false;
                                     });
                                 }
                             }       
@@ -205,7 +226,7 @@ public class UIManager : MonoBehaviour
                                 string popUpText;
                                 if (tile.name.Substring(4) == "Dome_tile")
                                 {
-                                    Vector4 produce = current_player.GetComponent<PlayerStats>().resources;
+                                    Vector4 produce = current_player.GetComponent<PlayerStats>().dome_tile.GetComponent<Dome_tile>().resources;
                                     popUpText = "Dome current resources : " + produce.x + ", food : " + produce.y + ", metal : " + produce.z + ", waste : " + produce.w + ".";
                                 }
                                 else if (buildingOnTile.assignedWorker != null)
@@ -231,6 +252,7 @@ public class UIManager : MonoBehaviour
                                 popUp.GetComponentInChildren<Text>().text = popUpText;
                                 //destroy_pop= DestroyPopup(popUp);
                                 StartCoroutine(destroy_pop);
+                                isMouseOnUI = false;
                             }
                             /*
                             if(option.name == "Close")

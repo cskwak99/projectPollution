@@ -14,6 +14,7 @@ public class TurnManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("GameStart");
         UIM = GameObject.Find("UI").GetComponent<UIManager>();
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
@@ -98,6 +99,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public void ResourceGatheringPhase(){
+        Debug.Log("Gather Resource");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         List<GameObject> buildings = player.buildings;
 
@@ -113,8 +115,15 @@ public class TurnManager : MonoBehaviour
         float remain = waste;
         foreach (GameObject building in buildings){
             if (building.GetComponent<Building>().buildingType == "Landfill"){
-                remain = building.GetComponent<Building>().saveWaste(remain*100);
-                if(remain <= -1){
+                if (remain+building.GetComponent<Building>().nowWaste < building.GetComponent<Building>().wasteCapacity){
+                    building.GetComponent<Building>().nowWaste += remain;
+                    remain = 0;
+                }
+                else
+                {
+                    remain -= building.GetComponent<Building>().wasteCapacity - building.GetComponent<Building>().nowWaste;
+                }
+                if(remain == 0){
                     break;
                 }
             }
@@ -122,8 +131,8 @@ public class TurnManager : MonoBehaviour
         if(remain > 0){
             //add remain Waste on player's dome tile
             player.dome_tile.GetComponent<Dome_tile>().resources.w += remain * 100;
+            resources.w = waste;
         }
-        resources.w = waste;
         player.resources += resources;
         //Calculate resource per turn to UI
         GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(current_player.GetComponent<PlayerStats>());
@@ -141,6 +150,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public void ConsumePhase(){
+        Debug.Log("Consume Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         float water = (float)player.antivaxHP_present + player.worker_present;
         float food = (float)player.antivaxHP_present + player.worker_present;
@@ -161,6 +171,7 @@ public class TurnManager : MonoBehaviour
         //Calc pollution meter for every tile that players worker & building is on
         //Calc efficiency different in worker on tile
         //Calc dome tile pollution and kill anti vaxxer
+        Debug.Log("Pollution Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         foreach(GameObject building in player.buildings){
             building.GetComponent<Building>().parentTile.GetComponent<TileClass>().UpdatePolluAmount();
@@ -171,11 +182,13 @@ public class TurnManager : MonoBehaviour
     }
 
     public void SupportRatePhase(){
+        Debug.Log("Support Rate Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         //Calc about it
     }
 
     public void CheckLosePhase(){
+        Debug.Log("Check Lose Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         if (player.antivaxHP_present <= 0 || player.support_rate <= 0){
             //game end -> do something
@@ -185,6 +198,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public void randomEvents(){
+        Debug.Log("Random Events");
         if(turnNum == 6 || turnNum == 7){
             //Debug.Log("Anti vaxxer want water memory");
             UIM.showPopup("Anti vaxxer want water memory, we lose some water");

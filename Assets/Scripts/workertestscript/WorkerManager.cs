@@ -7,12 +7,12 @@ public class WorkerManager : MonoBehaviour
 {
     public List<GameObject> worker_list;
     public GameObject worker_prefab;
-    int worker_max;
-    int worker_present;
-    int worker_num;
+    public int worker_max;
+    //public int worker_present;
+    public int worker_num;
     public PlayerStats player;
-    int worker_increase;
-    int worker_acc;
+    public int worker_increase;
+    public int worker_acc;
     // Start is called before the first frame update
     Boolean is_updated;
     //call by ui or something else
@@ -25,14 +25,19 @@ public class WorkerManager : MonoBehaviour
     public void Turn_Update_Worker()
     {
         Debug.Log("Turn Update Worker");
-        foreach (GameObject obj in worker_list)
-        {
+        int i = 0;
+        List<int> killed = new List<int>();
+        foreach (GameObject obj in new List<GameObject>(worker_list))
+        {        
             Debug.Log(obj.name);
             Debug.Log(obj.GetComponent<worker>().is_assigned);
             Debug.Log(obj.GetComponent<worker>().cur_action);
             //if (!obj.GetComponent<worker>().is_assigned)
-            Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);       
-            Update_hp(obj);
+            Update_Worker(obj, obj.GetComponent<worker>().cur_action, obj.GetComponent<worker>().destination);
+            if (Update_hp(obj) == -1)
+            {
+                killed.Add(i);
+            }
             if (obj.GetComponent<worker>().cur_action == worker.Action.collect || obj.GetComponent<worker>().cur_action == worker.Action.dump)
             {
                 //only take 1 turn to collect and dump
@@ -41,15 +46,25 @@ public class WorkerManager : MonoBehaviour
             
             if(obj.GetComponent<worker>().cur_action == worker.Action.idle && obj.GetComponent<worker>().is_assigned == true)
                 obj.GetComponent<worker>().is_assigned = false;
+            i++;
+        }
+        for(int j = 0; j < killed.Count; j++)
+        {
+            GameObject worker_died = worker_list[killed[j]];
+            worker_died.GetComponent<worker>().location.GetComponent<TileClass>().tile_worker.Remove(worker_died);
+            //remove from the building
+            worker_list.Remove(worker_died);
+            Destroy(worker_died);
         }
         //condition for worker increase
         Debug.Log("addworker");
-        if (worker_max > worker_present)
+        if (worker_max >= worker_num)
         {
             if (worker_acc >= 100)
             {
                 worker_acc = 0;
-                worker_list.Add(Create_Worker(player.player_number + "worker" + worker_num));
+                Debug.Log("new worker : "+player.player_number + "worker" + (worker_num + 1));
+                Create_Worker(player.player_number + "worker" + (worker_num+1));
             }
             else
             {
@@ -57,7 +72,7 @@ public class WorkerManager : MonoBehaviour
             }
         }
     }
-    public void Update_hp(GameObject obj)
+    public int Update_hp(GameObject obj)
     {
         //update worker hp.
         int hp = obj.GetComponent<worker>().hp;
@@ -68,8 +83,12 @@ public class WorkerManager : MonoBehaviour
         hp = Math.Max(0, hp - 10 * obj.GetComponent<worker>().location.GetComponent<TileClass>().thresholdLevel());
         obj.GetComponent<worker>().hp = hp;
         if (obj.GetComponent<worker>().hp == 0)
-            Kill_Worker(obj);
+        {
+            return -1;
+        }
+        return 0;
     }
+    /*
     public void Kill_Worker(GameObject obj)
     {
         worker_list.Remove(obj);
@@ -77,6 +96,7 @@ public class WorkerManager : MonoBehaviour
         //remove from the building
         Destroy(obj);
     }
+    */
     public GameObject Create_Worker(string name)
     {
         GameObject new_worker = Instantiate(worker_prefab);
@@ -91,7 +111,9 @@ public class WorkerManager : MonoBehaviour
         new_worker.GetComponent<worker>().init_worker(player, name, worker_prefab);
         worker_list.Add(new_worker);
         player.dome_tile.GetComponent<TileClass>().tile_worker.Add(new_worker);
+        //worker_present++;
         worker_num++;
+        player.worker_present++;
         return new_worker;
     }
     //when selected by UI
@@ -170,15 +192,15 @@ public class WorkerManager : MonoBehaviour
             }
             else
                 player = turn_manager.player2.GetComponent<PlayerStats>();
-            if (player.resources.w<= obj.capacity)
+            if (player.resources.w<= (obj.capacity-obj.waste_on_worker))
             {
-                obj.waste_on_worker = (int)player.resources.w;
+                obj.waste_on_worker += (int)player.resources.w;
                 player.resources.w = (float)0;
             }
             else
             {
                 obj.waste_on_worker = obj.capacity;
-                player.resources.w -= (float)obj.capacity;
+                player.resources.w -= (float)(obj.capacity-obj.waste_on_worker);
             }
             return;
         }
@@ -305,10 +327,12 @@ public class WorkerManager : MonoBehaviour
         Debug.Log(direction.x + ", " + direction.z);
         for (int i = 0; i < 10; i++)
         {
-            obj.gameObject.transform.position = obj.gameObject.transform.position + new Vector3(direction.x, 0, direction.z);
+            if(obj!=null)
+                obj.gameObject.transform.position = obj.gameObject.transform.position + new Vector3(direction.x, 0, direction.z);
             yield return new WaitForSeconds(0.05f);
         }
-        obj.worker_obj.transform.position = new Vector3(destination.x,workerPos.y,destination.z);
+        if(obj!=null)
+            obj.worker_obj.transform.position = new Vector3(destination.x,workerPos.y,destination.z);
         yield return new WaitForSeconds(0.05f);
     }
 
@@ -318,9 +342,9 @@ public class WorkerManager : MonoBehaviour
         GameObject result = null;
         string fmt = "00";
         Debug.Log(curr.name);
-        Debug.Log(curr.name.Substring(0, 2));
+        //Debug.Log(curr.name.Substring(0, 2));
         int cur_x = Convert.ToInt32(curr.name.Substring(0, 2));
-        Debug.Log(curr.name.Substring(2, 2));
+        //Debug.Log(curr.name.Substring(2, 2));
         int cur_y = Convert.ToInt32(curr.name.Substring(2, 2));
         int dest_x = Convert.ToInt32(dest.name.Substring(0, 2));
         int dest_y = Convert.ToInt32(dest.name.Substring(2, 2));
@@ -338,29 +362,29 @@ public class WorkerManager : MonoBehaviour
         }
         float temp;
 
-        float max = 0;
-        int max_idx = 0;
+        float min = 0;
+        int min_idx = 0;
         for (int i = 0; i < 6; i++)
         {
-            temp = (dest_dir.x * dir[i].x + dest_dir.y * dir[i].y)/(float)Math.Sqrt(dest_dir.x*dest_dir.x+dest_dir.y*dest_dir.y);
+            temp = (float)Math.Acos((double)(dest_dir.x * dir[i].x + dest_dir.y * dir[i].y)/Math.Sqrt(dest_dir.x*dest_dir.x+dest_dir.y*dest_dir.y));
             dot_product.Add(temp);
         }
-        Debug.Log(dest_dir.x + ", " + dest_dir.y);
-        Debug.Log(dot_product[0] + ", " + dot_product[1] + ", " + dot_product[2] + ", " + dot_product[3] + ", " + dot_product[4] + ", " + dot_product[5]);
+        //Debug.Log(dest_dir.x + ", " + dest_dir.y);
+        //Debug.Log(dot_product[0] + ", " + dot_product[1] + ", " + dot_product[2] + ", " + dot_product[3] + ", " + dot_product[4] + ", " + dot_product[5]);
         while (dot_product.Count > 0)
         {
-            max = 0;
-            max_idx = 0;
+            min = (float) Double.PositiveInfinity;
+            min_idx = 0;
             for (int i = 0; i < dot_product.Count; i++)
             {
-                if (max <= dot_product[i])
+                if (min >= dot_product[i])
                 {
-                    max = dot_product[i];
-                    max_idx = i;
+                    min = dot_product[i];
+                    min_idx = i;
                 }
             }
-            string next_x = (cur_x + tile_dir[max_idx].x).ToString(fmt);
-            string next_y = (cur_y + tile_dir[max_idx].y).ToString(fmt);
+            string next_x = (cur_x + tile_dir[min_idx].x).ToString(fmt);
+            string next_y = (cur_y + tile_dir[min_idx].y).ToString(fmt);
             result = GameObject.FindGameObjectsWithTag(next_x + next_y)[0];
             Debug.Log(result.name);
             if (result.name.Substring(4).Equals("Water_tile"))
@@ -368,7 +392,7 @@ public class WorkerManager : MonoBehaviour
                 if(dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>()==null)
                 //if (dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().name.Substring(0, dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().name.Length - 7) != "Waterpump")
                 {
-                    dot_product.RemoveAt(max_idx);
+                    dot_product.RemoveAt(min_idx);
                     Debug.Log("result was water tile");
                     continue;
                 }
@@ -383,13 +407,13 @@ public class WorkerManager : MonoBehaviour
     {
         Debug.Log("workermanager");
         worker_max = 3;
-        worker_present = 2;
+        worker_num =0;
         List<GameObject> worker_list = new List<GameObject>();
-        for (int i = 1; i <= worker_present; i++)
+        for (int i = 1; i <= 2; i++)
         {
             Create_Worker(player.player_number + "worker" + i);
         }
-        worker_num = 3;
+        //worker_num = 3;
         worker_acc = 0;
         worker_increase = 50;
     }

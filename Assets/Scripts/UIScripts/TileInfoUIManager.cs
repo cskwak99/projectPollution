@@ -10,7 +10,14 @@ public class TileInfoUIManager : MonoBehaviour
     {
         this.GetComponent<CanvasGroup>().alpha = 1f;
         transform.Find("TileInfo_Text").GetComponent<Text>().text = "\t"+tile.tileDescription;
-        transform.Find("PollutionMeter/PollutionMeter_Bar").GetComponent<RectTransform>().localScale = new Vector3(tile.polluAmount/tile.maxPolluAmount, 1.0f, 1.0f);
+        if(tile.polluAmount > tile.maxPolluAmount)
+        {
+            transform.Find("PollutionMeter/PollutionMeter_Bar").GetComponent<RectTransform>().localScale = new Vector3(tile.maxPolluAmount / tile.maxPolluAmount, 1.0f, 1.0f);
+        }
+        else
+        {
+            transform.Find("PollutionMeter/PollutionMeter_Bar").GetComponent<RectTransform>().localScale = new Vector3(tile.polluAmount / tile.maxPolluAmount, 1.0f, 1.0f);
+        } 
     }
     void onTileUnSelected()
     {

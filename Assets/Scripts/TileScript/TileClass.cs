@@ -37,7 +37,7 @@ public class TileClass : MonoBehaviour
 
     public Vector4 getResources(Vector4 resourcesTaken)
     {
-        Debug.Log(resources);
+        //Debug.Log(resources);
         Vector4 resourcesTrulyTaken = Vector4.Min(resourcesTaken, resources);
         resources = resources - resourcesTrulyTaken;
         return resourcesTrulyTaken;

@@ -37,6 +37,7 @@ public class PlayerStats : MonoBehaviour
     }
 
     public int updateWorkerMax(){
+        Debug.Log("updateWorkerMax");
         int temp = 0;
         foreach(GameObject building in buildings){
             if(building.GetComponent<Building>().isitResidential()){
@@ -44,6 +45,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
         this.worker_max = temp/2;
+        workerManager.GetComponent<WorkerManager>().worker_max = worker_max;
         return worker_max;
     }
 

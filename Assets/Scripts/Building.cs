@@ -108,9 +108,9 @@ public class Building : MonoBehaviour
                 int food = 10;
                 Vector4 required = new Vector4(0,0,0,0);
                 required.y = food * efficiency;
-                Debug.Log(required);
+                //Debug.Log(required);
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
-                Debug.Log(resources);
+                //Debug.Log(resources);
 
                 parentTile.GetComponent<Plain_tile>().resources.w += wasteMk; 
 

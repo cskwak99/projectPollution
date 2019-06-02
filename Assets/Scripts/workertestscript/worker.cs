@@ -64,6 +64,7 @@ public class worker : MonoBehaviour
             {
                 result.Add("Abort");
             }
+            result.Add("Info");
             return result.ToArray();
         }
         if (is_assigned == false)
@@ -92,6 +93,7 @@ public class worker : MonoBehaviour
             }
             result.Add("Move");
         }
+        result.Add("Info");
         return result.ToArray();
     }
     void Start()
