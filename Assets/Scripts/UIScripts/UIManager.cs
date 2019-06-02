@@ -156,6 +156,46 @@ public class UIManager : MonoBehaviour
                         buildingOptionList = buildingOnTile.getBuildingFunc();
                     }
                     buildingOption = OPM.createOptionPanel("BuildingOption", buildingOptionRoot, buildingOptionList, buildingOptionRoot.transform.position);
+                    foreach (Transform option in buildingOption.transform)
+                    {
+                        Button btn = option.GetComponent<Button>();
+                        if (!btn)
+                            continue;
+                        btn.onClick.AddListener(() =>
+                        {
+                            //GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile);
+                            
+                            GameObject popUp = Instantiate(popUpPanel, transform, false);
+                            IEnumerator destroy_pop = DestroyPopup(popUp);
+                            if (option.name == "Info")
+                            {
+                                //popUp = Instantiate(popUpPanel, transform, false);
+                                popUp.transform.SetParent(transform);
+                                string popUpText;
+                                if (buildingOnTile.assignedWorker != null)
+                                {
+                                    popUpText = buildingOnTile.name.Substring(0,buildingOnTile.name.Length-7) + " : " + buildingOnTile.assignedWorker.name+" ," ;
+                                    Vector4 produce = buildingOnTile.getResources();
+                                    Debug.Log(buildingOnTile.buildingType);
+                                    popUpText += "produces water : " + produce.x + ", food : " + produce.y + ", metal : " + produce.z + ", waste : " + produce.w + ".";
+                                    popUpText += "current waste on tile : " + tile.resources.w;
+                                }
+                                else
+                                    popUpText = buildingOnTile.name.Substring(0, buildingOnTile.name.Length - 7) + " : worker not assigned";
+                                popUp.GetComponentInChildren<Text>().text = popUpText;
+                                //destroy_pop= DestroyPopup(popUp);
+                                StartCoroutine(destroy_pop);
+                            }
+                            /*
+                            if(option.name == "Close")
+                            {
+                                Debug.Log("destroy popup");
+                                //StopCoroutine(destroy_pop);
+                                Destroy(popUp);
+                            }
+                            */
+                        });
+                    }
                     this.setActiveOption(buildingOption, buildOption, workerOption);
                 });
             }

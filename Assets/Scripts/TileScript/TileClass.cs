@@ -56,14 +56,17 @@ public class TileClass : MonoBehaviour
     }
     public string[] getWorker()
     {
-        string[] result = new string[tile_worker.Count];
+        List<string> result = new List<string>();
         int i = 0;
         foreach (GameObject worker in tile_worker)
         {
-            result[i] = worker.GetComponent<worker>().worker_name;
-            i++;
+            GameObject turn_manager = GameObject.Find("TurnManager");
+            if (turn_manager.GetComponent<TurnManager>().current_player.GetComponent<PlayerStats>().player_number == Convert.ToInt32(worker.GetComponent<worker>().worker_name.Substring(0, 1)))
+            {
+                result.Add(worker.GetComponent<worker>().worker_name);
+            }
         }
-        return result;
+        return result.ToArray();
     }
 
 }

@@ -147,6 +147,7 @@ public class Building : MonoBehaviour
     }
 
     public string[] getBuildingFunc(){
+        return new string[1] { "Info" };
         if(buildingType == "Residential_area"){
             string[] answer = {};
             return answer;

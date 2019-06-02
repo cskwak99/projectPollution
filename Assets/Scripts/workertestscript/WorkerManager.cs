@@ -38,10 +38,9 @@ public class WorkerManager : MonoBehaviour
                 //only take 1 turn to collect and dump
                 obj.GetComponent<worker>().cur_action = worker.Action.idle;
             }            
-            /*
-            if(obj.GetComponent<worker>().cur_action != worker.Action.move && obj.GetComponent<worker>().cur_action != worker.Action.work)
-            */
-            //obj.GetComponent<worker>().is_assigned = false;
+            
+            if(obj.GetComponent<worker>().cur_action == worker.Action.idle && obj.GetComponent<worker>().is_assigned == true)
+                obj.GetComponent<worker>().is_assigned = false;
         }
         //condition for worker increase
         Debug.Log("addworker");
@@ -116,7 +115,7 @@ public class WorkerManager : MonoBehaviour
             }
             selected.cur_action = worker.Action.idle;
             selected.destination = selected.location;
-            selected.is_assigned = false;
+            selected.is_assigned = true;
         }
         //if not on same tile 
         if (!(System.Object.ReferenceEquals(selected.location, dest)))
@@ -198,7 +197,10 @@ public class WorkerManager : MonoBehaviour
             if (System.Object.ReferenceEquals(destTile, obj.location))
                 yield break;
             if (destTile.name.Substring(4) == "Water_Tile")
-                yield break;
+            {
+                if(destTile.transform.GetComponentInChildren<Building>().name.Substring(0, destTile.transform.GetComponentInChildren<Building>().name.Length-7) != "Waterpump")
+                    yield break;
+            }
             obj.destination = destTile.gameObject;
             StartCoroutine(move_action(obj));
             Debug.Log("Destination set : " + destTile);
@@ -298,9 +300,13 @@ public class WorkerManager : MonoBehaviour
             Debug.Log(result.name);
             if (result.name.Substring(4).Equals("Water_tile"))
             {
-                dot_product.RemoveAt(max_idx);
-                Debug.Log("result was water tile");
-                continue;
+                if(dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>()==null)
+                //if (dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().name.Substring(0, dest.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().name.Length - 7) != "Waterpump")
+                {
+                    dot_product.RemoveAt(max_idx);
+                    Debug.Log("result was water tile");
+                    continue;
+                }
             }
             break;
         }
