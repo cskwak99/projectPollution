@@ -18,24 +18,28 @@ public class clickHandler : MonoBehaviour {
         UIM.showPopup("Select a destination tile");
         while (true)
         {
+            RaycastHit hit;
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out hit, 1000.0f);
+            TileClass tile = null;
+            string tile_type = "";
+            if (hit.transform == null)
+            {
+                tile = null;
+                tile_type = "None";
+            }
+            else
+            {
+                tile_type = hit.transform.gameObject.name.Substring(4);    
+                tile = (TileClass)hit.transform.GetComponent(tile_type);
+            }
+            UIM.hoverTile(tile);
             if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
             {
-                RaycastHit hit;
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Physics.Raycast(ray, out hit, 1000.0f);
-                TileClass tile = null;
-                if (hit.transform == null)
-                    tile = null;
-                else
-                {
-                    string tile_type = hit.transform.gameObject.name.Substring(4);
-                    print("SELECTED "+ tile_type);
-                    tile = (TileClass)hit.transform.GetComponent(tile_type);
-                }
+                print("SELECTED " + tile_type);
                 passedTile(tile);
                 this.UIM.isOnDestTileSelection = false;
-                yield break;
-                
+                yield break;        
             }
             if(Input.GetKey(KeyCode.Escape))
             {
