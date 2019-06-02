@@ -70,6 +70,13 @@ public class worker : MonoBehaviour
         {
             if (waste_on_worker < capacity)
             {
+                if (location.GetComponent<TileClass>().GetComponentInChildren<Building>() != null) {
+                    if (location.GetComponent<TileClass>().GetComponentInChildren<Building>().name == "Landfill(Clone)")
+                    {
+                        if (location.GetComponent<TileClass>().GetComponentInChildren<Building>().nowWaste > 0)
+                            result.Add("Collect");
+                    }
+                }
                 if (location.GetComponent<TileClass>().resources.w > 0)
                 {
                     result.Add("Collect");
@@ -79,7 +86,7 @@ public class worker : MonoBehaviour
             {
                 result.Add("Dump");
             }
-            else if (location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>() != null)
+            else if (location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>() != null&& location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().name != "Residential_area" && location.GetComponent<TileClass>().transform.GetComponentInChildren<Building>().assignedWorker==null)
             {
                 result.Add("Work");
             }

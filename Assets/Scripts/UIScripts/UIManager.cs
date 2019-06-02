@@ -151,6 +151,15 @@ public class UIManager : MonoBehaviour
                 GameObject buildingOptionRoot = tmp.gameObject;
                 buildingOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    GameObject current_player = GameObject.Find("TurnManager").GetComponent<TurnManager>().current_player;
+                    if (current_player.GetComponent<PlayerStats>().player_number==1 && tile.name == "0101Dome_tile")
+                    {
+                        buildingOptionList = new string[1] { "Info" };
+                    }
+                    if (current_player.GetComponent<PlayerStats>().player_number == 2 && tile.name == "1306Dome_tile")
+                    {
+                        buildingOptionList = new string[1] { "Info" };
+                    }
                     if (buildingOnTile)
                     {
                         buildingOptionList = buildingOnTile.getBuildingFunc();
@@ -172,16 +181,31 @@ public class UIManager : MonoBehaviour
                                 //popUp = Instantiate(popUpPanel, transform, false);
                                 popUp.transform.SetParent(transform);
                                 string popUpText;
-                                if (buildingOnTile.assignedWorker != null)
+                                if (tile.name.Substring(4) == "Dome_tile")
                                 {
-                                    popUpText = buildingOnTile.name.Substring(0,buildingOnTile.name.Length-7) + " : " + buildingOnTile.assignedWorker.name+" ," ;
+                                    Vector4 produce = current_player.GetComponent<PlayerStats>().resources;
+                                    popUpText = "Dome current resources : " + produce.x + ", food : " + produce.y + ", metal : " + produce.z + ", waste : " + produce.w + ".";
+                                }
+                                else if (buildingOnTile.assignedWorker != null)
+                                {            
+                                    popUpText = buildingOnTile.name.Substring(0, buildingOnTile.name.Length - 7) + " : " + buildingOnTile.assignedWorker.name + " ,";
                                     Vector4 produce = buildingOnTile.getResources();
-                                    Debug.Log(buildingOnTile.buildingType);
-                                    popUpText += "produces water : " + produce.x + ", food : " + produce.y + ", metal : " + produce.z + ", waste : " + produce.w + ".";
-                                    popUpText += "current waste on tile : " + tile.resources.w;
+                                    if (buildingOnTile.name.Substring(0, buildingOnTile.name.Length - 7) == "Landfill")
+                                    {
+                                        popUpText += "waste : " + buildingOnTile.nowWaste + ", capacity : " + buildingOnTile.wasteCapacity;
+                                    }
+                                    else
+                                    {
+                                        popUpText += "produces water : " + produce.x + ", food : " + produce.y + ", metal : " + produce.z + ", waste : " + produce.w + ".";
+                                        if (tile.resources.w > 0)
+                                            popUpText += "current waste on tile : " + tile.resources.w;
+                                    }                                    
+                                    Debug.Log(buildingOnTile.buildingType);                                    
                                 }
                                 else
+                                {
                                     popUpText = buildingOnTile.name.Substring(0, buildingOnTile.name.Length - 7) + " : worker not assigned";
+                                }
                                 popUp.GetComponentInChildren<Text>().text = popUpText;
                                 //destroy_pop= DestroyPopup(popUp);
                                 StartCoroutine(destroy_pop);

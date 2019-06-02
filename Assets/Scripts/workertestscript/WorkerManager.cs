@@ -140,12 +140,14 @@ public class WorkerManager : MonoBehaviour
             }
             else if(Action == worker.Action.collect)
             {
-                selected.cur_action = worker.Action.collect ;
+                selected.is_assigned = true;
+                selected.cur_action = worker.Action.idle ;
                 collect_waste(selected);
             }
             else if(Action == worker.Action.dump)
             {
-                selected.cur_action = worker.Action.dump;
+                selected.is_assigned = true;
+                selected.cur_action = worker.Action.idle;
                 dump_waste(selected);
             }
             else if (Action == worker.Action.work)
@@ -158,7 +160,47 @@ public class WorkerManager : MonoBehaviour
     }
     public void collect_waste(worker obj)
     {
-        if(obj.location.GetComponent<TileClass>().resources.w <= obj.capacity)
+        if (obj.location.name.Substring(4) == "Dome_tile")
+        {
+            TurnManager turn_manager = GameObject.Find("TurnManager").GetComponent<TurnManager>();
+            PlayerStats player;
+            if (obj.location.name.Substring(0, 1) == "0")
+            {
+                player = turn_manager.player1.GetComponent<PlayerStats>();
+            }
+            else
+                player = turn_manager.player2.GetComponent<PlayerStats>();
+            if (player.resources.w<= obj.capacity)
+            {
+                obj.waste_on_worker = (int)player.resources.w;
+                player.resources.w = (float)0;
+            }
+            else
+            {
+                obj.waste_on_worker = obj.capacity;
+                player.resources.w -= (float)obj.capacity;
+            }
+            return;
+        }
+        Building BuildingOnTile = obj.location.GetComponent<TileClass>().GetComponentInChildren<Building>();
+        if (BuildingOnTile != null)
+        {
+            if (BuildingOnTile.name == "Landfill(Clone)")
+            {
+                if (BuildingOnTile.nowWaste <= obj.capacity)
+                {
+                    obj.waste_on_worker = (int)BuildingOnTile.nowWaste;
+                    BuildingOnTile.nowWaste = (float)0;
+                }
+                else
+                {
+                    obj.waste_on_worker = obj.capacity;
+                    BuildingOnTile.nowWaste -= (float)obj.capacity;
+                }
+                return;
+            }
+        }
+        if (obj.location.GetComponent<TileClass>().resources.w <= obj.capacity)
         {
             obj.waste_on_worker = (int)obj.location.GetComponent<TileClass>().resources.w;
             obj.location.GetComponent<TileClass>().resources.w = (float)0;
@@ -171,6 +213,29 @@ public class WorkerManager : MonoBehaviour
     }
     public void dump_waste(worker obj)
     {
+        if (obj.location.name.Substring(4) == "Dome_tile") {
+            TurnManager turn_manager = GameObject.Find("TurnManager").GetComponent<TurnManager>();
+            PlayerStats player;
+            if (obj.location.name.Substring(0, 1) == "0")
+            {
+                player = turn_manager.player1.GetComponent<PlayerStats>();
+            }
+            else
+                player = turn_manager.player2.GetComponent<PlayerStats>();
+            player.resources.w += (float)obj.waste_on_worker;
+            obj.waste_on_worker = 0;
+            return;
+        }
+        Building BuildingOnTile = obj.location.GetComponent<TileClass>().GetComponentInChildren<Building>();
+        if (BuildingOnTile != null)
+        {
+            if (BuildingOnTile.name == "Landfill(Clone)")
+            {
+                BuildingOnTile.nowWaste += (float)obj.waste_on_worker;
+                obj.waste_on_worker = 0;
+            }
+            return;
+        }
         obj.location.GetComponent<TileClass>().resources.w += (float)obj.waste_on_worker;
         obj.waste_on_worker = 0;
     }
