@@ -114,7 +114,7 @@ public class TurnManager : MonoBehaviour
         }
         float remain = waste;
         foreach (GameObject building in buildings){
-            if (building.GetComponent<Building>().buildingType == "Landfill"){
+            if (building.GetComponent<Building>().buildingType == "Landfill"&&building.GetComponent<Building>().assignedWorker!=null){
                 if (remain+building.GetComponent<Building>().nowWaste < building.GetComponent<Building>().wasteCapacity){
                     building.GetComponent<Building>().nowWaste += remain;
                     remain = 0;
