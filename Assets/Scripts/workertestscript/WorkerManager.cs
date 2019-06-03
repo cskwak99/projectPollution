@@ -58,7 +58,7 @@ public class WorkerManager : MonoBehaviour
         }
         //condition for worker increase
         Debug.Log("addworker");
-        if (worker_max >= worker_num)
+        if (worker_max > worker_num)
         {
             if (worker_acc >= 100)
             {
