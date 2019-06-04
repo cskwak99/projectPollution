@@ -6,6 +6,8 @@ using UnityEngine;
 public class clickHandler : MonoBehaviour {
 
     public Ray ray;
+    private float clickTime = 0.0F;
+    private float delay = 0.3F;
     UIManager UIM;
     private void OnDrawGizmos()
     {
@@ -52,7 +54,7 @@ public class clickHandler : MonoBehaviour {
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         UIManager uiManager = this.GetComponent<UIManager>();
         TileClass tile = null;
@@ -72,19 +74,21 @@ public class clickHandler : MonoBehaviour {
             if(!UIM.isOnTileSelected)
                 uiManager.hoverTile(tile);
         }
-        if (Input.GetMouseButton(0) && !UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (!UIM.isOnTileSelected)
+            clickTime = Time.time;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (Time.time - clickTime <= delay)
             {
-                uiManager.manageUI(tile);
-                if (tile != null)
-                    UIM.isOnTileSelected = true;
-            }
-            else
-            {
-                UIM.isOnTileSelected = false;
+                if (!UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
+                {
+                        uiManager.selectTile(tile);
+                }
             }
         }
+        
         //ON CLICK MOUSE2 (MIDDLEMOUSE) CAMERA CAN MOVE (VIEW SCRIPT IN THE CAMERA)
     }
 

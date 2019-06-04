@@ -85,8 +85,8 @@ public class generateTileMap : MonoBehaviour
             for(int j = 0; j < mapHeight; j++)
             {
                 GameObject TempTile = getTilePrefab(typeMap[j,i], j.ToString(),i.ToString());
-                TempTile.GetComponent<TileClass>().x = j;
-                TempTile.GetComponent<TileClass>().y = i;
+                TempTile.GetComponent<TileClass>().x = i;
+                TempTile.GetComponent<TileClass>().y = j;
                 TempTile.GetComponent<TileClass>().h = heightMap[j,i];
                 TempTile.GetComponent<TileClass>().cubeCoor = TempTile.GetComponent<TileClass>().oddr_to_cube(j,i);
                 TempTile.GetComponent<TileClass>().tileType = TempTile.name.Substring(4, TempTile.name.Length-4);

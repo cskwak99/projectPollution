@@ -115,15 +115,36 @@ public class Building : MonoBehaviour
                     tile.UpdatePolluAmount(tile.polluAmount + landfillPolluRate);
                 }
             }
-            else if(buildingType == "Farm")
+            else if(buildingType == "Farm" || buildingType == "Mine")
             {
-
+                parentTile.GetComponent<TileClass>().UpdatePolluAmount(parentTile.GetComponent<TileClass>().polluAmount + 5);
             }
 
         }
        
     }
-
+    public List<TileClass> getAffectedArea()
+    {
+        List <TileClass> area = new List<TileClass>();
+        if (buildingType == "Farm" || buildingType == "Mine")
+        {
+            area.Add(parentTile.GetComponent<TileClass>());
+        }
+        else if(buildingType == "Landfill")
+        {
+           return parentTile.GetComponent<TileClass>().getNeighbor();
+        }
+        else if(buildingType == "Factory")
+        {
+            foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
+            {
+                TileClass tile = child.GetComponent<TileClass>();
+                if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
+                    area.Add(tile);
+            }
+        }
+        return area;
+    }
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
     {
         Vector4 resources = new Vector4(0,0,0,0);

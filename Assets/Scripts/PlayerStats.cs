@@ -37,7 +37,6 @@ public class PlayerStats : MonoBehaviour
         int temp = 0;
         
         foreach(GameObject building in buildings){
-            print(building);
             if (building.GetComponent<Building>().isitResidential())
             {
                 temp += 1;

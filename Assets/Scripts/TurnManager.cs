@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     public int turnNum;
     private UIManager UIM;
     private WorkerManager WM;
-
+    private GameObject currentArrow;
     void Start()
     {
         Debug.Log("GameStart");
@@ -24,7 +24,9 @@ public class TurnManager : MonoBehaviour
         turnNum = 1;
         WM.Create_Worker("P1worker1",player1.GetComponent<PlayerStats>());
         WM.Create_Worker("P2worker1",player2.GetComponent<PlayerStats>());
-
+        currentArrow = Instantiate(new GameObject(), UIM.transform);
+        currentArrow.transform.position = player1.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.4f, 0); ;
+        GameObject arrow = Instantiate(UIM.arrowP1Prefab, currentArrow.transform);
     }
 
     public void Swap_player()
@@ -32,10 +34,23 @@ public class TurnManager : MonoBehaviour
         if (current_player == player1)
         {
             current_player = player2;
+
+            Destroy(currentArrow);
+            currentArrow = Instantiate(new GameObject(), UIM.transform);
+            currentArrow.transform.position = player2.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.5f, 0);
+            GameObject arrow = Instantiate(UIM.arrowP2Prefab, currentArrow.transform);
+            
+
         }
         else
         {
             current_player = player1;
+
+            Destroy(currentArrow);
+            currentArrow = Instantiate(new GameObject(), UIM.transform);
+            currentArrow.transform.position = player1.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.5f, 0); ;
+            GameObject arrow = Instantiate(UIM.arrowP1Prefab, currentArrow.transform);
+            
         }
         turnNum+=1;
         Debug.Log("turn:" + turnNum);
@@ -88,25 +103,36 @@ public class TurnManager : MonoBehaviour
         //player do action
         //turn end
         */
-        TilesPhase();
         ResourceGatheringPhase();
         WorkerPhase();
         if(turnNum != 2) ConsumePhase();
-        PollutionPhase();
-        SupportRatePhase();
         CheckLosePhase();
         randomEvents();
     }
+    public void Turn_end()
+    {
+        print("End Turn");
+        TilesPhase();
+        PollutionPhase();
+        Swap_player();
+    }
     public void TilesPhase()
     {
+        print("TilePhase");
         generateTileMap GM = GameObject.Find("Hexagon_Map").GetComponent<generateTileMap>();
         bool[,] spreadMap = new bool[GM.mapWidth, GM.mapHeight];
+        ////Spread water tile pollution////
         foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
         {
             TileClass tile = child.GetComponent<TileClass>();
-            if(tile.tileType == "Water_tile")
+            if(tile.tileType == "Water_tile" && spreadMap[tile.x,tile.y]==false)
             {
-
+                bool[,] sp = tile.spread_pollution();
+                for(int i = 0;i< GM.mapWidth;i++)
+                {
+                    for (int j = 0; j < GM.mapHeight; j++)
+                        spreadMap[i, j] = spreadMap[i, j] || sp[i, j];
+                }
             }
         }
     }

@@ -16,9 +16,24 @@ public class UIManager : MonoBehaviour
     public GameObject gameEndPanel;
     public GameObject popUpPanel;
     public GameObject tileSelectionBorder;
+    public GameObject tileCoverPrefab;
+    public GameObject arrowP1Prefab;
+    public GameObject arrowP2Prefab;
     private GameObject currentOptionList;
     private GameObject currentBorder;
     private GameObject currentPopup;
+    private GameObject currentCover;
+
+    public void coverTile(List<TileClass> tile)
+    {
+        GameObject cover;
+        currentCover = Instantiate(new GameObject());
+        foreach (TileClass t in tile)
+        {
+            cover = Instantiate(tileCoverPrefab, currentCover.transform);
+            cover.transform.position = t.transform.position + new Vector3(0, 0.05f, 0);
+        }
+    }
     public void hoverTile(TileClass tile)
     {
         destroyBorder();
@@ -33,75 +48,89 @@ public class UIManager : MonoBehaviour
             //print("SPACE");
             BroadcastMessage("onTileUnSelected");
         }
-
     }
     public void destroyBorder()
     {
         Destroy(currentBorder);
     }
-    public void manageUI(TileClass tile)
+    public void selectTile(TileClass tile)
     {
         destroyCurrentOption();
-        TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
-        if (tile!=null && tile.isWorkerOn())
+        destroyCurrentCover();
+        if (tile!=null && (tile.isBuildingOn()|| tile.isWorkerOn()))
         {
-            ////CREATE OPTION PANEL
-            worker workerOnTile = tile.getWorker().GetComponent<worker>();
-            string[] optionList = workerOnTile.get_action();
-            Building buildingOnTile = tile.GetComponentInChildren<Building>();
-            currentOptionList = OPM.createOptionPanel("TileOption", gameObject, optionList, Input.mousePosition);
-            /////ADD LISTENER TO EACH OPTION///////
-            Transform tmp;
-            GameObject buildOption = null;
-            string[] buildOptionList = { };
-            ////////////////////////BUILD OPTION/////////////////////////////
-            if (tmp = currentOptionList.transform.Find("Build"))
+            isOnTileSelected = true;
+            if (tile.isBuildingOn())
             {
-                GameObject buildOptionRoot = tmp.gameObject;
-                buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    buildOptionList = tile.getBuildable();
-                    print(tile);
-                    if (buildingOnTile == null)
-                    {
-                        buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
-                        foreach (Transform option in buildOption.transform)
-                        {
-                            Button btn = option.GetComponent<Button>();
-                            if (!btn)
-                                continue;
-                            btn.onClick.AddListener(() =>
-                            {
-                                GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile, TM.current_player);
-                                destroyCurrentOption();
-                            });
-                        }
-                    }
-                });
+                coverTile(tile.getBuilding().getAffectedArea());
             }
-            ///////////////////////PURIFY////////////////////////////////////
-            if (tmp = currentOptionList.transform.Find("Purify"))
+            if(tile.isWorkerOn())
             {
-                GameObject buildOptionRoot = tmp.gameObject;
-                buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    destroyCurrentOption();
-                });
-            }
-            ///////////////////////MOVE////////////////////////////////////
-            if (tmp = currentOptionList.transform.Find("Move"))
-            {
-                GameObject MoveOptionRoot = tmp.gameObject;
-                MoveOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    StartCoroutine(workerOnTile.move_worker());
-                    destroyCurrentOption();
-                    isMouseOnUI = false;
-                });
+                buildPanel(tile);
             }
         }
+        else
+            isOnTileSelected = false;
     }
 
+    private void buildPanel(TileClass tile)
+    {
+        TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
+        ////CREATE OPTION PANEL
+        worker workerOnTile = tile.getWorker().GetComponent<worker>();
+        string[] optionList = workerOnTile.get_action();
+        Building buildingOnTile = tile.GetComponentInChildren<Building>();
+        currentOptionList = OPM.createOptionPanel("TileOption", gameObject, optionList, Input.mousePosition);
+        /////ADD LISTENER TO EACH OPTION///////
+        Transform tmp;
+        GameObject buildOption = null;
+        string[] buildOptionList = { };
+        ////////////////////////BUILD OPTION/////////////////////////////
+        if (tmp = currentOptionList.transform.Find("Build"))
+        {
+            GameObject buildOptionRoot = tmp.gameObject;
+            buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                buildOptionList = tile.getBuildable();
+                print(tile);
+                if (buildingOnTile == null)
+                {
+                    buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
+                    foreach (Transform option in buildOption.transform)
+                    {
+                        Button btn = option.GetComponent<Button>();
+                        if (!btn)
+                            continue;
+                        btn.onClick.AddListener(() =>
+                        {
+                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile, TM.current_player);
+                            destroyCurrentOption();
+                        });
+                    }
+                }
+            });
+        }
+        ///////////////////////PURIFY////////////////////////////////////
+        if (tmp = currentOptionList.transform.Find("Purify"))
+        {
+            GameObject buildOptionRoot = tmp.gameObject;
+            buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                destroyCurrentOption();
+            });
+        }
+        ///////////////////////MOVE////////////////////////////////////
+        if (tmp = currentOptionList.transform.Find("Move"))
+        {
+            GameObject MoveOptionRoot = tmp.gameObject;
+            MoveOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                StartCoroutine(workerOnTile.move_worker());
+                destroyCurrentOption();
+                isMouseOnUI = false;
+            });
+        }
+    }
     public void showGameEnd()
     {
         GameObject endPanel = Instantiate(gameEndPanel);
@@ -171,5 +200,9 @@ public class UIManager : MonoBehaviour
     public void onMouseLeaveUI()
     {
         this.isMouseOnUI = false;
+    }
+    public void destroyCurrentCover()
+    {
+        Destroy(this.currentCover);
     }
 }
