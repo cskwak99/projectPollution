@@ -383,7 +383,7 @@ MonoBehaviour:
     type: 3}
   tileSelectionBorder: {fileID: 5041042422050139852, guid: 9e02105581c60bb479b0738871007405,
     type: 3}
-  tileCoverPrefab: {fileID: 8399606885722883438, guid: 89d43aee69f0a54458916a0c8b93fef3,
+  tileCoverPrefab: {fileID: 8399606885722883438, guid: f5c0c21b2266225428d61bfbb1aab27d,
     type: 3}
   arrowP1Prefab: {fileID: 8759152964636921491, guid: abcce478ff28ab9489e6d6e14103a6d5,
     type: 3}
