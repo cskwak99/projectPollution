@@ -11,21 +11,20 @@ public class TurnManager : MonoBehaviour
     public int totalWaste;
     public int turnNum;
     private UIManager UIM;
+    private WorkerManager WM;
 
     void Start()
     {
         Debug.Log("GameStart");
         UIM = GameObject.Find("UI").GetComponent<UIManager>();
+        WM = GameObject.Find("WorkerManager").GetComponent<WorkerManager>();
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
         current_player = player1;
         turnNum = 1;
-    }
+        WM.Create_Worker("P1worker1",player1.GetComponent<PlayerStats>());
+        WM.Create_Worker("P2worker1",player2.GetComponent<PlayerStats>());
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Swap_player()
@@ -89,6 +88,7 @@ public class TurnManager : MonoBehaviour
         //player do action
         //turn end
         */
+        TilesPhase();
         ResourceGatheringPhase();
         WorkerPhase();
         if(turnNum != 2) ConsumePhase();
@@ -97,8 +97,21 @@ public class TurnManager : MonoBehaviour
         CheckLosePhase();
         randomEvents();
     }
+    public void TilesPhase()
+    {
+        generateTileMap GM = GameObject.Find("Hexagon_Map").GetComponent<generateTileMap>();
+        bool[,] spreadMap = new bool[GM.mapWidth, GM.mapHeight];
+        foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
+        {
+            TileClass tile = child.GetComponent<TileClass>();
+            if(tile.tileType == "Water_tile")
+            {
 
-    public void ResourceGatheringPhase(){
+            }
+        }
+    }
+    public void ResourceGatheringPhase()
+    {
         Debug.Log("Gather Resource");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         List<GameObject> buildings = player.buildings;
@@ -106,15 +119,17 @@ public class TurnManager : MonoBehaviour
         //Gather reources
         Vector4 resources = new Vector4(0,0,0,0); 
         float waste = 0;
-        foreach (GameObject building in buildings){
+        foreach (GameObject building in buildings)
+        {
             Vector4 gathered = building.GetComponent<Building>().getResources();
             resources += gathered;
             float gatheredWaste = building.GetComponent<Building>().giveWaste();
             waste += gatheredWaste;
         }
-        float remain = waste;
+        /*
+         * float remain = waste;
         foreach (GameObject building in buildings){
-            if (building.GetComponent<Building>().buildingType == "Landfill"&&building.GetComponent<Building>().assignedWorker!=null){
+            if (building.GetComponent<Building>().buildingType == "Landfill" && building.transform.parent.GetComponent<TileClass>().isWorkerOn()){
                 if (remain+building.GetComponent<Building>().nowWaste < building.GetComponent<Building>().wasteCapacity){
                     building.GetComponent<Building>().nowWaste += remain;
                     remain = 0;
@@ -132,21 +147,26 @@ public class TurnManager : MonoBehaviour
             //add remain Waste on player's dome tile
             player.dome_tile.GetComponent<Dome_tile>().resources.w += remain * 100;
             resources.w = waste;
-        }
+        }*/
         player.resources += resources;
         //Calculate resource per turn to UI
-        GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(current_player.GetComponent<PlayerStats>());
     }
 
     public void WorkerPhase(){
-        //do something with worker
-        //Check the number of player's Residential area in the map
+        WorkerManager WM = GameObject.Find("WorkerManager").GetComponent<WorkerManager>();
         PlayerStats player = current_player.GetComponent<PlayerStats>();
+        Debug.Log(player.player_number + ": workerphase");  
         int maxWorker = player.updateWorkerMax();
         int currentWorker = player.worker_present;
-        //Current worker < max worker -> pop up new worker on the  one of residential area
-        Debug.Log(player.player_number + ": workerphase");
-        player.workerManager.GetComponent<WorkerManager>().Turn_Update_Worker();
+        //Current worker < max worker -> pop up new worker on the one of residential area
+        if (currentWorker<maxWorker)
+        {
+            print(currentWorker + " " + maxWorker);
+            if (!player.dome_tile.GetComponent<TileClass>().isWorkerOn())
+                WM.Create_Worker("worker", player);
+            else
+                UIM.showPopup("Worker can't spawn!, get the one out of dome");
+        }    
     }
 
     public void ConsumePhase(){
@@ -154,14 +174,17 @@ public class TurnManager : MonoBehaviour
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         float water = (float)player.antivaxHP_present + player.worker_present;
         float food = (float)player.antivaxHP_present + player.worker_present;
-        if(player.resources.x >= water && player.resources.y >= food){
+        if(player.resources.x >= water && player.resources.y >= food)
+        {
             player.resources.x -= water;
             player.resources.y -= food;
-        }else{
+        }else
+        {
             player.antivaxHP_present -= 1;
             UIM.showPopup("An anti vaxxer dies!");
             //Debug.Log("anti vaxxer dies");
-            foreach (GameObject worker in player.workers){
+            foreach (GameObject worker in player.workers)
+            {
                 //decrease efficiency? support rate?
             }
         }
@@ -173,10 +196,11 @@ public class TurnManager : MonoBehaviour
         //Calc dome tile pollution and kill anti vaxxer
         Debug.Log("Pollution Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
-        foreach(GameObject building in player.buildings){
-            building.GetComponent<Building>().parentTile.GetComponent<TileClass>().UpdatePolluAmount();
+        foreach(GameObject building in player.buildings)
+        {
+            building.GetComponent<Building>().pollute();
         }
-        player.dome_tile.GetComponent<TileClass>().UpdatePolluAmount();
+        //player.dome_tile.GetComponent<TileClass>().UpdatePolluAmount();
 
         //UpdatePolluAmount
     }
@@ -190,7 +214,7 @@ public class TurnManager : MonoBehaviour
     public void CheckLosePhase(){
         Debug.Log("Check Lose Phase");
         PlayerStats player = current_player.GetComponent<PlayerStats>();
-        if (player.antivaxHP_present <= 0 || player.support_rate <= 0){
+        if (player.antivaxHP_present <= 0){
             //game end -> do something
             UIM.showGameEnd();
             Debug.Log("Game End");

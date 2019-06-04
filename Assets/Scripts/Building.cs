@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public GameObject playerOccupied;
     public string buildingType; //To specify building type
     public float efficiency; //To get efficiecny of worker so that evaluate the building work //Maybe change to float
-    public GameObject assignedWorker; //To check whether building can do something
     public int wasteMk; //Amount of waste that building makes
     public int airPoMk; //Amount of airPollution that factory makes
     public GameObject parentTile; //parent tile that building attached
@@ -15,25 +15,24 @@ public class Building : MonoBehaviour
     public float wasteCapacity;// For landfill
     public float nowWaste; //For landfill
 
+    [SerializeField]
+    private int foodPerTurn = 2;
+    private int waterPerTurn = 2;
+    private int metalPerTurn = 1;
+    private float factoryPolluRate = 5;
+    private float landfillPolluRate = 10;
     //For resource Vector -> (water, food, metal, waste)
     public void setBuildingType(){ //set Building type form its name
         string name = this.gameObject.name;
         string[] temp = name.Split('(');
         this.buildingType = temp[0];
+        transform.name = temp[0];
     }
 
     public void setParentTile(){
         parentTile = this.transform.parent.gameObject;
         string tileName = parentTile.name;
         tileType = tileName.Substring(4);
-    }
-
-    public void assignWorker(GameObject worker){
-        this.assignedWorker = worker;
-    }
-
-    public void unassignWorker(){
-        this.assignedWorker = null;
     }
 
     public void setInitial(){
@@ -49,7 +48,7 @@ public class Building : MonoBehaviour
     }
     public float giveWaste(){
         float waste = 0;
-        if (assignedWorker != null)
+        if (parentTile.GetComponent<TileClass>().isWorkerOn())
         {
             if (buildingType == "Farm")
             {
@@ -71,7 +70,7 @@ public class Building : MonoBehaviour
     }
 
     public float saveWaste(float waste){
-        if (assignedWorker != null)
+        if (parentTile.GetComponent<TileClass>().isWorkerOn())
         {
             if (buildingType == "Landfill")
             {
@@ -95,45 +94,72 @@ public class Building : MonoBehaviour
         return (float)-11.0;
     }
 
+    public void pollute()
+    {
+        if(parentTile.GetComponent<TileClass>().isWorkerOn())
+        {
+            print(buildingType);
+            if (buildingType == "Factory")
+            {
+                foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
+                {
+                    TileClass tile = child.GetComponent<TileClass>();
+                    if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
+                        tile.UpdatePolluAmount(tile.polluAmount + factoryPolluRate);
+                }
+            }
+            else if (buildingType == "Landfill")
+            {
+                foreach (TileClass tile in parentTile.GetComponent<TileClass>().getNeighbor())
+                {
+                    tile.UpdatePolluAmount(tile.polluAmount + landfillPolluRate);
+                }
+            }
+            else if(buildingType == "Farm")
+            {
+
+            }
+
+        }
+       
+    }
+
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
     {
         Vector4 resources = new Vector4(0,0,0,0);
-        if(assignedWorker == null){
+        if(!parentTile.GetComponent<TileClass>().isWorkerOn())
+        {
             return new Vector4(0,0,0,0);
         }else{
-            int polMeter = parentTile.GetComponent<TileClass>().thresholdLevel();
-            //efficiency = this.assiagnedWorker.GetComponent<Worker>().getEfficiency(polMeter);
-            efficiency = (float)1.0;
-            if(buildingType == "Farm"){
-                int food = 10;
+            if(buildingType == "Farm")
+            {
                 Vector4 required = new Vector4(0,0,0,0);
-                required.y = food * efficiency;
+                required.y += foodPerTurn;
                 //Debug.Log(required);
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
                 //Debug.Log(resources);
-
                 parentTile.GetComponent<Plain_tile>().resources.w += wasteMk; 
-
                 return resources;
-            }else if(buildingType == "Mine"){
-                int metal = 1;
+            }
+            else if(buildingType == "Mine")
+            {
                 Vector4 required = new Vector4(0,0,0,0);
-                required.z = metal * efficiency;
+                required.z = metalPerTurn * efficiency;
                 resources = this.parentTile.GetComponent<Mine_tile>().getResources(required);
-
                 parentTile.GetComponent<Mine_tile>().resources.w += wasteMk; 
 
                 return resources;
-            }else if(buildingType == "Waterpump"){
-                int water = 10;
+            }
+            else if(buildingType == "Waterpump")
+            {
                 Vector4 required = new Vector4(0,0,0,0);
-                required.x = water * efficiency;
+                required.x = waterPerTurn * efficiency;
                 resources = this.parentTile.GetComponent<Water_tile>().getResources(required);
-
                 parentTile.GetComponent<Water_tile>().resources.w += wasteMk; 
-
                 return resources;
-            }else{
+            }
+            else
+            {
                 return resources;
             }
         }
@@ -151,7 +177,7 @@ public class Building : MonoBehaviour
         if(buildingType == "Residential_area"){
             string[] answer = {};
             return answer;
-        }else if(assignedWorker == null){
+        }else if(parentTile.GetComponent<TileClass>().isWorkerOn()){
             string[] answer = new string[] {"Assign Worker"};
             return answer;
         }else{
@@ -185,9 +211,6 @@ public class Building : MonoBehaviour
         return 5; //dummy value
     }
     
-    private void Start() {
-        //setInitial();    
-    }
     private void Update() {
         //Vector4 test = this.getResources();
         //Debug.Log(test);

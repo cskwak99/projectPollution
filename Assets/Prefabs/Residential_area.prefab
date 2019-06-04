@@ -114,12 +114,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e830a7af6ef1d941be7ddc3723f47d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerOccupied: {fileID: 0}
   buildingType: 
   efficiency: 0
-  assignedWorker: {fileID: 0}
   wasteMk: 0
   airPoMk: 0
   parentTile: {fileID: 0}
   tileType: 
   wasteCapacity: 0
   nowWaste: 0
+  foodPerTurn: 2
+  waterPerTurn: 2
+  metalPerTurn: 1

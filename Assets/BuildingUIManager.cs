@@ -56,11 +56,12 @@ public class BuildingUIManager : MonoBehaviour
     IEnumerator buildTileSelection(string buildingName)
     {
         BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
+        TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         TileClass destTile = null;
         yield return StartCoroutine(transform.parent.GetComponent<clickHandler>().getDestTile(tile => destTile = tile));
         if (destTile.getBuildable().Contains(buildingName))
         {
-            BM.route_construction(buildingName, destTile);
+            BM.route_construction(buildingName, destTile, TM.current_player);
         }
         else
         {

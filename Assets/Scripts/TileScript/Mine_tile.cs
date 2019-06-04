@@ -12,15 +12,9 @@ public class Mine_tile : TileClass
         tileDescription = "Some kind of metal deposit, useful for building and research";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override string[] getBuildable()
     {
-        string[] buildable = { "Mine" };
+        string[] buildable = { "Mine", "Residential", "Factory" };
         return buildable;
     }
 }

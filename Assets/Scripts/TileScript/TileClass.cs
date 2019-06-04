@@ -3,31 +3,75 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
-
 public class TileClass : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int x;
+    public int y;
+    public Vector3 cubeCoor;
+    public int h;
     public string tileDescription;
+    public string tileType;
     public float polluAmount = 0;
     public float maxPolluAmount = 100;
     public float thresholdSafe = 30;
-    public float thresholdKill = 60;
-    public float thresholdDeadLand = 90;
-    public List<GameObject> tile_worker = new List<GameObject>();
+    public float thresholdShut = 60;
+    public float thresholdDeadLand = 100;
     public Vector4 resources = new Vector4(); // water, food, metal, waste
-    void Start()
+
+    public int calcDist(TileClass destTile)
     {
+        int x1, y1, x2, y2;
+        x1 = x;
+        y1 = y;
+        y2 = destTile.y;
+        x2 = destTile.x;
+        Vector3 cube1 = oddr_to_cube(x1, y1);
+        Vector3 cube2 = oddr_to_cube(x2, y2);
+        return cube_distance(cube1, cube2);
+
+    }
+    public Vector3 oddr_to_cube(int row, int col)
+    {
+        int x = col - (row - (row & 1)) / 2;
+        int z = row;
+        int y = -x - z;
+        return new Vector3(x, y, z);
+    }
+    public List<TileClass> getNeighbor()
+    {
+        List<TileClass> tiles = new List<TileClass>();
+        GameObject[,] tileMap = GameObject.Find("Hexagon_Map").GetComponent<generateTileMap>().TileMap;
+        int[,,] oddr_directions =
+        {
+            { 
+                { +1, 0 }, {0, -1 }, {-1, -1 },
+                { -1, 0 }, {-1, +1 }, {0, +1 }
+            },
+            {
+                { +1,  0 }, {+1, -1 }, { 0, -1},
+                { -1,  0 }, { 0, +1 }, { 1, +1}
+            }
+        };
+        int parity = x & 1;
+        for(int i = 0;i < 6; i++)
+        {
+            tiles.Add(tileMap[x+oddr_directions[parity, i, 0], y+oddr_directions[parity, i, 1]].GetComponent<TileClass>());
+        }
+        return tiles;
     }
 
-    // Update is called once per frame
-    void Update()
+    private int cube_distance(Vector3 a, Vector3 b)
     {
-        
+        return (int) (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
     }
-
-    public virtual void UpdatePolluAmount ()
+    
+    public virtual void UpdatePolluAmount (float amount)
     {
-        polluAmount = resources.w/10;
+        //polluAmount = resources.w/10;
+        polluAmount = Mathf.Clamp(amount, 0, maxPolluAmount);
+        UpdateThresholdLevel();
+
     }
 
     public void AddWaste(float waste)
@@ -43,30 +87,38 @@ public class TileClass : MonoBehaviour
         return resourcesTrulyTaken;
     }
 
-    public int thresholdLevel()
+    public int UpdateThresholdLevel()
     {
         int thresholdLvl = 0;
-        return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdKill) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
+        return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdShut) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
     }
-
-    public virtual string[] getBuildable()
+    public bool isWorkerOn()
     {
-        string[] buildable = { "" };
-        return buildable;
-    }
-    public string[] getWorker()
-    {
-        List<string> result = new List<string>();
-        int i = 0;
-        foreach (GameObject worker in tile_worker)
+        foreach (Transform child in transform)
         {
-            GameObject turn_manager = GameObject.Find("TurnManager");
-            if (turn_manager.GetComponent<TurnManager>().current_player.GetComponent<PlayerStats>().player_number == Convert.ToInt32(worker.GetComponent<worker>().worker_name.Substring(0, 1)))
+            if (child.gameObject.GetComponent<worker>() != null)
             {
-                result.Add(worker.GetComponent<worker>().worker_name);
+                return true;
             }
         }
-        return result.ToArray();
+        return false;
+    }
+    public virtual string[] getBuildable()
+    {
+        string[] buildable = { "ASD" };
+        return buildable;
+    }
+
+    public GameObject getWorker()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.GetComponent<worker>() != null)
+            {
+                return child.gameObject;
+            }
+        }
+        return null;
     }
 
 }

@@ -9,27 +9,24 @@ public class PlayerStats : MonoBehaviour
     public int antivaxHP_present;
     public int worker_max;
     public int worker_present;
-    public int support_rate;
     public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
     public int player_number;
     public List<GameObject> workers;
     public List<GameObject> buildings; //saves building class instances about product to this array, and use it for resource production calculation
     public GameObject dome_tile;
     public GameObject workerManager;
+    private void Awake()
+    {
+        buildings = new List<GameObject>();
+    }
     private void Start() {
         initSet();
     }
     public void initSet(){
-        antivaxHP_max = 5;
-        antivaxHP_present = 5;
-        worker_max = 3;
-        worker_present = 2;
-        support_rate = 50;
-        resources = new Vector4(10,10,10,0);
+        resources = new Vector4(50,50,11,0);
         //add worker list
         //add building list
         //buildings = new List<GameObject>();
-        workerManager.GetComponent<WorkerManager>().init();
         foreach (GameObject building in buildings){
             building.GetComponent<Building>().setInitial();
         }
@@ -37,15 +34,16 @@ public class PlayerStats : MonoBehaviour
     }
 
     public int updateWorkerMax(){
-        Debug.Log("updateWorkerMax");
         int temp = 0;
+        
         foreach(GameObject building in buildings){
-            if(building.GetComponent<Building>().isitResidential()){
+            print(building);
+            if (building.GetComponent<Building>().isitResidential())
+            {
                 temp += 1;
             }
         }
-        this.worker_max = temp/2;
-        workerManager.GetComponent<WorkerManager>().worker_max = worker_max;
+        this.worker_max = temp;
         return worker_max;
     }
 
@@ -76,7 +74,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Update_support(int value)
     {
-        support_rate = support_rate + value;
+        //support_rate = support_rate + value;
     }
 
     public int Get_metal()
@@ -105,7 +103,8 @@ public class PlayerStats : MonoBehaviour
     }
     public int Get_support()
     {
-        return support_rate;
+        //return support_rate;
+        return 1;
     }
     /*
     public void Resource_produce_perturn()

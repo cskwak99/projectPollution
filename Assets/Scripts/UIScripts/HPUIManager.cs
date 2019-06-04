@@ -15,8 +15,9 @@ public class HPUIManager : MonoBehaviour
     private void Update()
     {
         PlayerStats player = GameObject.Find("TurnManager").GetComponent<TurnManager>().Get_current_player().GetComponent<PlayerStats>();
-        transform.Find("AntiVaxxer'sHP").Find("AntiVaxxer's_Bar").gameObject.GetComponent<RectTransform>().localScale = new Vector3((float) player.antivaxHP_present / player.antivaxHP_max, 1, 1);
-        transform.Find("Worker'sHP").Find("Worker's_Bar").gameObject.GetComponent<RectTransform>().localScale = new Vector3((float)player.worker_present / player.worker_max, 1, 1);
+        transform.Find("AntiVaxxer'sHP").Find("AntiVaxxer's_Bar").gameObject.GetComponent<RectTransform>().localScale = new Vector3((float)(player.antivaxHP_present / player.antivaxHP_max), 1, 1);
+        //print(player.worker_max);
+        transform.Find("Worker'sHP").Find("Worker's_Bar").gameObject.GetComponent<RectTransform>().localScale = new Vector3((float)(player.worker_present / player.worker_max), 1, 1);
 
     }
 }
