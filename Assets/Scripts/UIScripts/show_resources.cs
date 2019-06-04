@@ -9,7 +9,6 @@ public class show_resources : MonoBehaviour
     public Text waterText;
     public Text foodText;
     public Text metalText;
-    public Text wasteText;
 
     private GameObject currentPlayer;
     private GameObject TM;
@@ -60,6 +59,5 @@ public class show_resources : MonoBehaviour
         waterText.text = "Water: " + currentPlayer.GetComponent<PlayerStats>().Get_water()+" "+waterPerTurn+"/turn";
         foodText.text = "Food: " + currentPlayer.GetComponent<PlayerStats>().Get_food()+" " + foodPerTurn + "/turn";
         metalText.text = "Metal: " + currentPlayer.GetComponent<PlayerStats>().Get_metal()+" " + metalPerTurn + "/turn";
-        wasteText.text = "Waste: " + currentPlayer.GetComponent<PlayerStats>().Get_waste()+" " + wastePerTurn + "/turn";
     }
 }
