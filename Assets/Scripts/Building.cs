@@ -15,13 +15,22 @@ public class Building : MonoBehaviour
     public float wasteCapacity;// For landfill
     public float nowWaste; //For landfill
 
-    [SerializeField]
-    private int foodPerTurn = 2;
-    private int waterPerTurn = 2;
-    private int metalPerTurn = 1;
-    private float factoryPolluRate = 5;
-    private float landfillPolluRate = 10;
     //For resource Vector -> (water, food, metal, waste)
+    private int foodPerTurn;
+    private int waterPerTurn;
+    private int metalPerTurn;
+    private float factoryPolluRate;
+    private float landfillPolluRate ;
+
+    private void Start()
+    {
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
+        foodPerTurn = BM.foodPerTurn;
+        waterPerTurn = BM.waterPerTurn;
+        metalPerTurn = BM.metalPerTurn;
+        factoryPolluRate = BM.factoryPolluRate;
+        landfillPolluRate = BM.landfillPolluRate;
+    }
     public void setBuildingType(){ //set Building type form its name
         string name = this.gameObject.name;
         string[] temp = name.Split('(');
@@ -46,57 +55,10 @@ public class Building : MonoBehaviour
 
         this.fixBuilding();
     }
-    public float giveWaste(){
-        float waste = 0;
-        if (parentTile.GetComponent<TileClass>().isWorkerOn())
-        {
-            if (buildingType == "Farm")
-            {
-                waste = parentTile.GetComponent<Plain_tile>().resources.w;
-                parentTile.GetComponent<Plain_tile>().resources.w = 0;
-            }
-            else if (buildingType == "Mine")
-            {
-                waste = parentTile.GetComponent<Mine_tile>().resources.w;
-                parentTile.GetComponent<Mine_tile>().resources.w = 0;
-            }
-            else if (buildingType == "Waterpump")
-            {
-                waste = parentTile.GetComponent<Water_tile>().resources.w;
-                parentTile.GetComponent<Water_tile>().resources.w = 0;
-            }
-        }
-        return waste;
-    }
-
-    public float saveWaste(float waste){
-        if (parentTile.GetComponent<TileClass>().isWorkerOn())
-        {
-            if (buildingType == "Landfill")
-            {
-                if (wasteCapacity > nowWaste + waste)
-                {
-                    nowWaste += waste;
-                    return (float)-1.0;
-                }
-                else
-                {
-                    float remain = nowWaste + waste - wasteCapacity;
-                    nowWaste = wasteCapacity;
-                    return remain;
-                }
-            }
-            else
-            {
-                return (float)-11.0;
-            }
-        }
-        return (float)-11.0;
-    }
 
     public void pollute()
     {
-        if(parentTile.GetComponent<TileClass>().isWorkerOn())
+        if(parentTile.GetComponent<TileClass>().isWorkerOn() && parentTile.GetComponent<TileClass>().thresholdLvl < 1)
         {
             print(buildingType);
             if (buildingType == "Factory")
@@ -112,7 +74,8 @@ public class Building : MonoBehaviour
             {
                 foreach (TileClass tile in parentTile.GetComponent<TileClass>().getNeighbor())
                 {
-                    tile.UpdatePolluAmount(tile.polluAmount + landfillPolluRate);
+                    if(tile.h <= parentTile.GetComponent<TileClass>().h)
+                        tile.UpdatePolluAmount(tile.polluAmount + landfillPolluRate);
                 }
             }
             else if(buildingType == "Farm" || buildingType == "Mine")
@@ -132,7 +95,11 @@ public class Building : MonoBehaviour
         }
         else if(buildingType == "Landfill")
         {
-           return parentTile.GetComponent<TileClass>().getNeighbor();
+            foreach (TileClass tile in parentTile.GetComponent<TileClass>().getNeighbor())
+            {
+                if (tile.h <= parentTile.GetComponent<TileClass>().h)
+                    area.Add(tile);
+            }
         }
         else if(buildingType == "Factory")
         {
@@ -148,10 +115,12 @@ public class Building : MonoBehaviour
     public Vector4 getResources() //For every building, return Vec4 info about resources that player get
     {
         Vector4 resources = new Vector4(0,0,0,0);
-        if(!parentTile.GetComponent<TileClass>().isWorkerOn())
+        if(!parentTile.GetComponent<TileClass>().isWorkerOn() || parentTile.GetComponent<TileClass>().thresholdLvl >=1)
         {
             return new Vector4(0,0,0,0);
-        }else{
+        }
+        else
+        {
             if(buildingType == "Farm")
             {
                 Vector4 required = new Vector4(0,0,0,0);
@@ -159,7 +128,6 @@ public class Building : MonoBehaviour
                 //Debug.Log(required);
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
                 //Debug.Log(resources);
-                parentTile.GetComponent<Plain_tile>().resources.w += wasteMk; 
                 return resources;
             }
             else if(buildingType == "Mine")
@@ -167,8 +135,6 @@ public class Building : MonoBehaviour
                 Vector4 required = new Vector4(0,0,0,0);
                 required.z = metalPerTurn * efficiency;
                 resources = this.parentTile.GetComponent<Mine_tile>().getResources(required);
-                parentTile.GetComponent<Mine_tile>().resources.w += wasteMk; 
-
                 return resources;
             }
             else if(buildingType == "Waterpump")
@@ -176,7 +142,6 @@ public class Building : MonoBehaviour
                 Vector4 required = new Vector4(0,0,0,0);
                 required.x = waterPerTurn * efficiency;
                 resources = this.parentTile.GetComponent<Water_tile>().getResources(required);
-                parentTile.GetComponent<Water_tile>().resources.w += wasteMk; 
                 return resources;
             }
             else
@@ -192,21 +157,6 @@ public class Building : MonoBehaviour
             return true;
         }else return false;
     }
-
-    public string[] getBuildingFunc(){
-        return new string[1] { "Info" };
-        if(buildingType == "Residential_area"){
-            string[] answer = {};
-            return answer;
-        }else if(parentTile.GetComponent<TileClass>().isWorkerOn()){
-            string[] answer = new string[] {"Assign Worker"};
-            return answer;
-        }else{
-            string[] answer = new string[] {"Unassign Worker"};
-            return answer;
-        }
-    }
-
 
      public void fixBuilding(){
         string name = this.buildingType;
@@ -227,13 +177,4 @@ public class Building : MonoBehaviour
         this.gameObject.transform.position = position;
     }
 
-    public int makeAirPo() //For factory building, make fixed amout of air pollution
-    {
-        return 5; //dummy value
-    }
-    
-    private void Update() {
-        //Vector4 test = this.getResources();
-        //Debug.Log(test);
-    }
 }

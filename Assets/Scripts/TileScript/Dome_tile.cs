@@ -11,14 +11,11 @@ public class Dome_tile : TileClass
     // Start is called before the first frame update
     void Start()
     {
-        tileDescription = "Headquarter of the mighty antivaxxer ! They have generously taken upon them the curse of staying in the dome all their life to avoid autism and be intellectually superior";
+        tileDescription = "Headquarter of the mighty antivaxxer ! They have generously taken upon them the curse of staying in the dome all their life to avoid autism and be intellectually superior\n" +
+            "Spawn worker here every turn if workers number does not max out\n" +
+            "You can not spawn if the worker is on the tile!\n\n"+
+            "Height: "+h;
         resources = new Vector4(0,0,0,0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public override string[] getBuildable()

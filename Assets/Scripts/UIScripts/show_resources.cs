@@ -33,8 +33,6 @@ public class show_resources : MonoBehaviour
         {
             Vector4 gathered = building.GetComponent<Building>().getResources();
             resources += gathered;
-            float gatheredWaste = building.GetComponent<Building>().giveWaste();
-            waste += gatheredWaste;
         }
         float waterConsumed = (float)player.antivaxHP_present + player.worker_present;
         float foodConsumed = (float)player.antivaxHP_present + player.worker_present;

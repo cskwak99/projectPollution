@@ -55,16 +55,17 @@ public class UIManager : MonoBehaviour
     }
     public void selectTile(TileClass tile)
     {
+        TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         destroyCurrentOption();
         destroyCurrentCover();
-        if (tile!=null && (tile.isBuildingOn()|| tile.isWorkerOn()))
+        if (tile!=null && (tile.isBuildingOn()|| tile.isPlayerWorkerOn(TM.current_player.GetComponent<PlayerStats>())))
         {
             isOnTileSelected = true;
             if (tile.isBuildingOn())
             {
                 coverTile(tile.getBuilding().getAffectedArea());
             }
-            if(tile.isWorkerOn())
+            if(tile.isPlayerWorkerOn(TM.current_player.GetComponent<PlayerStats>()))
             {
                 buildPanel(tile);
             }
@@ -92,7 +93,6 @@ public class UIManager : MonoBehaviour
             buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
             {
                 buildOptionList = tile.getBuildable();
-                print(tile);
                 if (buildingOnTile == null)
                 {
                     buildOption = OPM.createOptionPanel("BuildOption", buildOptionRoot, buildOptionList, buildOptionRoot.transform.position);
@@ -104,7 +104,9 @@ public class UIManager : MonoBehaviour
                         btn.onClick.AddListener(() =>
                         {
                             GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile, TM.current_player);
+                            workerOnTile.actionLeft -= 1;
                             destroyCurrentOption();
+                            isMouseOnUI = false;
                         });
                     }
                 }
@@ -116,7 +118,9 @@ public class UIManager : MonoBehaviour
             GameObject buildOptionRoot = tmp.gameObject;
             buildOptionRoot.GetComponent<Button>().onClick.AddListener(() =>
             {
+                StartCoroutine(workerOnTile.purify_tile());
                 destroyCurrentOption();
+                isMouseOnUI = false;
             });
         }
         ///////////////////////MOVE////////////////////////////////////

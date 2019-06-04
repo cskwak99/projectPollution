@@ -9,15 +9,11 @@ public class Plain_tile : TileClass
     void Start()
     {
         resources = new Vector4(0,float.PositiveInfinity, 0, 0); //initiate resources, second place is food
-        tileDescription = "A plain, useful to build something on.";
+        tileDescription = "A plain, useful to build something on.\n\n" +
+            "Can build: Residential, Farm, Landfill, Factory \n"+
+            "Height: " + h;
     }
-
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override string[] getBuildable()
     {
         string[] buildable = { "Residential", "Farm", "Landfill", "Factory" };

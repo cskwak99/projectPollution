@@ -105,10 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b2fea028155d043adf727aa393d4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  cubeCoor: {x: 0, y: 0, z: 0}
+  h: 0
   tileDescription: 
+  tileType: 
   polluAmount: 0
   maxPolluAmount: 100
-  thresholdSafe: 30
-  thresholdKill: 60
+  thresholdShut: 60
   thresholdDeadLand: 90
+  thresholdLvl: 0
   resources: {x: 0, y: 0, z: 0, w: 0}
+  textures:
+  - {fileID: 2800000, guid: 23b7ab0c67fbc30438e3f8b7b51ff2f9, type: 3}
+  - {fileID: 2800000, guid: 3b28b1ce19402844aac3eebe30b167a5, type: 3}
+  - {fileID: 2800000, guid: fe7ea96fbb95f1449b7bb2d87ef55093, type: 3}

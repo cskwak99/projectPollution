@@ -55,7 +55,7 @@ public class generateTileMap : MonoBehaviour
               {  W, W, M, P, P, P, P, P, P, W, W, W},
               {P, W, P, P, P, P, P, P, P, P, W, W},
               {  P, W, W, P, P, P, P, P, P, P, P, P},
-              {W, P, W, W, P, P, P, W, P, P, D, P},
+              {W, P, W, W, P, P, P, P, P, P, D, P},
               {  P, P, W, W, W, W, W, P, P, P, P, P},
             };
         int[,] heightMap = new int[,]
@@ -117,11 +117,11 @@ public class generateTileMap : MonoBehaviour
         }
         else if (building == b.H1)
         {
-            BM.Init_Residental(atTile, TM.player1);
+            BM.Init_Residential(atTile, TM.player1);
         }
         else if (building == b.H2)
         {
-            BM.Init_Residental(atTile, TM.player2);
+            BM.Init_Residential(atTile, TM.player2);
         }
 
     }

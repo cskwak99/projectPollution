@@ -112,8 +112,8 @@ public class TurnManager : MonoBehaviour
     public void Turn_end()
     {
         print("End Turn");
-        TilesPhase();
         PollutionPhase();
+        TilesPhase();
         Swap_player();
     }
     public void TilesPhase()
@@ -135,6 +135,16 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
+        ////CHECK TILE CONDITION/////
+        foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
+        {
+            TileClass tile = child.GetComponent<TileClass>();
+            tile.changeModel();
+            if(tile.thresholdLvl == 2)
+            {
+
+            }
+        }
     }
     public void ResourceGatheringPhase()
     {
@@ -144,38 +154,12 @@ public class TurnManager : MonoBehaviour
 
         //Gather reources
         Vector4 resources = new Vector4(0,0,0,0); 
-        float waste = 0;
         foreach (GameObject building in buildings)
         {
             Vector4 gathered = building.GetComponent<Building>().getResources();
             resources += gathered;
-            float gatheredWaste = building.GetComponent<Building>().giveWaste();
-            waste += gatheredWaste;
         }
-        /*
-         * float remain = waste;
-        foreach (GameObject building in buildings){
-            if (building.GetComponent<Building>().buildingType == "Landfill" && building.transform.parent.GetComponent<TileClass>().isWorkerOn()){
-                if (remain+building.GetComponent<Building>().nowWaste < building.GetComponent<Building>().wasteCapacity){
-                    building.GetComponent<Building>().nowWaste += remain;
-                    remain = 0;
-                }
-                else
-                {
-                    remain -= building.GetComponent<Building>().wasteCapacity - building.GetComponent<Building>().nowWaste;
-                }
-                if(remain == 0){
-                    break;
-                }
-            }
-        }
-        if(remain > 0){
-            //add remain Waste on player's dome tile
-            player.dome_tile.GetComponent<Dome_tile>().resources.w += remain * 100;
-            resources.w = waste;
-        }*/
         player.resources += resources;
-        //Calculate resource per turn to UI
     }
 
     public void WorkerPhase(){

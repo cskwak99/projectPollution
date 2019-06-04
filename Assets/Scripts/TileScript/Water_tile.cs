@@ -12,14 +12,12 @@ public class Water_tile : TileClass
     void Start()
     {
         resources = new Vector4(float.PositiveInfinity,0, 0, 0); //initiate resources, first place is water
-        tileDescription = "A river, source of life";
+        tileDescription =
+            "Water, source of life, source of faraway wastes. Pollution dumped will flow to all tiles\n\n" +
+            "Can build: Water Pump\n"+
+            "Height: "+h;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public override bool[,] spread_pollution()  //Return a speaded tile map.
     {
         generateTileMap GT = GameObject.Find("Hexagon_Map").GetComponent<generateTileMap>();
@@ -57,7 +55,7 @@ public class Water_tile : TileClass
     }
     public override string[] getBuildable()
     {
-        string[] buildable = { "Water Pump", "Landfill"};
+        string[] buildable = { "Water Pump"};
         return buildable;
     }
 }

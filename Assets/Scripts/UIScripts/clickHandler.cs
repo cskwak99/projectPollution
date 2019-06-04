@@ -39,7 +39,6 @@ public class clickHandler : MonoBehaviour {
             UIM.hoverTile(tile);
             if (Input.GetMouseButtonDown(0) && !UIM.isMouseOnUI)
             {
-                print("SELECTED " + tile_type);
                 passedTile(tile);
                 this.UIM.isOnDestTileSelection = false;
                 yield break;        

@@ -20,26 +20,54 @@ public class BuildingUIManager : MonoBehaviour
 
     public void showBuildInfo(string buildingName)
     {
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
         transform.parent.Find("BuildingInfo").GetComponent<CanvasGroup>().alpha = 1;
         if (buildingName == "Mine")
         {
-            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = "\"Heigh-ho, heigh-ho\nIt\'s home from work we go\nHeigh - ho, heigh - ho, heigh - ho\nHeigh - ho, heigh - ho\nIt's home from work we go\nHeigh - ho, heigh - ho\"";
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
+                "\"Heigh-ho, heigh-ho\n" +
+                "It\'s home from work we go.\n" +
+                "Mine always produce toxic substances, pollution will increase on the tile" +
+                "Produce" + BM.metalPerTurn + " Metal/turn, use worker\n" +
+                "Cost" + BM.mine_cost + " Metal";
         }
         if (buildingName == "Farm")
         {
-            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = "We all know what a farm is for, do you need description or The foundation of sedentarism";
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
+                "We all know what a farm is for, do you need description or The foundation of sedentarism\n" +
+                "They all use toxic fertilizer on farm, pollution will increase on the tile" +
+                "Produce" + BM.foodPerTurn + " Food/turn, use worker\n" +
+                "Cost"+BM.farm_cost+" Metal";
         }
         if (buildingName == "Residential")
         {
-            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = "The much-needed homes in this forsaken world";
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = 
+                "The much-needed homes in this forsaken world\n" +
+                "Increase maximum workers. Costs " + BM.farm_cost + " Metal";
         }
         if (buildingName == "Water Pump")
         {
-            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = "\"Does someone know where we get the energy for that ?\" \"No, that’s why we are worker, not nobles\"";
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
+                "\"Does someone know where we get the energy for that ?\"\n" +
+                "\"No, that’s why we are worker, not nobles\"" +
+                "Produce" + BM.waterPerTurn + " Water/turn, use worker\n" +
+                "Cost" + BM.water_pump_cost + " Metal";
         }
         if (buildingName == "Landfill")
         {
-            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = "\"And that’s where we put our war weapon !\"\n\"But that’s just waste\"\n\"Nothing more deadly for the nobles ...\"";
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = 
+                "\"And that’s where we put our war weapon !\"\n" +
+                "\"But that’s just waste\"\n" +
+                "\"Nothing more deadly for the nobles ...\""+
+                "Strongly pollute tiles around. Cost " + BM.landfill_cost + " Metal";
+        }
+        if (buildingName == "Factory")
+        {
+            transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
+                "\"And that’s where we put our war weapon !\"\n" +
+                "\"But that’s just waste\"\n" +
+                "\"Nothing more deadly for the nobles ...\"" +
+                "Slowly pollute all 1 level higher tiles. Cost " + BM.factory_cost + " Metal";
         }
     }
 

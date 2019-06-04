@@ -14,11 +14,17 @@ public class TileClass : MonoBehaviour
     public string tileType;
     public float polluAmount = 0;
     public float maxPolluAmount = 100;
-    public float thresholdSafe = 30;
     public float thresholdShut = 60;
     public float thresholdDeadLand = 100;
+    public int thresholdLvl = 0;
     public Vector4 resources = new Vector4(); // water, food, metal, waste
+    public Texture[] textures;
 
+    public void changeModel()
+    {
+        Renderer rend = this.GetComponent<Renderer>();
+        rend.material.mainTexture = textures[thresholdLvl];
+    }
     public int calcDist(TileClass destTile)
     {
         int x1, y1, x2, y2;
@@ -49,24 +55,25 @@ public class TileClass : MonoBehaviour
         int[,,] oddr_directions =
         {
             { 
-                { +1, 0 }, {0, -1 }, {-1, -1 },
+                { +1, 0 }, {0, -1 }, {+1, +1 },
                 { -1, 0 }, {-1, +1 }, {0, +1 }
             },
             {
                 { +1,  0 }, {+1, -1 }, { 0, -1},
-                { -1,  0 }, { 0, +1 }, { 1, +1}
+                { -1,  0 }, { 0, +1 }, { -1, -1}
             }
         };
-        int parity = x & 1;
+        int parity = (y+1) % 2;
+        print(parity);
         for(int i = 0;i < 6; i++)
         {
-            if(0 <= x + oddr_directions[parity, i, 0] && x + oddr_directions[parity, i, 0] < GT.mapWidth)
-                if (0 <= y + oddr_directions[parity, i, 1] && y + oddr_directions[parity, i, 1] < GT.mapHeight)
-                    tiles.Add(tileMap[x+oddr_directions[parity, i, 0], y+oddr_directions[parity, i, 1]].GetComponent<TileClass>());
+            if(0 <= x + oddr_directions[parity, i, 1] && x + oddr_directions[parity, i, 1] < GT.mapWidth)
+                if (0 <= y + oddr_directions[parity, i, 0] && y + oddr_directions[parity, i, 0] < GT.mapHeight)
+                    tiles.Add(tileMap[x+oddr_directions[parity, i, 1], y+oddr_directions[parity, i, 0]].GetComponent<TileClass>());
         }
         return tiles;
     }
-    public virtual bool[,] spread_pollution()
+    public virtual bool[,] spread_pollution()  ///ABSTRACTED FOR WATER TILE
     {
         return new bool[1,1];
     }
@@ -76,12 +83,6 @@ public class TileClass : MonoBehaviour
         //polluAmount = resources.w/10;
         polluAmount = Mathf.Clamp(amount, 0, maxPolluAmount);
         UpdateThresholdLevel();
-
-    }
-
-    public void AddWaste(float waste)
-    {
-        resources.w = waste;
     }
 
     public Vector4 getResources(Vector4 resourcesTaken)
@@ -92,10 +93,9 @@ public class TileClass : MonoBehaviour
         return resourcesTrulyTaken;
     }
 
-    public int UpdateThresholdLevel()
+    public void UpdateThresholdLevel()
     {
-        int thresholdLvl = 0;
-        return thresholdLvl = ((polluAmount >= thresholdSafe) ? 1 : 0) + ((polluAmount >= thresholdShut) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
+        thresholdLvl = ((polluAmount >= thresholdShut) ? 1 : 0) + ((polluAmount >= thresholdDeadLand) ? 1 : 0);
     }
     public bool isWorkerOn()
     {
@@ -108,6 +108,22 @@ public class TileClass : MonoBehaviour
         }
         return false;
     }
+    public bool isPlayerWorkerOn(PlayerStats player)
+    {
+        worker w;
+        foreach (Transform child in transform)
+        {
+            w = child.gameObject.GetComponent<worker>();
+            if (w != null)
+            {
+                if (w.player.player_number == player.player_number)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        return false;
+    }
     public bool isBuildingOn()
     {
         foreach (Transform child in transform)
@@ -115,6 +131,22 @@ public class TileClass : MonoBehaviour
             if (child.gameObject.GetComponent<Building>() != null)
             {
                 return true;
+            }
+        }
+        return false;
+    }
+    public bool isPlayerBuildingOn(PlayerStats player)
+    {
+        Building b;
+        foreach (Transform child in transform)
+        {
+            b = child.gameObject.GetComponent<Building>();
+            if (b != null)
+            {
+                if (b.playerOccupied.GetComponent<PlayerStats>().player_number == player.player_number)
+                    return true;
+                else
+                    return false;
             }
         }
         return false;
