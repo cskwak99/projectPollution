@@ -10,50 +10,64 @@ public class show_resources : MonoBehaviour
     public Text foodText;
     public Text metalText;
 
-    private GameObject currentPlayer;
-    private GameObject TM;
-    string waterPerTurn;
-    string foodPerTurn;
-    string metalPerTurn;
-    string wastePerTurn;
+    private TurnManager TM;
+    string waterPerTurn = "";
+    string foodPerTurn = "";
+    string metalPerTurn = "";
+    string wastePerTurn = "";
     void Start()
     {
-        TM = GameObject.Find("TurnManager");
+        TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
+        UpdateResourcesPerTurn();
     }
 
-    public void calcResourcePerTurn(PlayerStats current_player)
+    public void UpdateResourcesPerTurn()
     {
+        GameObject current_player = TM.GetComponent<TurnManager>().Get_current_player();
         PlayerStats player = current_player.GetComponent<PlayerStats>();
         List<GameObject> buildings = player.buildings;
 
         //Gather reources
-        Vector4 resources = new Vector4(0, 0, 0, 0);
-        float waste = 0;
+        Vector4 resourcesPerTurn = new Vector4(0, 0, 0, 0);
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
         foreach (GameObject building in buildings)
         {
-            Vector4 gathered = building.GetComponent<Building>().getResources();
-            resources += gathered;
+            Building bd = building.GetComponent<Building>();
+            GameObject parentTile = bd.parentTile;
+            string buildingType = bd.buildingType;
+            if (parentTile.GetComponent<TileClass>().isWorkerOn() && parentTile.GetComponent<TileClass>().thresholdLvl < 1)
+            {
+                if (buildingType == "Farm")
+                {
+                    resourcesPerTurn.y += BM.foodPerTurn;
+                }
+                else if (buildingType == "Mine")
+                {
+                    resourcesPerTurn.z += BM.metalPerTurn;
+                }
+                else if (buildingType == "Waterpump")
+                {
+                    resourcesPerTurn.x += BM.waterPerTurn;
+                }
+            }
+           
         }
         float waterConsumed = (float)player.antivaxHP_present + player.worker_present;
         float foodConsumed = (float)player.antivaxHP_present + player.worker_present;
-        resources.w += waste;
-        resources.x -= waterConsumed;
-        resources.y -= foodConsumed;
-        waterPerTurn = resources.x.ToString();
-        waterPerTurn = resources.x > 0 ?  "+" + waterPerTurn : waterPerTurn;
-        foodPerTurn = resources.y.ToString();
-        foodPerTurn = resources.y > 0 ? "+" + foodPerTurn : foodPerTurn;
-        metalPerTurn = resources.z.ToString();
-        metalPerTurn = resources.z > 0 ? "+" + metalPerTurn : metalPerTurn;
-        wastePerTurn = resources.w.ToString();
-        wastePerTurn = resources.w > 0 ? "+" + wastePerTurn : wastePerTurn;
+        resourcesPerTurn.x -= waterConsumed;
+        resourcesPerTurn.y -= foodConsumed;
+        waterPerTurn = resourcesPerTurn.x.ToString();
+        waterPerTurn = resourcesPerTurn.x > 0 ?  "+" + waterPerTurn : waterPerTurn;
+        foodPerTurn = resourcesPerTurn.y.ToString();
+        foodPerTurn = resourcesPerTurn.y > 0 ? "+" + foodPerTurn : foodPerTurn;
+        metalPerTurn = resourcesPerTurn.z.ToString();
+        metalPerTurn = resourcesPerTurn.z > 0 ? "+" + metalPerTurn : metalPerTurn;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentPlayer = TM.GetComponent<TurnManager>().Get_current_player();
-        calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
+        GameObject currentPlayer = TM.Get_current_player();
         waterText.text = "Water: " + currentPlayer.GetComponent<PlayerStats>().Get_water()+" "+waterPerTurn+"/turn";
         foodText.text = "Food: " + currentPlayer.GetComponent<PlayerStats>().Get_food()+" " + foodPerTurn + "/turn";
         metalText.text = "Metal: " + currentPlayer.GetComponent<PlayerStats>().Get_metal()+" " + metalPerTurn + "/turn";

@@ -176,7 +176,12 @@ public class TurnManager : MonoBehaviour
                 WM.Create_Worker("worker", player);
             else
                 UIM.showPopup("Worker can't spawn!, get the one out of dome");
-        }    
+        }
+        ///Reseting AP for all workers
+        foreach(GameObject w in player.workers)
+        {
+            w.GetComponent<worker>().actionLeft = player.worker_ap;
+        }
     }
 
     public void ConsumePhase(){

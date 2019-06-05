@@ -18,7 +18,6 @@ public class BuildManager : MonoBehaviour
     public GameObject residental;
     public GameObject mine;
     public GameObject factory;
-    public GameObject TurnManager;
     public GameObject P1Border;
     public GameObject P2Border;
 
@@ -38,6 +37,7 @@ public class BuildManager : MonoBehaviour
     public void route_construction(string buildingName, TileClass target_tile, GameObject currentPlayer)
     {
         int res;
+        UIManager UIM = GameObject.Find("UI").GetComponent<UIManager>();
         switch (buildingName)
         {
             case "Farm": res = Init_Farm(target_tile, currentPlayer); break;
@@ -56,7 +56,7 @@ public class BuildManager : MonoBehaviour
             else
                 border = Instantiate(P2Border, target_tile.gameObject.transform);
             border.transform.position = target_tile.transform.position + new Vector3(0, 0.05f, 0);
-            GameObject.Find("UI").GetComponentInChildren<show_resources>().calcResourcePerTurn(currentPlayer.GetComponent<PlayerStats>());
+            UIM.UpdateResourcesPerTurn();
         }
     }
 

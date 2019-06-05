@@ -2036,7 +2036,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 43.203003, y: -60.329002, z: -26.854002}
 --- !u!1 &884718418
 GameObject:
@@ -2152,7 +2152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -237.3, y: -34.69998}
+  m_AnchoredPosition: {x: -237.2998, y: -34.69998}
   m_SizeDelta: {x: 194.8, y: 39.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902896454
@@ -2295,7 +2295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1004062738}
-  - component: {fileID: 1004062737}
   - component: {fileID: 1004062736}
   m_Layer: 0
   m_Name: Hexagon_Map
@@ -2316,8 +2315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27aa94ba19958e041a6bb469e499afbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapHeight: 8
-  mapWidth: 12
+  mapHeight: 10
+  mapWidth: 16
   tileXOffset: 0.175
   tileZOffset: -0.15
   tileYOffset: 0.045
@@ -2329,18 +2328,6 @@ MonoBehaviour:
     type: 3}
   minePrefab: {fileID: 3406572338638638453, guid: 2d1cd159125fb5d488597b71c6c0ed7b,
     type: 3}
---- !u!114 &1004062737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004062735}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2db7baf91a72d49a563fe6e44b36b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1004062738
 Transform:
   m_ObjectHideFlags: 0
@@ -2800,7 +2787,6 @@ MonoBehaviour:
     type: 3}
   mine: {fileID: 4788098851882680553, guid: d0ac4142949c47f45a71a68f9d5271b2, type: 3}
   factory: {fileID: 3375172002110201100, guid: f0af8e52e5c6aa84f8b3f947f777bd19, type: 3}
-  TurnManager: {fileID: 1544295792}
   P1Border: {fileID: 2058123268607754651, guid: 2357fab3cff7bdc47ba2c13025223ad0,
     type: 3}
   P2Border: {fileID: 6076077062680140154, guid: 11bd5d0efabc92042988a406bcb348ec,
@@ -3255,7 +3241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -95.1, y: 212.8}
+  m_AnchoredPosition: {x: -95.09961, y: 212.8}
   m_SizeDelta: {x: -588, y: -455.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1302870202
@@ -3746,9 +3732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {x: 100, y: 100, z: 100, w: 100}
+  resources: {x: 100, y: 100, z: 20, w: 0}
   antivaxHP_max: 10
   antivaxHP_present: 10
+  worker_ap: 2
   worker_max: 1
   worker_present: 0
   unlocked_buildings:
@@ -3781,7 +3768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1478824379
 GameObject:
@@ -4068,7 +4055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 1421234470}
   player2: {fileID: 1790588955}
-  current_player: {fileID: 0}
+  current_player: {fileID: 1421234470}
   totalWaste: 0
   turnNum: 0
 --- !u!4 &1544295794
@@ -4585,7 +4572,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790588955
 GameObject:
@@ -4616,9 +4603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {x: 200, y: 200, z: 200, w: 200}
+  resources: {x: 100, y: 100, z: 20, w: 0}
   antivaxHP_max: 10
   antivaxHP_present: 10
+  worker_ap: 2
   worker_max: 1
   worker_present: 0
   unlocked_buildings:
@@ -4651,7 +4639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1841953538
 GameObject:

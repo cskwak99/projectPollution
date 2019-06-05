@@ -103,8 +103,7 @@ public class UIManager : MonoBehaviour
                             continue;
                         btn.onClick.AddListener(() =>
                         {
-                            GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(option.name, tile, TM.current_player);
-                            workerOnTile.actionLeft -= 1;
+                            workerOnTile.build(option.name, tile, TM.current_player);
                             destroyCurrentOption();
                             isMouseOnUI = false;
                         });
@@ -167,7 +166,10 @@ public class UIManager : MonoBehaviour
         if (daOption != null)
             daOption.SetActive(true);
     }
-
+    public void UpdateResourcesPerTurn()
+    {
+        gameObject.transform.Find("Resources").GetComponent<show_resources>().UpdateResourcesPerTurn();
+    }
     private void Start()
     {
         currentBorder = null;

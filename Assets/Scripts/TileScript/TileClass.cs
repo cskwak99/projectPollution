@@ -64,7 +64,6 @@ public class TileClass : MonoBehaviour
             }
         };
         int parity = (y+1) % 2;
-        print(parity);
         for(int i = 0;i < 6; i++)
         {
             if(0 <= x + oddr_directions[parity, i, 1] && x + oddr_directions[parity, i, 1] < GT.mapWidth)

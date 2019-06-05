@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
     public Vector4 resources; //water, food, metal, waste
     public int antivaxHP_max;
     public int antivaxHP_present;
+    public int worker_ap;
     public int worker_max;
     public int worker_present;
     public string[] unlocked_buildings = new string[] {"Farm", "Factory", "Waterpump", "Landfill", "Residential_area", "Mine" };
@@ -20,17 +21,12 @@ public class PlayerStats : MonoBehaviour
         buildings = new List<GameObject>();
     }
     private void Start() {
-        initSet();
-    }
-    public void initSet(){
-        resources = new Vector4(50,50,11,0);
-        //add worker list
-        //add building list
-        //buildings = new List<GameObject>();
-        foreach (GameObject building in buildings){
+        //IniSet Can be done in inspector!
+        //initSet();
+        foreach (GameObject building in buildings)
+        {
             building.GetComponent<Building>().setInitial();
         }
-        //add dome tile
     }
 
     public int updateWorkerMax(){

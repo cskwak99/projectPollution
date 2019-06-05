@@ -25,8 +25,23 @@ public class worker : MonoBehaviour
     {
         return new string[] {"Move", "Purify", "Build"};
     }
+    public void build(string name, TileClass tile, GameObject current_player)
+    {
+        if (actionLeft <= 0)
+        {
+            UIM.showPopup("This worker have no action point left!");
+            return;
+        }
+        GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(name, tile, current_player);
+        actionLeft -= 1;
+    }
     public IEnumerator move_worker()
     {
+        if(actionLeft <= 0)
+        {
+            UIM.showPopup("This worker have no action point left!");
+            yield break;
+        }
         TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         UIM = GameObject.Find("UI").GetComponent<UIManager>();
         TileClass destTile = null;
@@ -63,10 +78,16 @@ public class worker : MonoBehaviour
         }
         transform.parent = destTile.gameObject.transform;
         transform.position = transform.parent.transform.position + new Vector3(0f, 0.05f, 0f);
+        UIM.UpdateResourcesPerTurn();
         actionLeft -= 1;
     }
     public IEnumerator purify_tile()
     {
+        if (actionLeft <= 0)
+        {
+            UIM.showPopup("This worker have no action point left!");
+            yield break;
+        }
         TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         UIM = GameObject.Find("UI").GetComponent<UIManager>();
         TileClass destTile = null;

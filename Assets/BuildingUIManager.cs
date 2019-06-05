@@ -9,13 +9,7 @@ public class BuildingUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.parent.Find("BuildingInfo").GetComponent<CanvasGroup>().alpha = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        hideBuildInfo();
     }
 
     public void showBuildInfo(string buildingName)
@@ -27,47 +21,50 @@ public class BuildingUIManager : MonoBehaviour
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
                 "\"Heigh-ho, heigh-ho\n" +
                 "It\'s home from work we go.\n" +
-                "Mine always produce toxic substances, pollution will increase on the tile" +
-                "Produce" + BM.metalPerTurn + " Metal/turn, use worker\n" +
-                "Cost" + BM.mine_cost + " Metal";
+                "Mine always produce toxic substances, pollution will increase on the tile\n\n" +
+                "Produce " + BM.metalPerTurn + " Metal/turn, use worker\n" +
+                "Cost: " + BM.mine_cost + " Metal";
         }
         if (buildingName == "Farm")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
                 "We all know what a farm is for, do you need description or The foundation of sedentarism\n" +
-                "They all use toxic fertilizer on farm, pollution will increase on the tile" +
-                "Produce" + BM.foodPerTurn + " Food/turn, use worker\n" +
-                "Cost"+BM.farm_cost+" Metal";
+                "They all use toxic fertilizer on farm, pollution will increase on the tile\n\n" +
+                "Produce " + BM.foodPerTurn + " Food/turn, use worker\n" +
+                "Cost: "+BM.farm_cost+" Metal";
         }
         if (buildingName == "Residential")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = 
-                "The much-needed homes in this forsaken world\n" +
-                "Increase maximum workers. Costs " + BM.farm_cost + " Metal";
+                "The much-needed homes in this forsaken world\n\n" +
+                "Increase maximum workers.\n" +
+                "Costs: " + BM.farm_cost + " Metal";
         }
         if (buildingName == "Water Pump")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
                 "\"Does someone know where we get the energy for that ?\"\n" +
-                "\"No, that’s why we are worker, not nobles\"" +
-                "Produce" + BM.waterPerTurn + " Water/turn, use worker\n" +
-                "Cost" + BM.water_pump_cost + " Metal";
+                "\"No, that’s why we are worker, not nobles\"\n\n" +
+                "Produce " + BM.waterPerTurn + " Water/turn, use worker\n" +
+                "Cost: " + BM.water_pump_cost + " Metal";
         }
         if (buildingName == "Landfill")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = 
                 "\"And that’s where we put our war weapon !\"\n" +
                 "\"But that’s just waste\"\n" +
-                "\"Nothing more deadly for the nobles ...\""+
-                "Strongly pollute tiles around. Cost " + BM.landfill_cost + " Metal";
+                "\"Nothing more deadly for the nobles ...\"\n\n"+
+                "Strongly pollute tiles around.\n" +
+                "Cost: " + BM.landfill_cost + " Metal";
         }
         if (buildingName == "Factory")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
                 "\"And that’s where we put our war weapon !\"\n" +
                 "\"But that’s just waste\"\n" +
-                "\"Nothing more deadly for the nobles ...\"" +
-                "Slowly pollute all 1 level higher tiles. Cost " + BM.factory_cost + " Metal";
+                "\"Nothing more deadly for the nobles ...\"\n\n" +
+                "Slowly pollute all tiles that are 1 level above it.\n" +
+                "Cost: " + BM.factory_cost + " Metal";
         }
     }
 

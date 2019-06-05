@@ -6,7 +6,6 @@ public class Building : MonoBehaviour
 {
     public GameObject playerOccupied;
     public string buildingType; //To specify building type
-    public float efficiency; //To get efficiecny of worker so that evaluate the building work //Maybe change to float
     public int wasteMk; //Amount of waste that building makes
     public int airPoMk; //Amount of airPollution that factory makes
     public GameObject parentTile; //parent tile that building attached
@@ -125,7 +124,7 @@ public class Building : MonoBehaviour
             {
                 Vector4 required = new Vector4(0,0,0,0);
                 required.y += foodPerTurn;
-                //Debug.Log(required);
+                Debug.Log(required);
                 resources = this.parentTile.GetComponent<Plain_tile>().getResources(required);
                 //Debug.Log(resources);
                 return resources;
@@ -133,14 +132,14 @@ public class Building : MonoBehaviour
             else if(buildingType == "Mine")
             {
                 Vector4 required = new Vector4(0,0,0,0);
-                required.z = metalPerTurn * efficiency;
+                required.z = metalPerTurn;
                 resources = this.parentTile.GetComponent<Mine_tile>().getResources(required);
                 return resources;
             }
             else if(buildingType == "Waterpump")
             {
                 Vector4 required = new Vector4(0,0,0,0);
-                required.x = waterPerTurn * efficiency;
+                required.x = waterPerTurn;
                 resources = this.parentTile.GetComponent<Water_tile>().getResources(required);
                 return resources;
             }
