@@ -13,6 +13,7 @@ public class Building : MonoBehaviour
 
     public float wasteCapacity;// For landfill
     public float nowWaste; //For landfill
+    public TileClass factoryPollutionCenter;
 
     //For resource Vector -> (water, food, metal, waste)
     private int foodPerTurn;
@@ -57,7 +58,8 @@ public class Building : MonoBehaviour
 
     public void pollute()
     {
-        if(parentTile.GetComponent<TileClass>().isWorkerOn() && parentTile.GetComponent<TileClass>().thresholdLvl < 1)
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
+        if (parentTile.GetComponent<TileClass>().isWorkerOn() && parentTile.GetComponent<TileClass>().thresholdLvl < 1)
         {
             print(buildingType);
             if (buildingType == "Factory")
@@ -65,8 +67,12 @@ public class Building : MonoBehaviour
                 foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
                 {
                     TileClass tile = child.GetComponent<TileClass>();
-                    if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
+                    //if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
+                    //    tile.UpdatePolluAmount(tile.polluAmount + factoryPolluRate);
+                    if(tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange)
+                    {
                         tile.UpdatePolluAmount(tile.polluAmount + factoryPolluRate);
+                    }
                 }
             }
             else if (buildingType == "Landfill")
@@ -87,6 +93,7 @@ public class Building : MonoBehaviour
     }
     public List<TileClass> getAffectedArea()
     {
+        BuildManager BM = GameObject.Find("_BuildManager").GetComponent<BuildManager>();
         List <TileClass> area = new List<TileClass>();
         if (buildingType == "Farm" || buildingType == "Mine")
         {
@@ -105,7 +112,7 @@ public class Building : MonoBehaviour
             foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
             {
                 TileClass tile = child.GetComponent<TileClass>();
-                if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
+                if (tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange)
                     area.Add(tile);
             }
         }

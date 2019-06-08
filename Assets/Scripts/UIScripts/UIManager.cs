@@ -68,12 +68,16 @@ public class UIManager : MonoBehaviour
             if(tile.isPlayerWorkerOn(TM.current_player.GetComponent<PlayerStats>()))
             {
                 buildPanel(tile);
+                showAP(tile);
             }
         }
         else
             isOnTileSelected = false;
     }
+    public void showAP(TileClass tile)
+    {
 
+    }
     private void buildPanel(TileClass tile)
     {
         TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
@@ -188,12 +192,13 @@ public class UIManager : MonoBehaviour
         GameObject currentPopup = Instantiate(popUpPanel, transform, false);
         currentPopup.transform.SetParent(transform);
         currentPopup.GetComponentInChildren<Text>().text = popUpText;
-        StartCoroutine(PopupBomb(currentPopup));
+        Destroy(currentPopup, 2.0f);
     }
-    IEnumerator PopupBomb(GameObject popUp)
+    public IEnumerator ArrowBomb(GameObject currentArrow)
     {
-        yield return new WaitForSeconds(5);
-        Destroy(popUp);
+        yield return new WaitForSeconds(2);
+        Destroy(currentArrow);
+        yield break;
     }
     public void destroyPopup()
     {
