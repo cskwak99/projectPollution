@@ -33,6 +33,7 @@ public class BuildManager : MonoBehaviour
     public int metalPerTurn = 2;
     public float factoryPolluRate = 5;
     public float landfillPolluRate = 10;
+    public int factoryPolluteRange = 3;
 
     public void route_construction(string buildingName, TileClass target_tile, GameObject currentPlayer)
     {
@@ -72,7 +73,7 @@ public class BuildManager : MonoBehaviour
         clone_farm.GetComponent<Building>().setInitial();
         clone_farm.GetComponent<Building>().playerOccupied = currentPlayer;
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_farm);
-        currentPlayer.GetComponent<PlayerStats>().resources.z -= 1.0f;
+        currentPlayer.GetComponent<PlayerStats>().resources.z -= farm_cost;
         return 0;
     }
     public int Init_Waterpump(TileClass target_tile, GameObject currentPlayer)
@@ -105,6 +106,14 @@ public class BuildManager : MonoBehaviour
         currentPlayer.GetComponent<PlayerStats>().resources.z -= landfill_cost;
         return 0;
     }
+    IEnumerator SetFactoryPollutionCenter(Building factory)
+    {
+        TileClass destTile = null;
+        clickHandler CLK = GameObject.Find("UI").GetComponent<clickHandler>();
+        yield return StartCoroutine(CLK.getDestTile(tile => destTile = tile));
+        factory.factoryPollutionCenter = destTile;
+    }
+
     public int Init_Factory(TileClass target_tile, GameObject currentPlayer)
     {
         if (currentPlayer.GetComponent<PlayerStats>().resources.z < factory_cost)
@@ -114,6 +123,7 @@ public class BuildManager : MonoBehaviour
         }
         clone_factory = Instantiate(factory);
         clone_factory.transform.parent = target_tile.transform;
+        StartCoroutine(SetFactoryPollutionCenter(clone_factory.GetComponent<Building>()));
         clone_factory.GetComponent<Building>().setInitial();
         clone_factory.GetComponent<Building>().playerOccupied = currentPlayer;
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_factory);

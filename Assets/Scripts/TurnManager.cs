@@ -27,10 +27,12 @@ public class TurnManager : MonoBehaviour
         currentArrow = Instantiate(new GameObject(), UIM.transform);
         currentArrow.transform.position = player1.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.4f, 0); ;
         GameObject arrow = Instantiate(UIM.arrowP1Prefab, currentArrow.transform);
+        Destroy(currentArrow, 2.0f);
     }
 
     public void Swap_player()
     {
+        UIManager UIM = GameObject.Find("UI").GetComponent<UIManager>(); 
         if (current_player == player1)
         {
             current_player = player2;
@@ -39,7 +41,7 @@ public class TurnManager : MonoBehaviour
             currentArrow = Instantiate(new GameObject(), UIM.transform);
             currentArrow.transform.position = player2.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.5f, 0);
             GameObject arrow = Instantiate(UIM.arrowP2Prefab, currentArrow.transform);
-            
+            Destroy(currentArrow, 2.0f);
 
         }
         else
@@ -50,7 +52,7 @@ public class TurnManager : MonoBehaviour
             currentArrow = Instantiate(new GameObject(), UIM.transform);
             currentArrow.transform.position = player1.GetComponent<PlayerStats>().dome_tile.transform.position + new Vector3(0, 0.5f, 0); ;
             GameObject arrow = Instantiate(UIM.arrowP1Prefab, currentArrow.transform);
-            
+            Destroy(currentArrow, 2.0f);
         }
         turnNum+=1;
         Debug.Log("turn:" + turnNum);
@@ -245,5 +247,4 @@ public class TurnManager : MonoBehaviour
             player.resources.x -= 3;
         }
     }
-
 }

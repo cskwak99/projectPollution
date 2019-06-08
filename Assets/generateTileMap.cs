@@ -48,7 +48,7 @@ public class generateTileMap : MonoBehaviour
         b d2 = b.d2;
         b L = b.L;
         b N = b.N;
-        t[,] typeMap = new t[,]
+        t[,] typeMap = new t[,] // P = plain tile, W = water, M = mine, D = dome
             { {P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
               {  P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
               {P, P, W, P, P, P, P, P, P, P, P, P, P, P, P},
@@ -59,7 +59,7 @@ public class generateTileMap : MonoBehaviour
               {  P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
               {P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
             };
-        int[,] heightMap = new int[,]
+        int[,] heightMap = new int[,] //0 = Ground level
             { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
               {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
               {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -70,7 +70,7 @@ public class generateTileMap : MonoBehaviour
               {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
               {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             };
-        b[,] buildMap = new b[,]
+        b[,] buildMap = new b[,] //N = None, d1 = dome for player 1, H1 = residential for player 1
             { {H2, N, N, N, N, N, N, N, N, N, N, N, N, N, N},
               {  N, d2, N, N, N, N, N, N, N, N, N, N, N, N, N},
               {N, N, N, N, N, N, N, N, N, N, N, N, N, N, N},
