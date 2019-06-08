@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public GameObject tileCoverPrefab;
     public GameObject arrowP1Prefab;
     public GameObject arrowP2Prefab;
+    public GameObject apPrefab;
     private GameObject currentOptionList;
     private GameObject currentBorder;
     private GameObject currentPopup;
@@ -76,7 +77,12 @@ public class UIManager : MonoBehaviour
     }
     public void showAP(TileClass tile)
     {
-
+        GameObject apPanel;
+        apPanel = Instantiate(apPrefab, currentOptionList.transform);
+        worker worker = tile.getWorker().GetComponent<worker>();
+        apPanel.GetComponentInChildren<Text>().text = "AP: " + worker.actionLeft.ToString();
+        apPanel.transform.position = currentOptionList.transform.position;
+        apPanel.GetComponent<RectTransform>().position += new Vector3(0, 40, 0);
     }
     private void buildPanel(TileClass tile)
     {

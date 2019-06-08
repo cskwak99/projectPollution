@@ -112,6 +112,7 @@ public class BuildManager : MonoBehaviour
         clickHandler CLK = GameObject.Find("UI").GetComponent<clickHandler>();
         yield return StartCoroutine(CLK.getDestTile(tile => destTile = tile));
         factory.factoryPollutionCenter = destTile;
+        //GameObject.Find("UI").GetComponent<UIManager>().selectTile(factory.parentTile.GetComponent<TileClass>());
     }
 
     public int Init_Factory(TileClass target_tile, GameObject currentPlayer)
@@ -123,11 +124,11 @@ public class BuildManager : MonoBehaviour
         }
         clone_factory = Instantiate(factory);
         clone_factory.transform.parent = target_tile.transform;
-        StartCoroutine(SetFactoryPollutionCenter(clone_factory.GetComponent<Building>()));
         clone_factory.GetComponent<Building>().setInitial();
         clone_factory.GetComponent<Building>().playerOccupied = currentPlayer;
         currentPlayer.GetComponent<PlayerStats>().buildings.Add(clone_factory);
         currentPlayer.GetComponent<PlayerStats>().resources.z -= factory_cost;
+        StartCoroutine(SetFactoryPollutionCenter(clone_factory.GetComponent<Building>()));
         return 0;
     }
     public int Init_Residential(TileClass target_tile, GameObject currentPlayer)
