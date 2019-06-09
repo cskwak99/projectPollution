@@ -56,7 +56,7 @@ public class HowToPlay : MonoBehaviour
         }else if(time >= nextTime * 2.0f && flag2){
             flag2 = false;
             flag3 = true;
-            howTo = howTo + "2. Worker can do move, build and purify, each actions cost 1 action point\n";
+            howTo = howTo + "2. Worker can do move and build, each actions cost 1 action point\n";
             howToText.text = howTo;
         }else if(time >= nextTime * 3.0f && flag3){
             flag3 = false;
@@ -96,11 +96,11 @@ public class HowToPlay : MonoBehaviour
         }else if(time >= nextTime * 10.0f && flag10){
             flag10 = false;
             flag11 = true;
-            howTo = howTo + "10. Maybe Andti vaxxer will do some stupid action, but you need to protect them\n";
+            howTo = howTo + "10. Maybe Anti vaxxer will do some stupid action, but you need to protect them\n";
             howToText.text = howTo;
         }else if(time >= nextTime * 11.0f && flag11){
             flag11 = false;
-            howTo = howTo + "Advice: Build Mine before you consume all starting metal";
+            howTo = howTo + "Advice: Build Mine before you consume all starting metal\n***You can move scree by mouse right click!!***";
             howToText.text = howTo;
         }
     }
