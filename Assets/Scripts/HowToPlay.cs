@@ -100,7 +100,7 @@ public class HowToPlay : MonoBehaviour
             howToText.text = howTo;
         }else if(time >= nextTime * 11.0f && flag11){
             flag11 = false;
-            howTo = howTo + "Advice: Build Mine before you consume all starting metal\n***You can move scree by mouse right click!!***";
+            howTo = howTo + "Advice: Build Mine before you consume all starting metal\n***You can move screen by mouse right click!!***";
             howToText.text = howTo;
         }
     }
