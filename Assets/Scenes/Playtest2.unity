@@ -2776,7 +2776,7 @@ MonoBehaviour:
   landfill_cost: 8
   residential_cost: 5
   mine_cost: 5
-  factory_cost: 10
+  factory_cost: 30
   foodPerTurn: 10
   waterPerTurn: 10
   metalPerTurn: 5
