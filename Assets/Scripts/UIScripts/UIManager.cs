@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
         worker worker = tile.getWorker().GetComponent<worker>();
         apPanel.GetComponentInChildren<Text>().text = "AP: " + worker.actionLeft.ToString();
         apPanel.transform.position = currentOptionList.transform.position;
-        apPanel.GetComponent<RectTransform>().position += new Vector3(0, 60, 0);
+        apPanel.GetComponent<RectTransform>().position += new Vector3(0, 65, 0);
     }
     private void buildPanel(TileClass tile)
     {
