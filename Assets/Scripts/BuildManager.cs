@@ -35,7 +35,7 @@ public class BuildManager : MonoBehaviour
     public float landfillPolluRate = 10;
     public int factoryPolluteRange = 3;
 
-    public void route_construction(string buildingName, TileClass target_tile, GameObject currentPlayer)
+    public bool route_construction(string buildingName, TileClass target_tile, GameObject currentPlayer)
     {
         int res;
         UIManager UIM = GameObject.Find("UI").GetComponent<UIManager>();
@@ -47,18 +47,20 @@ public class BuildManager : MonoBehaviour
             case "Residential": res = Init_Residential(target_tile, currentPlayer); break;
             case "Mine": res = Init_Mine(target_tile, currentPlayer); break;
             case "Factory": res = Init_Factory(target_tile, currentPlayer); break;
-            default: return;
-        }
-        GameObject border;
+            default: return false;
+        } 
         if (res == 0)
         {
+            GameObject border;
             if (currentPlayer.name == "Player1")
                 border = Instantiate(P1Border, target_tile.gameObject.transform);
             else
                 border = Instantiate(P2Border, target_tile.gameObject.transform);
             border.transform.position = target_tile.transform.position + new Vector3(0, 0.05f, 0);
             UIM.UpdateResourcesPerTurn();
+            return true;
         }
+        return false;
     }
 
     public int Init_Farm(TileClass target_tile, GameObject currentPlayer)

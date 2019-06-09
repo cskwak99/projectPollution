@@ -212,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63293172}
   m_LocalRotation: {x: 0.44355997, y: -0, z: -0, w: 0.8962447}
-  m_LocalPosition: {x: 1.04, y: 1.24, z: -1.38}
+  m_LocalPosition: {x: 1.63, y: 1.24, z: -2.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2771,15 +2771,15 @@ MonoBehaviour:
     type: 3}
   P2Border: {fileID: 6076077062680140154, guid: 11bd5d0efabc92042988a406bcb348ec,
     type: 3}
-  farm_cost: 3
-  water_pump_cost: 3
+  farm_cost: 2
+  water_pump_cost: 2
   landfill_cost: 8
-  residential_cost: 3
+  residential_cost: 5
   mine_cost: 5
   factory_cost: 10
-  foodPerTurn: 3
-  waterPerTurn: 3
-  metalPerTurn: 2
+  foodPerTurn: 10
+  waterPerTurn: 10
+  metalPerTurn: 5
   factoryPolluRate: 5
   landfillPolluRate: 10
   factoryPolluteRange: 2

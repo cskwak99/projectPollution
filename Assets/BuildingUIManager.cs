@@ -38,7 +38,7 @@ public class BuildingUIManager : MonoBehaviour
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text = 
                 "The much-needed homes in this forsaken world\n\n" +
                 "Increase maximum workers.\n" +
-                "Costs: " + BM.farm_cost + " Metal";
+                "Costs: " + BM.residential_cost + " Metal";
         }
         if (buildingName == "Water Pump")
         {

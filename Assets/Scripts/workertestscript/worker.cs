@@ -9,9 +9,9 @@ public class worker : MonoBehaviour
     public UIManager UIM;
     public string worker_name;
     public int actionLeft = 2;
-    public int maxMoveRange = 1;
-    public int maxPurifyRange = 2;
-    public int purifyPower = 10;
+    public int maxMoveRange = 2;
+    public int maxPurifyRange = 1;
+    public int purifyPower = 30;
     // Start is called before the first frame update
     public void init_worker(PlayerStats player, string name, GameObject worker_prefab)
     {
@@ -32,8 +32,8 @@ public class worker : MonoBehaviour
             UIM.showPopup("This worker have no action point left!");
             return;
         }
-        GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(name, tile, current_player);
-        actionLeft -= 1;
+        bool isBuildSuccess = GameObject.Find("_BuildManager").GetComponent<BuildManager>().route_construction(name, tile, current_player);
+        if(isBuildSuccess) actionLeft -= 1;
     }
     public IEnumerator move_worker()
     {
@@ -96,13 +96,16 @@ public class worker : MonoBehaviour
         float range = transform.parent.GetComponent<TileClass>().calcDist(destTile);
         if (range == 0)
             yield break;
-        else if (range > maxMoveRange)
+        else if (range > maxPurifyRange)
         {
             UIM.showPopup("Too far to reach!");
             yield break;
         }
         TileClass t = destTile.GetComponent<TileClass>();
         t.UpdatePolluAmount(t.polluAmount - purifyPower);
+        player.workers.Remove(gameObject);
+        player.worker_present -= 1;
+        Destroy(this.gameObject);
         actionLeft -= 1;
     }
 }

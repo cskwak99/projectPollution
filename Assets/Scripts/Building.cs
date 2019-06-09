@@ -69,7 +69,7 @@ public class Building : MonoBehaviour
                     TileClass tile = child.GetComponent<TileClass>();
                     //if (tile.h == parentTile.GetComponent<TileClass>().h + 1)
                     //    tile.UpdatePolluAmount(tile.polluAmount + factoryPolluRate);
-                    if(tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange)
+                    if(tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange && tile.tileType != "Water_tile")
                     {
                         tile.UpdatePolluAmount(tile.polluAmount + factoryPolluRate);
                     }
@@ -112,7 +112,7 @@ public class Building : MonoBehaviour
             foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
             {
                 TileClass tile = child.GetComponent<TileClass>();
-                if (tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange)
+                if (tile.calcDist(factoryPollutionCenter) <= BM.factoryPolluteRange && tile.tileType != "Water_tile")
                     area.Add(tile);
             }
         }

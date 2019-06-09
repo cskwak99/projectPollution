@@ -82,6 +82,7 @@ public class TileClass : MonoBehaviour
         //polluAmount = resources.w/10;
         polluAmount = Mathf.Clamp(amount, 0, maxPolluAmount);
         UpdateThresholdLevel();
+        changeModel();
     }
 
     public Vector4 getResources(Vector4 resourcesTaken)

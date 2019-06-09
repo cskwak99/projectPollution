@@ -141,10 +141,21 @@ public class TurnManager : MonoBehaviour
         foreach (Transform child in GameObject.Find("Hexagon_Map").transform)
         {
             TileClass tile = child.GetComponent<TileClass>();
-            tile.changeModel();
             if(tile.thresholdLvl == 2)
             {
-
+                GameObject building = tile.getBuilding().gameObject;
+                GameObject worker = tile.getWorker();
+                if(building != null)
+                {
+                    building.GetComponent<Building>().playerOccupied.GetComponent<PlayerStats>().buildings.Remove(building);
+                    Destroy(building);
+                }
+                if(worker != null)
+                {
+                    worker.GetComponent<worker>().player.workers.Remove(worker);
+                    worker.GetComponent<worker>().player.worker_present -= 1;
+                    Destroy(worker);
+                }
             }
         }
     }
@@ -162,6 +173,7 @@ public class TurnManager : MonoBehaviour
             resources += gathered;
         }
         player.resources += resources;
+        UIM.UpdateResourcesPerTurn();
     }
 
     public void WorkerPhase(){

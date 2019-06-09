@@ -49,26 +49,27 @@ public class generateTileMap : MonoBehaviour
         b L = b.L;
         b N = b.N;
         t[,] typeMap = new t[,] // P = plain tile, W = water, M = mine, D = dome
-            { {P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
-              {  P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
-              {P, P, W, P, P, P, P, P, P, P, P, P, P, P, P},
-              {  P, P, W, W, W, W, M, M, M, P, P, P, P, P, P},
-              {P, P, P, P, P, P, M, M, M, M, P, P, P, P, P},
-              {  P, P, P, P, P, P, M, M, M, W, W, W, W, P, P},
-              {P, P, P, P, P, P, P, P, P, P, P, P, P, W, P},
-              {  P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
-              {P, P, P, P, P, P, P, P, P, P, P, P, P, P, P},
+            { {P, P, P, P, P, P, P, W, W, W, W, P, M, M, M},
+              {  W, D, P, P, P, P, P, P, P, P, W, W, P, M, M},
+              {W, P, P, P, P, P, W, W, M, M, P, P, W, P, P},
+              {  W, P, P, P, P, W, M, M, M, M, P, P, W, P, P},
+              {P, W, P, P, P, M, M, M, M, M, M, P, P, W, P},
+              {  P, W, P, P, P, M, M, M, M, W, P, P, P, W, P},
+              {M, P, W, P, P, P, M, M, W, W, P, P, P, P, W},
+              {  M, P, W, W, W, P, P, P, P, P, P, P, P, D, P},
+              {M, M, P, P, P, W, W, W, W, P, P, P, P, P, P},
             };
+
         int[,] heightMap = new int[,] //0 = Ground level
-            { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-              {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-              {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-              {  1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1},
-              {1, 1, 1, 1, 1, 1, 2, 3, 3, 2, 1, 1, 1, 1, 1},
-              {  1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1},
-              {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-              {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-              {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            { {2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3},
+              {  1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3},
+              {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+              {  1, 1, 1, 1, 1, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2},
+              {1, 1, 1, 1, 1, 2, 3, 4, 4, 3, 2, 1, 1, 1, 1},
+              {  1, 1, 1, 1, 1, 2, 3, 3, 3, 2, 1, 1, 1, 1, 1},
+              {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1},
+              {  3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2},
+              {3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2},
             };
         b[,] buildMap = new b[,] //N = None, d1 = dome for player 1, H1 = residential for player 1
             { {H2, N, N, N, N, N, N, N, N, N, N, N, N, N, N},

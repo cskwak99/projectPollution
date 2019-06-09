@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  hp: 0
-  support: 0
-  location: {fileID: 0}
-  destination: {fileID: 0}
   worker_obj: {fileID: 329443010540713676}
+  UIM: {fileID: 0}
   worker_name: 
-  action_list: []
-  turn_left: 0
-  cur_action: 0
-  cur_queue: 0
-  is_updated: 0
-  is_move: 0
+  actionLeft: 2
+  maxMoveRange: 2
+  maxPurifyRange: 1
+  purifyPower: 40
 --- !u!1001 &329443010540614028
 PrefabInstance:
   m_ObjectHideFlags: 0

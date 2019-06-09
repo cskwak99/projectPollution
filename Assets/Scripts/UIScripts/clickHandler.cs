@@ -83,7 +83,7 @@ public class clickHandler : MonoBehaviour {
             {
                 if (!UIM.isMouseOnUI && !UIM.isOnDestTileSelection)
                 {
-                        uiManager.selectTile(tile);
+                    uiManager.selectTile(tile);
                 }
             }
         }

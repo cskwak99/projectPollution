@@ -12,7 +12,7 @@ public class cameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(2))
+        if(Input.GetMouseButton(1))
         {
             
             if(iniMousePos == Vector3.zero)
