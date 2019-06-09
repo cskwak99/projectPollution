@@ -81,7 +81,7 @@ public class StartScene : MonoBehaviour
         }else if(time >= nextTime * 7.0f && flag7){
             flag7 = false;
             flag8 = true;
-            storyString = storyString + "The others are the workers, \"not the brightest\" said the Noble, \"but necessary to gather resources for us chosen.\"\n";
+            storyString = storyString + "The others are the workers, \"not the brightest\" said the Noble,\n \"but necessary to gather resources for us chosen.\"\n";
             backgroundText.text = storyString;
         }else if(time >= nextTime * 8.0f && flag8){
             flag8 = false;
@@ -105,7 +105,7 @@ public class StartScene : MonoBehaviour
         }
     }
 
-    public void startGame(){
-        SceneManager.LoadScene("Playtest2");
+    public void seeHowto(){
+        SceneManager.LoadScene("HowToPlay");
     }
 }

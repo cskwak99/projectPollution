@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: d1dc0f65de18fbb4fb10df1908c739ce
-  - enabled: 0
-    path: Assets/Scenes/Playtest.unity
-    guid: a11e4a79a0c9a3143918b8e52477f66c
   - enabled: 1
     path: Assets/Scenes/Playtest2.unity
     guid: 91283482b50212b4c8e69555d1104c63
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: ac3037b89927c1d4ea3a1dc10b4a15a7
   m_configObjects: {}

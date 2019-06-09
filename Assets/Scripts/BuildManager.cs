@@ -28,9 +28,9 @@ public class BuildManager : MonoBehaviour
     public int mine_cost = 5;
     public int factory_cost = 10;
 
-    public int foodPerTurn = 3;
-    public int waterPerTurn = 3;
-    public int metalPerTurn = 2;
+    public int foodPerTurn = 7;
+    public int waterPerTurn = 7;
+    public int metalPerTurn = 3;
     public float factoryPolluRate = 5;
     public float landfillPolluRate = 10;
     public int factoryPolluteRange = 3;
