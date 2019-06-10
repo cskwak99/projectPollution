@@ -20,7 +20,7 @@ public class BuildingUIManager : MonoBehaviour
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
                 "\"Heigh-ho, heigh-ho\n" +
-                "It\'s home from work we go.\n" +
+                "It\'s home from work we go.\"\n" +
                 "Mine always produce toxic substances, pollution will increase on the tile\n\n" +
                 "Produce " + BM.metalPerTurn + " Metal/turn, use worker\n" +
                 "Cost: " + BM.mine_cost + " Metal";
@@ -60,10 +60,9 @@ public class BuildingUIManager : MonoBehaviour
         if (buildingName == "Factory")
         {
             transform.parent.Find("BuildingInfo").Find("Text").GetComponent<Text>().text =
-                "\"And that’s where we put our war weapon !\"\n" +
-                "\"But that’s just waste\"\n" +
-                "\"Nothing more deadly for the nobles ...\"\n\n" +
-                "Slowly pollute all tiles that are 1 level above it.\n" +
+                "\"Hey, what’s the use of this building again ?\"\n" +
+                "\"Nothing, just pollute\"\n\n" +
+                "Slowly pollute tiles in the zone around selected center.\n" +
                 "Cost: " + BM.factory_cost + " Metal";
         }
     }

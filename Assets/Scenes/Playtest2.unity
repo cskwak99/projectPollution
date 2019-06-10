@@ -2042,7 +2042,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3507,7 +3507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {x: 50, y: 50, z: 20, w: 0}
+  resources: {x: 50, y: 50, z: 25, w: 0}
   antivaxHP_max: 10
   antivaxHP_present: 10
   worker_ap: 2
@@ -4321,7 +4321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf73e75d11792c41acbba80df96c850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {x: 50, y: 50, z: 20, w: 0}
+  resources: {x: 50, y: 50, z: 25, w: 0}
   antivaxHP_max: 10
   antivaxHP_present: 10
   worker_ap: 2
