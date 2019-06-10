@@ -10,13 +10,13 @@ public class Mine_tile : TileClass
     {
         resources = new Vector4(0, 0, 100, 0); //initiate resources, third place is metal
         tileDescription = "Some kind of metal deposit, useful for building and research\n\n" +
-            "Can build: Mine, Residential, Factory\n"  +
+            "Can build: Mine, Residential, Factory, Landfill\n" +
             "Height: " + h;
     }
 
     public override string[] getBuildable()
     {
-        string[] buildable = { "Mine", "Residential", "Factory" };
+        string[] buildable = { "Mine", "Residential", "Factory", "Landfill" };
         return buildable;
     }
 }

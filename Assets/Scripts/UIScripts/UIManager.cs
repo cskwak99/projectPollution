@@ -147,8 +147,10 @@ public class UIManager : MonoBehaviour
     }
     public void showGameEnd()
     {
+        TurnManager TM = GameObject.Find("TurnManager").GetComponent<TurnManager>();
         GameObject endPanel = Instantiate(gameEndPanel);
         endPanel.transform.SetParent(transform);
+        endPanel.GetComponentInChildren<Text>().text = TM.current_player.name + " lose\n Is pollution worth it?";
         endPanel.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
     public void destroyCurrentOption()

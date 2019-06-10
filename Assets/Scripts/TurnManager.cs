@@ -248,6 +248,11 @@ public class TurnManager : MonoBehaviour
             UIM.showGameEnd();
             Debug.Log("Game End");
         }
+        if (player.dome_tile.GetComponent<TileClass>().thresholdLvl >= 2)
+        {
+            UIM.showGameEnd();
+            Debug.Log("Game End");
+        }
     }
 
     public void randomEvents(){
